@@ -1,0 +1,1 @@
+Remember we need to to do pooled brier scores , integarted briers scores and c-index 
