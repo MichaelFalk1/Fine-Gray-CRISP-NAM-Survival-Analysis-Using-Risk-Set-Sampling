@@ -1,1 +1,3 @@
 Remember we need to to do pooled brier scores , integarted briers scores and c-index 
+
+Keep in mind for c_index we are doing antolini
