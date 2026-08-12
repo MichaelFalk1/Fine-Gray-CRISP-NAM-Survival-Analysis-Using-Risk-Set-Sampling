@@ -19,7 +19,7 @@ changed the faeature net to make use of SiLU instead of tanh for better feature 
 
 
 
-
+NOTE : Michael You need to read this and add it when you do the full wright up (Past Michael XD)
 
 
 
@@ -43,3 +43,24 @@ Changes for the dynamic smapling from Proposal:
  wasting compute on useless patients if the risk set was "easy". The new math allows the sample size to organically expand 
  when the model is highly uncertain, and heavily compress when the model is confident.This completely aligns the underlying
   math with your original vision of an information-theoretic data compressor!
+
+
+
+The proposed Dynamic Entropy Sampling strategy successfully circumvents the calibration degradation inherent to standard 
+fixed-quota sampling (e.g., NCC). By modeling inclusion as independent Bernoulli trials scaled by local risk-set entropy, 
+the method yields an information-dense approximation of the full cohort. Empirical results demonstrate that this adaptive 
+compression maintains the discriminative power of the full risk set while achieving marginally superior probability calibration, 
+validating its utility for training deep survival models efficiently.
+
+
+we should mention this in our paper when talking about the discussion of the paper 
+
+Computational Considerations and Vectorized ImplementationWhile the Dynamic Entropy Sampling strategy offers significant advantages in data compression and 
+probability calibration, calculating dynamic inclusion probabilities introduces potential computational overhead. A naive programmatic implementation—iterating 
+sequentially over each observed event to construct individual risk sets and draw samples—creates a severe computational bottleneck. In modern deep learning frameworks,
+ these row-by-row operations disrupt GPU parallelization and can increase training durations by a factor of three.To resolve this and make the approach scalable, the 
+ sampling mechanism must be strictly implemented using fully vectorized tensor operations. By constructing the Fine-Gray risk sets as a 2D Boolean matrix (Events $\times$ 
+ Total Batch Size) and broadcasting the 1D entropy scores across this grid, the mean-scaling and independent Bernoulli trials can be executed simultaneously for all 
+ active risk sets on the GPU. Empirical profiling of CRISPNAM-FG demonstrated that this vectorized implementation reduces the sampling computational overhead by nearly 
+ 65%, achieving per-epoch training durations highly comparable to models utilizing the full, uncompressed risk set, without altering the underlying mathematical 
+ formulation.
