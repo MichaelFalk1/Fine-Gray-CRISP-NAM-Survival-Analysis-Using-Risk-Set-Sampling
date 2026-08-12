@@ -1,3 +1,45 @@
 Remember we need to to do pooled brier scores , integarted briers scores and c-index 
 
 Keep in mind for c_index we are doing antolini
+
+
+
+ONe very big thing we did not thingk about is that our baseline fine gary would need to have IPWC to account for the right censored data which all the sampled loss 
+will have so as such we needed to add that to the baseline, (RIP I forgot)
+
+we need to think about it not sure
+
+
+
+
+changed the faeature net to make use of SiLU instead of tanh for better feature representation
+
+
+
+
+
+
+
+
+
+
+
+
+Changes for the dynamic smapling from Proposal:
+ Dynamic Entropy SamplingThe Core Shift: We moved from a rigid "Fixed Quota System" (Multinomial sampling) 
+ to an adaptive "Dynamic Threshold System" (Independent Bernoulli sampling).
+ 
+ 
+ The Math Update: We stopped dividing the importance score ($s_g$) by the sum of all scores—which incorrectly forced the selection probabilities to add up to exactly 1.0. 
+ Instead, we now divide by the mean importance score and scale it by a baseline retention rate ($\rho$).
+ 
+ 
+ The Code Update: We completely removed the n_controls parameter. The selection mechanism was updated to use independent coin flips (torch.bernoulli) 
+ for every single patient.
+ 
+ 
+ The "Why" (The Benefit): The original proposal forced the model to pick exactly $M$ controls every time. 
+ This meant the model was accidentally throwing away highly informative patients if there were too many, or 
+ wasting compute on useless patients if the risk set was "easy". The new math allows the sample size to organically expand 
+ when the model is highly uncertain, and heavily compress when the model is confident.This completely aligns the underlying
+  math with your original vision of an information-theoretic data compressor!
