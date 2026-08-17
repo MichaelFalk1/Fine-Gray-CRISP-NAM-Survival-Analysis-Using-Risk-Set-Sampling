@@ -64,3 +64,28 @@ sequentially over each observed event to construct individual risk sets and draw
  active risk sets on the GPU. Empirical profiling of CRISPNAM-FG demonstrated that this vectorized implementation reduces the sampling computational overhead by nearly 
  65%, achieving per-epoch training durations highly comparable to models utilizing the full, uncompressed risk set, without altering the underlying mathematical 
  formulation.
+
+
+NCC Failing to be able to be vectorized
+
+ A significant limitation of standard Nested Case-Control (NCC) sampling in deep learning frameworks is its computational inefficiency. 
+ Because NCC requires sampling exactly $m$ controls without replacement from variable-sized risk sets, it cannot be easily mapped to 2D tensor operations. 
+ This forces sequential, row-by-row iteration, resulting in severe interpreter overhead and a failure to utilize CPU-level multi-threading (SIMD) or GPU 
+ parallelization.By contrast, our Dynamic Entropy Sampler removes this bottleneck entirely. By relying on independent Bernoulli trials rather than fixed-size 
+ sampling without replacement, our method is natively compatible with fully vectorized tensor operations. This architectural shift eliminates the sequential processing 
+ penalty of NCC, resulting in heavily accelerated training times without sacrificing risk-set integrity.
+
+
+
+
+ Pre-Processing for teh farhinham dataset
+
+ To prepare the standard Framingham dataset for competing risks survival analysis, missing values were first resolved using median imputation to maintain feature continuity, 
+ and the original binary target column (`ten_year_c_h_d`) was removed entirely to prevent data leakage during model training. Because the original dataset lacks longitudinal 
+ tracking, time-to-event data was semi-synthetically generated to classify patient outcomes into three distinct states. **Event 1 (The Main Event)** represents patients who actively 
+ developed Coronary Heart Disease (CHD) at a randomized time within the 10-year study window. **Event 2 (The Competing Event)** was engineered to simulate a scenario where approximately 
+ 15% of the non-CHD patients experienced a terminal occurrence—such as a fatal car accident or non-cardiovascular death—prior to the 10-year mark.
+ 
+This is typically defined as a 'competing risk' because experiencing this alternative event precludes the patient from experiencing the main CHD event. 
+This shifts the risk set dynamics, which the Fine-Gray loss function is designed to accommodate. Finally, Event 0 (Censoring) captures the remaining baseline 
+patients who either safely reached the end of the 10-year study or were randomly lost to follow-up without experiencing either event.
