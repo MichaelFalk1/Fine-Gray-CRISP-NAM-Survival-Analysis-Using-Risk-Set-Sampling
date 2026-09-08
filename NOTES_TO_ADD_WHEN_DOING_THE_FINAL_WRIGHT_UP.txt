@@ -89,3 +89,17 @@ NCC Failing to be able to be vectorized
 This is typically defined as a 'competing risk' because experiencing this alternative event precludes the patient from experiencing the main CHD event. 
 This shifts the risk set dynamics, which the Fine-Gray loss function is designed to accommodate. Finally, Event 0 (Censoring) captures the remaining baseline 
 patients who either safely reached the end of the 10-year study or were randomly lost to follow-up without experiencing either event.
+
+
+
+Pre-Proccessing for PBC dataset
+Data preprocessing for the Primary Biliary Cholangitis (PBC) dataset involved converting observation times from years to days and defining a competing risks outcome space 
+(0: right-censored, 1: death, 2: liver transplantation). Missing continuous clinical variables were imputed using the cohort mean, whereas categorical covariates were 
+imputed with the most frequent class prior to one-hot encoding.
+
+ Finally, redundant administrative identifiers and records lacking valid survival times were excluded to establish the final analytical cohort.
+
+K-fold
+
+ moved to stratified k-fold to stop fold collapse from real wolrd data
+To ensure class balance and stability across all competing risks, a 5-fold Stratified Cross-Validation protocol was uniformly applied to all synthetic and real-world datasets.
