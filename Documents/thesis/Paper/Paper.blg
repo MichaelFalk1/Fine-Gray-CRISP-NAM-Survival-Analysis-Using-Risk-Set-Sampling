@@ -1,0 +1,52 @@
+This is BibTeX, Version 0.99e
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: Paper.aux
+Reallocating 'name_of_file' (item size: 1) to 17 items.
+The style file: utils/named-wits.bst
+Reallocating 'name_of_file' (item size: 1) to 11 items.
+Database file #1: references.bib
+Warning--can't use both volume and number fields in andersen2012competing
+Warning--empty publisher in andersen2012competing
+Warning--there's a url but no retrieval date in kingma2014adam
+You've used 24 entries,
+            2541 wiz_defined-function locations,
+            745 strings with 8881 characters,
+and the built_in function-call counts, 9766 in all, are:
+= -- 983
+> -- 427
+< -- 2
++ -- 151
+- -- 144
+* -- 836
+:= -- 1576
+add.period$ -- 72
+call.type$ -- 24
+change.case$ -- 165
+chr.to.int$ -- 24
+cite$ -- 27
+duplicate$ -- 348
+empty$ -- 747
+format.name$ -- 174
+if$ -- 1972
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 27
+newline$ -- 147
+num.names$ -- 72
+pop$ -- 124
+preamble$ -- 1
+purify$ -- 192
+quote$ -- 0
+skip$ -- 280
+stack$ -- 0
+substring$ -- 538
+swap$ -- 60
+text.length$ -- 2
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 180
+warning$ -- 3
+while$ -- 84
+width$ -- 27
+write$ -- 356
+(There were 3 warnings)

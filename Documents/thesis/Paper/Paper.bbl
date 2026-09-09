@@ -1,0 +1,179 @@
+\begin{thebibliography}{}
+
+\bibitem[\protect\citeauthoryear{Aalen and Johansen}{1978}]{aalen1978empirical}
+Odd~O Aalen and S{\o}ren Johansen.
+\newblock An empirical transition matrix for non-homogeneous markov chains
+  based on censored observations.
+\newblock {\em Scandinavian Journal of Statistics}, 5(3):141--150, 1978.
+
+
+\bibitem[\protect\citeauthoryear{Andersen \bgroup \em et al.\egroup
+  }{2012}]{andersen2012competing}
+P.~K. Andersen, R.~B. Geskus, T.~de~Witte, and H.~Putter.
+\newblock {\em Competing risks in epidemiology: possibilities and pitfalls},
+  volume~41.
+\newblock 2012.
+
+
+\bibitem[\protect\citeauthoryear{Antolini \bgroup \em et al.\egroup
+  }{2005}]{Antolini2005}
+Laura Antolini, Patrizia Boracchi, and Elia Biganzoli.
+\newblock A time-dependent discrimination index for survival data.
+\newblock {\em Statistics in Medicine}, 24:3927--3944, 2005.
+
+
+\bibitem[\protect\citeauthoryear{Borgan \bgroup \em et al.\egroup
+  }{2000}]{Borgan2000}
+{{\O}}rnulf Borgan, Larry Goldstein, and Bryan Langholz.
+\newblock Sampling designs for cox regression.
+\newblock {\em Scandinavian Journal of Statistics}, 27(4):601--618, 2000.
+
+
+\bibitem[\protect\citeauthoryear{Breslow}{1974}]{Breslow1974}
+N.~Breslow.
+\newblock Covariance analysis of censored survival data.
+\newblock {\em Biometrics}, 30(1):89--99, 1974.
+
+
+\bibitem[\protect\citeauthoryear{Cox}{1972}]{Cox1972}
+D.~R. Cox.
+\newblock Regression models and life tables.
+\newblock {\em Journal of the Royal Statistical Society: Series B
+  (Methodological)}, 34(2):187--220, 1972.
+
+
+\bibitem[\protect\citeauthoryear{Fine and Gray}{1999}]{FineGray1999}
+Jason~P. Fine and Robert~J. Gray.
+\newblock A proportional hazards model for the subdistribution of a competing
+  risk.
+\newblock {\em Journal of the American Statistical Association},
+  94(446):496--509, 1999.
+
+
+\bibitem[\protect\citeauthoryear{Graf \bgroup \em et al.\egroup
+  }{1999}]{Graf1999}
+E.~Graf, C.~Schmoor, W.~Sauerbrei, and M.~Schumacher.
+\newblock Assessment and comparison of prognostic classification schemes for
+  survival data.
+\newblock {\em Statistics in Medicine}, 18(17-18):2529--2545, 1999.
+
+
+\bibitem[\protect\citeauthoryear{Hern{\'a}n and Robins}{2000}]{Hernan2000}
+Miguel~A. Hern{\'a}n and James~M. Robins.
+\newblock Causal inference from observational data.
+\newblock {\em Journal of Epidemiology \& Community Health}, 54(10):753--758,
+  2000.
+
+
+\bibitem[\protect\citeauthoryear{Horvitz and
+  Thompson}{1952}]{HorvitzThompson1952}
+Daniel~G. Horvitz and Donovan~J. Thompson.
+\newblock A generalization of sampling without replacement from a finite
+  universe.
+\newblock {\em Journal of the American Statistical Association},
+  47(260):663--685, 1952.
+
+
+\bibitem[\protect\citeauthoryear{Kalbfleisch and
+  Prentice}{2002}]{kalbfleisch2002statistical}
+J.~D. Kalbfleisch and R.~L. Prentice.
+\newblock {\em The statistical analysis of failure time data}.
+\newblock Wiley, 2002.
+
+
+\bibitem[\protect\citeauthoryear{Katzman \bgroup \em et al.\egroup
+  }{2018}]{Katzman2018}
+J.~L. Katzman, U.~Shaham, A.~Cloninger, J.~Bates, T.~Jiang, and Y.~Kluger.
+\newblock Deepsurv: Personalized treatment recommender system using a cox
+  proportional hazards deep neural network.
+\newblock {\em BMC Medical Research Methodology}, 18(1):24, 2018.
+
+
+\bibitem[\protect\citeauthoryear{Kingma and Ba}{2014}]{kingma2014adam}
+Diederik~P. Kingma and Jimmy Ba.
+\newblock Adam: A method for stochastic optimization.
+\newblock {\em arXiv:1412.6980}, 2014.
+
+
+\bibitem[\protect\citeauthoryear{Kvamme \bgroup \em et al.\egroup
+  }{2019}]{kvamme2019}
+H{\aa}vard Kvamme, {\O}rnulf Borgan, and Ida Scheel.
+\newblock Time-to-event prediction with neural networks and cox regression.
+\newblock {\em Journal of Machine Learning Research}, 20(129):1--30, 2019.
+
+
+\bibitem[\protect\citeauthoryear{Laney}{2001}]{Laney2001}
+Doug Laney.
+\newblock 3d data management: Controlling data volume, velocity, and variety.
+\newblock {\em META Group Research Note}, 2001.
+
+
+\bibitem[\protect\citeauthoryear{Latouche \bgroup \em et al.\egroup
+  }{2013}]{latouche2013competing}
+A.~Latouche, A.~Allignol, J.~Beyersmann, M.~Labopin, and J.~P. Fine.
+\newblock Competing risks analysis in survival data: a tutorial for clinicians.
+\newblock {\em Critical Reviews in Oncology/Hematology}, 85(1):47--54, 2013.
+
+
+\bibitem[\protect\citeauthoryear{LeCun \bgroup \em et al.\egroup
+  }{2015}]{LeCun2015}
+Y.~LeCun, Y.~Bengio, and G.~Hinton.
+\newblock Deep learning.
+\newblock {\em Nature}, 521(7553):436--444, 2015.
+
+
+\bibitem[\protect\citeauthoryear{Lee \bgroup \em et al.\egroup
+  }{2018}]{Lee2018}
+C.~Lee, W.~R. Zame, J.~Yoon, and M.~van~der Schaar.
+\newblock Deephit: A deep learning approach to survival analysis with competing
+  risks.
+\newblock In {\em Proceedings of the Thirty-Second AAAI Conference on
+  Artificial Intelligence}, pages 231--238, 2018.
+
+
+\bibitem[\protect\citeauthoryear{Pintilie}{2006}]{pintilie2006competing}
+M.~Pintilie.
+\newblock {\em Competing risks: A practical perspective}.
+\newblock Wiley, 2006.
+
+
+\bibitem[\protect\citeauthoryear{Prentice \bgroup \em et al.\egroup
+  }{1978}]{prentice1978analysis}
+R.~L. Prentice, J.~D. Kalbfleisch, A.~V. Peterson, N.~Flournoy, V.~T. Farewell,
+  and N.~E. Breslow.
+\newblock The analysis of failure times in the presence of competing risks.
+\newblock {\em Biometrics}, 34(4):541--554, 1978.
+
+
+\bibitem[\protect\citeauthoryear{Prentice}{1986}]{Prentice1986}
+R.~L. Prentice.
+\newblock A case–cohort design for epidemiologic cohort studies and disease
+  prevention trials.
+\newblock {\em Biometrika}, 73(1):1--11, 1986.
+
+
+\bibitem[\protect\citeauthoryear{Ramachandram \bgroup \em et al.\egroup
+  }{2025}]{InterpretableFineGray2025}
+Dhanesh Ramachandram, Anne Loefler, Surain Roberts, Amol Verma, Maia Norman,
+  Fahad Razak, Conrad Pow, and Charles de~Mestral.
+\newblock Interpretable fine-gray deep survival model for competing risks:
+  Predicting post-discharge foot complications for diabetic patients in
+  ontario.
+\newblock {\em arXiv preprint arXiv:2511.12409}, 2025.
+
+
+\bibitem[\protect\citeauthoryear{Robins \bgroup \em et al.\egroup
+  }{2000}]{Robins2000}
+James~M. Robins, Miguel~A. Hern{\'a}n, and Babette Brumback.
+\newblock Marginal structural models and causal inference in epidemiology.
+\newblock {\em Epidemiology}, 11(5):550--560, 2000.
+
+
+\bibitem[\protect\citeauthoryear{Wang \bgroup \em et al.\egroup
+  }{2020}]{Wang2020}
+J.~Wang, H.~Zhao, and H.~Chu.
+\newblock Mini‐batch sampling for cox regression in deep learning.
+\newblock {\em Journal of Computational Biology}, 27(1):1--10, 2020.
+
+
+\end{thebibliography}

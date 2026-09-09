@@ -1,0 +1,624 @@
+\documentclass[a4paper,twoside,12pt]{report}
+% Richard Klein (2020,2021)
+
+% Include Packages
+%\usepackage[a4paper,inner=3.5cm,outer=2.5cm,top=2.5cm,bottom=2.5cm]{geometry}  % Set page margins
+\usepackage{tikz}
+\usepackage{fullpage}
+\usepackage{float}                  % Allows 'Here and Only Here' [H] for Floats
+\usepackage{url}                    % \url{} command
+\usepackage{charter}                  % Set font to Times
+\usepackage{graphicx}               % \includegraphics
+\usepackage{subfigure}              % Allow subfigures
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{booktabs}
+\usepackage{parskip}
+\usepackage[all]{nowidow}
+\setnoclub[2]
+\setnowidow[2]
+
+% Referencing
+% Provides \Vref and \vref to indicate where a reference is.
+\usepackage{varioref} 
+% Hyperlinks references
+\usepackage[bookmarks=true,bookmarksopen=true]{hyperref} 
+% Provides \Cref, \cref, \Vref, \vref to include the type of reference: fig/eqn/tbl
+\usepackage{cleveref} 
+% Setup Hyperref
+\hypersetup{
+  colorlinks   = true,              %Colours links instead of ugly boxes
+  urlcolor     = blue,              %Colour for external hyperlinks
+  linkcolor    = blue,              %Colour of internal links
+  citecolor    = blue                %Colour of citations
+}
+% Names for Clever Ref
+\crefname{table}{table}{tables}
+\Crefname{table}{Table}{Tables}
+\crefname{figure}{figure}{figures}
+\Crefname{figure}{Figure}{Figures}
+\crefname{equation}{equation}{equations}
+\Crefname{equation}{Equation}{Equations}
+
+% Wits Citation Style
+\usepackage{natbib} \input{natbib-add}
+\bibliographystyle{named-wits}
+\bibpunct{[}{]}{;}{a}{}{}  % to get correct punctuation for bibliography
+\setlength{\skip\footins}{1.5cm}
+\newcommand{\citets}[1]{\citeauthor{#1}'s \citeyearpar{#1}}
+\renewcommand\bibname{References}  
+
+\pagestyle{headings}
+
+\pagestyle{plain}
+\pagenumbering{roman}
+
+\renewenvironment{abstract}{\ \vfill\begin{center}\textbf{Abstract}\end{center}\addcontentsline{toc}{section}{Abstract}}{\vfill\vfill\newpage}
+\newenvironment{declaration}{\ \vfill\begin{center}\textbf{Declaration}\end{center}\addcontentsline{toc}{section}{Declaration}}{\vfill\vfill\newpage}
+\newenvironment{acknowledgements}{\ \vfill\begin{center}\textbf{Acknowledgements}\end{center}\addcontentsline{toc}{section}{Acknowledgements}}{\vfill\vfill\newpage}
+
+\begin{document}
+
+\onecolumn
+\thispagestyle{empty}
+
+\setcounter{page}{0}
+\addcontentsline{toc}{chapter}{Preface}
+\ 
+\begin{center}
+  \vfill
+  {
+  \huge \bf \textsc{CRISP-NAM for Survival Analysis under Competing Risks using Risk Set Sampling}\\
+  \large School of Computer Science \& Applied Mathematics\\
+  \large University of the Witwatersrand\\[20pt]
+  \normalsize
+  Michael Falk\\
+  3052851\\[20pt]
+  Supervised by Dr Justine Nasejje\\[10pt]
+  \today
+  }
+
+  \vfill
+  \vfill
+  \includegraphics[width=1.5cm]{utils/images/wits.jpg}
+  \vspace{10pt}\\
+  \small{Ethics Clearance Number: WCSAM-2026-25}\\[10pt]
+  \small{A proposal submitted to the Faculty of Science, University of the Witwatersrand, Johannesburg,
+in partial fulfilment of the requirements for the degree of Masters in Data Science}\\
+\end{center}
+\vfill
+\newpage
+
+\pagestyle{plain}
+\setcounter{page}{1}
+
+\phantomsection
+\begin{abstract}
+This work will investigate the effects of risk set sampling on competing risk survival modelling when paired with an interpretable Fine–Gray framework. In particular, it will provide a systematic investigation of case-cohort and nested case-control sampling within competing risk settings, specifically in the context of deep survival models, including Deep Fine–Gray and CRISP-NAM. In addition, it will introduce a novel dynamic sampling strategy based on entropy-guided grouped sampling, designed to adaptively approximate risk sets while reducing computational cost. These methods will be integrated within a Deep Fine–Gray modelling framework and evaluated against full-risk approaches in terms of predictive performance and computational efficiency. The study will assess whether substantial reductions in training time and resource usage can be achieved without compromising statistical validity or predictive accuracy.
+\end{abstract}
+
+
+\phantomsection
+\begin{declaration}
+I, ---------, hereby declare the contents of this research proposal to be my own work.
+This proposal is submitted for the degree of Masters of Data Science in the school of Computer Science and applied Mathematics at the University of the Witwatersrand.
+This work has not been submitted to any other university, or for any other degree.
+\end{declaration}
+
+\phantomsection
+\begin{acknowledgements}
+I would like to acknowledge Dr. Justine for assisting and guiding me in the creation of this study as well as all the lecturers that imparted their knowledge and time into my understanding of the work.
+\end{acknowledgements}
+
+
+\phantomsection
+\addcontentsline{toc}{section}{Table of Contents}
+\tableofcontents
+\newpage
+\phantomsection
+% \addcontentsline{toc}{section}{List of Figures}
+% \listoffigures
+% \newpage
+% \phantomsection
+% \addcontentsline{toc}{section}{List of Tables}
+% \listoftables
+% \newpage
+\pagenumbering{arabic}
+
+\chapter{Introduction}
+\section{Introduction}
+The world is currently in a data driven era, where the volume, velocity, and variety of data generated across multiple domains continue to grow at an exponential rate \citep{Laney2001}. For instance, healthcare institutions, financial organizations, and online platforms generate vast amounts of data daily through patient records, transactions, sensor networks, and user interactions. While these data sources enable increasingly sophisticated analytical methods, they also require scalable approaches capable of handling large and complex datasets efficiently. While this has enabled increasingly powerful analytical methods, it has also introduced significant computational challenges, particularly when training models on large-scale, high-dimensional data.
+
+Survival analysis is a key framework for risk modelling, focusing on estimating the likelihood of an event occurring over time in the presence of censoring \citep{Cox1972}. In many real-world applications, competing risks arise, where multiple mutually exclusive events may occur, requiring specialised modelling approaches such as the Fine-Gray subdistribution hazard models \citep{FineGray1999}. Recent advances in machine learning and deep learning have further improved the flexibility and predictive performance of survival models \citep{LeCun2015,Katzman2018,Lee2018}. However, these improvements come at the cost of increased computational burden, with training times growing substantially as dataset sizes and model complexity increase \citep{Wang2020}.
+
+To mitigate this computational burden, case–cohort and nested case-control sampling provide established approaches, although their limitations motivate the development of adaptive dynamic sampling strategies for deep competing-risk models. Despite the availability of sampling-based designs such as case–cohort \citep{Prentice1986} and nested case-control methods, their application within modern deep competing-risk models remains limited and insufficiently explored. Furthermore, existing approaches typically rely on fixed sampling schemes, which may not adapt well to varying data characteristics along with requiring constant tuning to acquire the correct sampling size.
+
+This thesis will address these limitations through two primary contributions. First, it will provide a systematic investigation of case–cohort and nested case-control sampling within competing risk settings, specifically in the context of deep survival models along with Fine-Gray and CRISP-NAM. Second, it will introduce a novel dynamic sampling strategy based on entropy-guided grouped sampling, designed to adaptively approximate risk sets while reducing computational cost.
+
+These methods will be integrated within a deep CRISP-NAM Fine-Gray modelling framework and evaluated against full risk-set approaches in terms of predictive performance and computational efficiency. The aim is to demonstrate that substantial reductions in training time and resource usage can be achieved without compromising statistical validity or predictive accuracy.
+
+\section{Research Questions and Objectives}
+
+\subsection{Research Questions}
+
+This study will aim to investigates the effects of risk-set sampling on competing risks for right-censored data along with a custom dynamic sampling techniqiue. 
+The key research questions are:
+
+\begin{itemize}
+  \item How do case–cohort and nested case–control sampling designs affect discrimination, calibration, and explained variation in Fine–Gray models for competing risks compared to full risk analyses?
+  
+  \item  How does the proposed dynamic sampling strategy, which adapts dynamically, affect discrimination, calibration, and explained variation in Fine–Gray models for competing risks compared to full risk analyses as well as the other other techniques (NCC \& CC) ?
+  
+  \item What network and training design choices (e.g., additive interpretable modules, weight stabilization, censoring corrections, mini-batch risk-set sampling) ensure stable and consistent training on sampled data?
+  
+  \item  Between case–cohort, nested case–control, and the study's own sampling strategy designs, which provides superior performance in terms of discrimination (C-index), Brier score, Integrated Brier score, robustness to censoring, and computational efficiency (CPU Usage, Memory Usage and Traning Durations)?
+  
+  \item How do different sampling strategies affect CPU usage, memory requirements, and training duration for deep Fine–Gray models?
+\end{itemize}
+
+
+\subsection{Research Objectives}
+
+The objectives of this research are:
+
+\begin{itemize}
+  \item To implement interpretable deep Fine–Gray models (CRISP-NAM) with stabilized inverse probability weighting (IPW) for sampled risk sets using case–cohort, nested case–control, and the proposed dynamic sampling strategy.
+
+  \item To evaluate and compare the predictive performance (discrimination, calibration, and explained variation) of full-cohort, case–cohort, nested case–control, and dynamic sampling designs using right-censored survival data.
+
+  \item To evaluate the proposed dynamic sampling strategy in terms of predictive performance (discrimination, calibration), using C-index and Brier score against the full risk-set model as a statistical baseline, as well as robustness and computational efficiency (CPU usage, memory footprint, and training time), compared to case–cohort and nested case–control methods.
+
+  \item To analyze the impact of different sampling strategies on computational efficiency, including CPU usage, memory requirements, and training duration across model configurations.
+
+ \item To analyze the impact of different sampling strategies on the C-index, Brier SCore, and Integrated brier score across model configurations.
+
+  \item To provide practical guidelines for network design and training strategies that maintain interpretability, calibration, stability, and computational efficiency when using sampled risk sets.
+
+  \item To produce reproducible code and benchmark results to support adoption of sampling-aware deep survival analysis methods.
+\end{itemize}
+
+
+\chapter{Background Theory}
+
+\section{Related Work}
+
+\subsection{Competing risks}
+
+Competing risks occur when an individual may experience one of several mutually exclusive event types, where the occurrence of one event prevents the occurrence of the others. Let \(K\) denote the number of competing event types in the study. Let \(T\) denote the time to the first event, and let \(\Delta \in \{0,1,\dots,K\}\) denote the event type, where \(\Delta = 0\) indicates right censoring. Let \(\boldsymbol{X} \in \mathbb{R}^p\) denote the vector of baseline covariates associated with each individual. Two central objects are the \emph{cause–specific hazard} and the \emph{cumulative incidence function (CIF)}.
+
+The \textbf{cause–specific hazard} for cause \(k\) is
+\[
+\lambda_k(t\mid \boldsymbol{X})
+=
+\lim_{\Delta t\downarrow 0}
+\frac{P\big(t\le T < t+\Delta t,\ \Delta=k \mid T\ge t, \boldsymbol{X}\big)}{\Delta t},
+\]
+and the \textbf{cumulative incidence function} for cause \(k\) is
+\[
+F_k(t\mid \boldsymbol{X}) \;=\; P(T\le t,\ \Delta=k \mid \boldsymbol{X}).
+\]
+These are related through
+\begin{equation}\label{eq:cif-cs}
+F_k(t\mid \boldsymbol{X})
+=
+\int_0^t S(u^-\mid \boldsymbol{X})\,\lambda_k(u\mid \boldsymbol{X})\,du,
+\qquad
+S(t\mid \boldsymbol{X})=\exp\!\Big(-\sum_{\ell=1}^K\int_0^t \lambda_\ell(s\mid \boldsymbol{X})\,ds\Big),
+\end{equation}
+where \(S(t\mid \boldsymbol{X})\) is the overall survival (no event of any type up to \(t\)).
+
+A common mistake is to treat other event types as simply censored and then analyse only the remaining events that are of interest. This implicitly assumes the competing events are independent censoring mechanisms for the event of interest. Because competing events change the composition of the risk pool \(S(u)\) in \eqref{eq:cif-cs}, ignoring the events will create bias estimates of \(F_k(t)\) and can produce severely misleading conclusions for absolute risk. Competing risk specific methods are therefore required when the CIF (absolute/event-type probability) is the estimand of interest \citep{Cox1972,Breslow1974}.
+
+% make sure to add the aslo add Cause-Specific Hazard (CSH) Model as a mention as this needs to be addresd in my proposal i belive it is mentioned but maybe not directly or cited add that and clean up
+
+\subsection{Cause specific Cox models}
+Cause-specific Cox models extend the traditional Cox proportional hazards framework to competing risks settings, where multiple mutually exclusive event types may occur. For each event type \(k\), a separate cause-specific hazard function is defined, representing the instantaneous risk of experiencing event \(k\) at time \(t\), conditional on remaining free of any event up to that time. In this formulation, individuals who experience competing events are treated as censored at the time of their occurrence, allowing the Cox model to be applied independently for each cause \citep{prentice1978analysis, latouche2013competing}. This approach preserves the interpretability of regression coefficients as effects on the hazard of a specific event types.
+
+Although cause-specific Cox models are widely used for analyzing etiological relationships, they do not directly estimate the cumulative incidence function (CIF), which reflects the absolute risk of an event in the presence of competing risks. This is because censoring competing events modifies the risk set and does not account for the probability structure induced by competing outcomes \citep{kalbfleisch2002statistical, pintilie2006competing}. To address this limitation, alternative methods such as subdistribution hazard models and CIF-based regression approaches have been proposed, providing a direct link to event probabilities while complementing the insights obtained from cause-specific hazard modeling \citep{FineGray1999, andersen2012competing}.
+
+
+\subsection{Fine-Gray subdistribution hazard}
+
+The Fine-Gray approach \citep{FineGray1999} directly models the CIF by introducing the \emph{subdistribution hazard} for cause \(k\):
+\begin{equation}\label{eq:fg-model}
+\tilde\lambda_k(t\mid \boldsymbol{X}) \;=\; \tilde\lambda_{0k}(t)\,\exp\{\beta_k^\top \boldsymbol{X}\},
+\end{equation}
+where \(\tilde\lambda_{0k}(t)\) is an unspecified baseline subdistribution hazard and \(\beta_k\) are regression parameters. Conceptually, the subdistribution hazard describes the instantaneous rate of the event of cause \(k\) among individuals who have not yet experienced cause \(k\), while retaining individuals who experienced competing events through a modified risk set (as opposed to traditional cause-specific Cox models, where such individuals are removed from the risk set and treated as censored observations).
+
+Using counting process notation, let \(N_i^k(t)=\mathbf{1}\{T_i\le t,\ \Delta_i=k\}\) be the counting process for cause \(k\) and let \(Y_i^*(t)\) denote the (modified) at-risk indicator for the Fine-Gray subdistribution formulation. The Fine–Gray score equation has the form
+\begin{equation}\label{eq:fg-score}
+U_k(\beta) \;=\; \sum_{i=1}^n \int_0^\tau \big\{ \boldsymbol{X}_i - \bar{\boldsymbol{X}}_k(t;\beta)\big\}\,d\tilde N_i^k(t) \;=\; 0,
+\end{equation}
+where
+\[
+\bar{\boldsymbol{X}}_k(t;\beta) \;=\; 
+\frac{\sum_{j=1}^n Y_j^*(t)\,\boldsymbol{X}_j\,\exp\{\beta^\top \boldsymbol{X}_j\}}{\sum_{j=1}^n Y_j^*(t)\,\exp\{\beta^\top \boldsymbol{X}_j\}}.
+\]
+Solving \eqref{eq:fg-score} or maximising an equivalent pseudo-likelihood yields \(\hat\beta_k\); modern NN adaptations replace \(\beta^\top \boldsymbol{X}\) by a flexible function \(\eta_\theta(\boldsymbol{X})\) and minimise a corresponding loss \citep{InterpretableFineGray2025}.
+
+\subsubsection{Subdistribution hazard}
+The subdistribution hazard, denoted by $\tilde{\lambda}_k(t \mid \boldsymbol{X})$, is the central quantity in the Fine-Gray competing risks model. It represents the instantaneous rate at which the event of interest (cause $k$) occurs at time $t$ for an individual with covariates $\boldsymbol{X}$, while accounting for the presence of competing events. Unlike the standard cause-specific hazard used in traditional survival analysis, the subdistribution hazard is defined so that individuals who experience competing events are handled through a modified risk set rather than being removed entirely. The Fine-Gray model assumes a proportional hazards structure for this quantity, typically written as
+\[
+\tilde{\lambda}_k(t \mid \boldsymbol{X}) = \tilde{\lambda}_{k0}(t)\exp(\beta^\top \boldsymbol{X}),
+\]
+where $\tilde{\lambda}_{k0}(t)$ is the baseline subdistribution hazard and $\beta$ represents the regression coefficients describing the effect of covariates on the subdistribution hazard.
+
+\subsubsection{Cumulative incidence function}
+The cumulative incidence function (CIF), denoted by $F_k(t \mid \boldsymbol{X})$, represents the probability that an individual with covariates $\boldsymbol{X}$ experiences the event of interest (cause $k$) by time $t$. In competing risks settings, the CIF is the primary quantity of interest because it correctly accounts for the possibility that other events may occur first and prevent the event of interest from happening. The Fine-Gray model is specifically constructed so that modelling the subdistribution hazard directly corresponds to modelling the cumulative incidence function, allowing regression effects to be interpreted in terms of changes in the probability of experiencing the event over time.
+
+\subsubsection{Modified at risk indicator}
+The modified at risk indicator, denoted by $Y_i^*(t)$, defines the risk set used in the Fine-Gray model. In standard survival models, individuals are removed from the risk set after experiencing any event. However, in competing risks data, individuals who experience a competing event are retained in the modified risk set to ensure that the cumulative incidence function is estimated correctly. This adjustment allows the model to account for competing risks while maintaining the proportional hazards structure of the subdistribution hazard model.
+
+\subsubsection{Risk set weighted covariate average}
+The term $\bar{\boldsymbol{X}}_k(t;\beta)$ represents the risk-set weighted average of the covariates at time $t$. It is calculated over the modified risk set using weights proportional to $\exp(\beta^\top \boldsymbol{X})$ and appears in the score function used to estimate the regression parameters. Conceptually, it represents the expected covariate value within the risk set at time $t$ under the model and serves as a reference when comparing individuals who experience the event with those who remain at risk.
+
+\subsection{Deep neural networks with Cox to Fine-Gray}
+
+Deep neural nets have been used to parameterise classical survival objectives to capture nonlinearities and interactions. Representative examples include:
+
+\begin{itemize}
+  \item DeepSurv: replaces the Cox linear predictor by a neural network \( \eta_\theta(X)\) and optimises the Cox partial-likelihood–based loss \citep{Katzman2018}.
+  \item DeepHit: multi-task network predicting discrete-time event probabilities for competing risks \citep{Lee2018}.
+  \item Neural Cox / time-to-event studies: investigate architectures, training and consistency for NN parameterisations \citep{kvamme2019,Wang2020}.
+\end{itemize}
+
+
+
+\subsubsection{CRISP-NAM}  
+CRISP-NAM is a Interpretable Fine–Gray model \citep{InterpretableFineGray2025}, the model combines the Fine–Gray subdistribution hazard with an additive, interpretable neural parameterisation:
+\[
+\eta_k(\boldsymbol{X}) \;\triangleq\; \sum_{j=1}^p g_{k,j}(X_j),
+\]
+where each \(g_{k,j}\) is a learned univariate function that is implemented as a discretized small subnet module. The subdistribution hazard becomes
+\[
+\tilde\lambda_k(t\mid \boldsymbol{X}) \;=\; \tilde\lambda_{0k}(t)\,\exp\{\eta_k(\boldsymbol{X})\}.
+\]
+This modelling framework offers several key advantages. First, it provides strong interpretability, as per-feature contribution plots $g_{k,j}(x)$ allow the effect of each covariate on the prediction to be visualised and understood individually. Second, the structure retains flexibility, since nonlinear relationships between covariates and the outcome can be captured through additive feature functions, and interactions can be incorporated through additional pairwise components when required. Finally, by operating within the Fine-Gray competing risks framework, the model directly targets the cumulative incidence function (CIF), ensuring that predictions correspond to calibrated probabilities for the event of interest in the presence of competing risks. In this work, we adopt the CRISP-NAM parameterisation as the baseline neural network architecture upon which our sampling-aware extensions are built.
+
+\subsection{Risk set sampling}
+
+The study will use the full risk set approach as a baseline for comparison. In this setting, the Fine-Gray loss requires summing over the full risk set $\mathcal{R}(t_j)=\{i : T_i \ge t_j\}$ at each event time $t_j$. This results in a computational cost of $O(n)$ per event time, which can become expensive when the sample size $n$ is large. Despite this computational burden, the full risk set provides a natural reference point because the model is trained using all available observations without any sampling. As such, it serves as an appropriate baseline against which the efficiency and performance of sampling based approaches can be evaluated.
+
+\subsubsection{Nested case–control (NCC).} For each event at time \(t_j\) include the case plus \(m\) controls sampled (usually uniformly) from \(\mathcal{R}(t_j)\). Inclusion probability for a non-case at that event time is \(\pi_{i,j}=m/|\mathcal{R}(t_j)|\) (conditional on event time). Repeating across events yields a set of local partial-likelihood contributions \citep{Breslow1974,Cox1972}.
+
+\subsubsection{Case–cohort (CC).} Draw a subcohort of size \(n_s\) at baseline with sampling fraction \(f=n_s/n\). For each event time include the case and those subcohort members still at risk. For a subcohort member \(\pi_i=f\) (time-constant), whereas observed cases outside the subcohort have \(\pi_i=1\) because they are always included. Analysis uses design-corrected weights to account for unequal inclusion \citep{Prentice1986}.
+
+Both designs reduce memory and CPU by working with much smaller risk sets, but they change inclusion probabilities \(\pi_i\) and therefore require correction to recover full-cohort estimands.
+
+\subsection{Inverse probability weighting (IPW) and stabilization}
+
+Sampling-based designs such as case-cohort and nested case-control are commonly used to reduce computational and data collection costs by analysing only a subset of observations from a larger cohort \citep{Prentice1986,Borgan2000}. However, because individuals are included in the sample with different probabilities, naive analysis of the sampled data can lead to biased estimates. In particular, cases are typically always included while controls are sampled with lower probability, meaning that the resulting dataset no longer reflects the distribution of the original population. To correct for this unequal inclusion, inverse probability weighting (IPW) is used \citep{HorvitzThompson1952}.
+
+In the IPW framework, each sampled individual is assigned a weight equal to the inverse of their probability of being included in the sample. If $\pi_i$ denotes the inclusion probability for individual $i$, the corresponding weight is defined as
+\[
+w_i = \frac{1}{\pi_i}.
+\]
+Individuals who were less likely to be sampled therefore receive larger weights, ensuring that the weighted sample more closely represents the full cohort. By incorporating these weights into the estimation procedure, consistent and approximately unbiased estimates of population parameters can be obtained even when only a subset of the original cohort is observed \citep{Prentice1986,Borgan2000}.
+
+In practice, inverse probability weights can sometimes be highly variable, particularly when some inclusion probabilities are small. Large weights inflate estimator variance and can lead to instability during optimisation in statistical or machine learning models. To mitigate this issue, stabilised weights are often used, a strategy widely adopted in causal inference and missing data literature \citep{Robins2000,Hernan2000}. Stabilisation multiplies the inverse probability weight by the marginal probability of being sampled, $P(S=1)$, producing the stabilised weight
+\[
+w_i^{\mathrm{stab}} = \frac{P(S=1)}{\pi_i}.
+\]
+This rescaling preserves the bias correction properties of IPW while reducing the variability of the weights, which improves numerical stability during estimation.
+
+Survival data frequently contain right-censoring, meaning that the event time for some individuals is not observed within the study period. To account for this, inverse-probability-of-censoring weighting (IPCW) can also be incorporated \citep{Graf1999}. IPCW adjusts observations by the inverse of the probability of remaining uncensored up to a given time, typically estimated using the censoring survival function $\hat G(t \mid \boldsymbol{X})$. Incorporating censoring adjustments ensures that inference remains valid when event times are only partially observed.
+
+
+Unstabilised weights \(1/\pi_i\) can be large and highly variable when some \(\pi_i\) are small, which inflates estimator variance and can destabilise gradient-based training. Multiplying by \(P(S=1)\) keeps the weights centred and reduces their empirical variance while preserving unbiasedness under correct inclusion-probability specification, a standard principle in survey sampling and causal inference \citep{Robins2000,Hernan2000}.
+
+\subsection{Optimization}
+
+The Adam optimizer is a widely used adaptive learning rate method for training neural networks, capable of efficiently updating parameters such as weights and biases in large complex models \citep{kingma2014adam}. Adam combines the benefits of momentum-based updates and RMSProp-style adaptive scaling, which allows for faster and more stable convergence.
+
+In Adam, momentum is computed as an exponential moving average of past gradients to smooth updates and accelerate convergence. Denoting the gradient at iteration \(t\) as
+\[
+g_t = \nabla_\theta L(\theta_{t-1}),
+\]
+the momentum estimate is
+\[
+m_t = \beta_1 m_{t-1} + (1-\beta_1) g_t,
+\]
+with a typical decay parameter \(\beta_1 = 0.9\). To correct for the bias introduced by initialization, a bias-corrected estimate is used:
+\[
+\hat m_t = \frac{m_t}{1-\beta_1^t}.
+\]
+
+RMSProp complements this by maintaining an exponential moving average of squared gradients:
+\[
+v_t = \beta_2 v_{t-1} + (1-\beta_2) g_t^2,
+\]
+where \(\beta_2\) is usually set to 0.999. The corresponding bias-corrected term is
+\[
+\hat v_t = \frac{v_t}{1-\beta_2^t}.
+\]
+
+The Adam parameter update combines these two estimates as
+\[
+\theta_t = \theta_{t-1} - \alpha\, \frac{\hat m_t}{\sqrt{\hat v_t} + \varepsilon},
+\]
+where \(\alpha\) is the learning rate, \(\varepsilon\) a small constant for numerical stability, and \(\theta_t\) the updated parameter at iteration \(t\). Intuitively, momentum smooths the update direction while RMSProp adaptively scales the step size for each parameter, resulting in faster and more robust convergence.
+
+To prevent overfitting and improve generalization, \(L_2\) regularization is commonly applied. This augments the original loss \(L_0(\theta)\) with a quadratic penalty:
+\[
+L(\theta) = L_0(\theta) + \frac{\lambda}{2} \|\theta\|_2^2,
+\]
+where \(\|\theta\|_2^2 = \sum_i \theta_i^2\). The gradient update is modified by adding \(\lambda \theta\) to the unregularized gradient:
+\[
+\nabla_\theta L = \nabla_\theta L_0 + \lambda \theta.
+\]
+This procedure can be interpreted as imposing a zero-mean Gaussian prior on the parameters, continuously shrinking weights toward zero without inducing sparsity \citep{bishop2006}. In contrast, \(L_1\) regularization adds \(\lambda \|\theta\|_1\) to the loss and can set some coefficients exactly to zero, promoting sparse solutions \citep{tibshirani1996}. Hence, \(L_2\) is generally preferred for reducing overfitting, while \(L_1\) is suitable when feature selection is desired.
+
+% ======================================================================
+\chapter{Methodology}
+
+
+This thesis investigates how different risk-set sampling strategies affect competing-risk survival modelling when paired with an interpretable Fine-Gray framework. The main goal is to determine whether reducing the amount of data used during training can lower computational cost and improve training efficiency, while still preserving predictive performance as measured by discrimination and calibration. In particular, the study examines whether sampling-aware training can reduce memory usage, CPU demand, and training time without causing a substantial decline in standard survival evaluation metrics such as the C-index and the time-dependent Brier score. The methodology therefore combines an interpretable neural survival architecture, weighted sampling strategies, and an efficiency-focused evaluation design built around the CRISP-NAM-FG setting introduced in the prior interpretable Fine-Gray work \cite{InterpretableFineGray2025}.
+
+\subsection{Data preprocessing}
+
+The study will initially focus on simulated competing risks data rather than relying immediately on empirical datasets. This approach is intentional, as the primary objective is to evaluate the behaviour, efficiency, and statistical validity of the proposed sampling strategies under controlled conditions where the underlying data-generating mechanism is known. Synthetic data provide complete control over key characteristics of the survival process, allowing systematic variation.
+
+The simulated datasets will consist of twelve covariates, including both continuous and binary predictors, generated from predefined probability distributions. Competing risk outcomes will be simulated through cause-specific hazard functions, where the relative prevalence of each event type can be controlled through baseline hazard rates. Feature importance will also be explicitly specified through predefined regression coefficients, allowing selected covariates to have strong, moderate, weak, or no influence on each competing event. Right censoring will be incorporated through an independent censoring mechanism, with censoring rates adjusted to produce realistic survival scenarios. Because the true data generating process is known, the simulated environment allows verification that the proposed sampling framework accurately preserves the relationships between covariates, event occurrence, and cumulative incidence.
+
+To ensure that the generated data behave as intended, descriptive analyses will be performed to verify event distributions, censoring proportions, covariate effects, and cumulative incidence functions against their predefined simulation parameters. Model performance will then be evaluated using both predictive and discrimination metrics, including the Concordance Index (C-index) and Brier Score, and compared against a baseline model trained on the full unsampled risk set. This comparison ensures that any computational gains achieved through sampling do not come at the cost of substantial predictive accuracy.
+
+Subject to time constraints and successful validation of the simulation results, the study will further evaluate the proposed framework on publicly available real world competing-risks datasets, including the \textit{Framingham Heart Study} and \textit{SUPPORT2} datasets. These empirical evaluations will serve to assess the generalisability of the findings beyond the controlled simulation environment and demonstrate the practical applicability of the proposed sampling methodology in real world survival analysis settings.
+
+\subsection{Risk set sampling}
+
+At each observed event time, the full risk set can be expensive to evaluate, especially when the number of subjects is large. The study therefore compares several sampling designs that reduce the number of individuals entering each event-time contribution while preserving those observations that contribute most to the Fine–Gray objective function. Under simple risk-set sampling, each event time $t_j$ contributes the case subject together with $m$ controls sampled uniformly from the risk set, defined as those satisfying $T_i \ge t_j$ \cite{Breslow1974}. This provides a computationally efficient approximation to the full risk set while preserving the local event-time structure of the subdistribution hazard formulation.
+
+\subsubsection{Case Cohort}
+Case–cohort sampling is evaluated in which a subcohort is selected once at baseline and then reused throughout training. All cases are always retained, while individuals in the subcohort contribute to the risk sets across all event times. This design introduces unequal inclusion probabilities, where subcohort members have constant inclusion probability $\pi_i = f$, the sampling fraction. These probabilities are incorporated into the inverse probability weighted Fine–Gray objective to correct for selection bias induced by subsampling.
+
+\subsubsection{Nested Case Control}
+Nested case–control sampling is also considered. In this design, each observed case at time $t_j$ is matched with $m$ controls sampled from the corresponding risk set. The inclusion probability for a control depends on the size of the risk set at that time, denoted by $\pi_{i,j}$. These time-dependent inclusion probabilities are explicitly accounted for through inverse probability weighting within the Fine–Gray loss, ensuring that the sampled risk sets provide an unbiased representation of the full cohort contribution at each event time.
+
+% \subsubsection{Dynamic Sampling Strategy old}
+% In addition to established sampling methods, the thesis introduces a dynamic sampling strategy based on entropy-guided grouped selection applied directly to the subdistribution risk set. Under the Fine-Gray framework, the modified risk set at time $T_i$, denoted $\tilde{R}(T_i)$, intrinsically retains individuals who previously experienced competing events, weighted by their inverse probability of censoring weights (IPCW), $w_j(T_i)$.
+
+% The risk set is partitioned into groups $\{G_g(T_i)\}_{g=1}^{G_i}$ based on shared covariate patterns, with representative covariate vector $\boldsymbol{X}_g$. The effective size of each group is the sum of its censoring weights:
+% \[
+% W_g(T_i) = \sum_{j \in G_g(T_i)} w_j(T_i)
+% \]
+% The empirical group proportion within the modified risk set is defined as
+% \[
+% p_g(T_i)=\frac{W_g(T_i)}{\sum_h W_h(T_i)}.
+% \]
+
+% To prioritize informative but potentially rare covariate patterns while leveraging the current model state, the importance score for each group combines information gain and model-based relevance:
+% \[
+% s_g(T_i)=\bigl[-\log p_g(T_i)\bigr]\exp(\hat{\eta}(\boldsymbol{X}_g)),
+% \]
+% where $\hat{\eta}(\boldsymbol{X}_g)$ denotes the current model risk score. 
+
+% The sampling budget is allocated according to the normalized selection probabilities:
+% \[
+% \pi_g(T_i)=\frac{s_g(T_i)}{\sum_h s_h(T_i)}.
+% \]
+% By sampling directly from the weighted group proportions, the design seamlessly preserves the competing-risks structure governed by the Fine-Gray formulation without requiring manual cause-specific stratification.
+
+% The sampled set of groups is denoted by $\tilde{\mathcal{G}}(T_i)$, and the contribution of the sampled risk set to the partial likelihood is approximated using an inverse probability weighted estimator:
+% \[
+% \widehat{\mathcal{L}}(T_i)=\sum_{g \in \tilde{\mathcal{G}}(T_i)} \frac{W_g(T_i)}{\pi_g(T_i)} \exp\bigl(\eta(\boldsymbol{X}_g)\bigr).
+% \]
+
+% Under standard group-wise inclusion assumptions and correct specification of the inclusion probabilities, this estimator provides a design-consistent approximation of the full risk-set contribution in the Fine-Gray objective. However, because the sampling probabilities depend on the current model via $\hat{\eta}(\cdot)$, the resulting estimator is adaptive and is best interpreted as a biased-variance trade-off controlled approximation rather than an exact unbiased estimator.
+
+% \subsubsection{Connection to IPW Estimation}
+% All sampling strategies are unified through inverse probability weighting. Each individual or group contributes to the Fine–Gray loss proportionally to the inverse of its inclusion probability, such that the weighted estimating equations recover the full-cohort objective in expectation, under correct specification of the inclusion probabilities and appropriate sampling assumptions (e.g. independent selection given the risk set). 
+
+% In particular, let $\pi_i$ denote the inclusion probability of subject $i$ (or $\pi_g(t)$ for a sampled group). The IPW construction ensures that
+% \[
+% \mathbb{E}\!\left[\frac{\mathbf{1}\{i \in S\}}{\pi_i} \, \phi_i \right] = \phi_i,
+% \]
+% for any contribution $\phi_i$ to the full data objective, which forms the basis of Horvitz–Thompson type unbiasedness \citep{HorvitzThompson1952}. 
+
+% This allows case–cohort, nested case–control, and dynamic grouped sampling to be interpreted within a single coherent IPW Fine–Gray framework, where each method corresponds to a different specification of $\pi_i$ (or $\pi_g(t)$), but the same weighting principle is used to reconstruct the full risk-set contribution.
+
+\subsubsection{Dynamic Sampling Strategy}
+In addition to established sampling methods, the thesis introduces a dynamic sampling strategy based on entropy-guided grouped selection applied directly to the subdistribution risk set. Under the Fine-Gray framework, the modified risk set at time $T_i$, denoted $\tilde{R}(T_i)$, intrinsically retains individuals who previously experienced competing events, weighted by their inverse probability of censoring weights (IPCW), $w_j(T_i)$.
+
+The risk set is partitioned into groups $\{G_g(T_i)\}_{g=1}^{G_i}$ based on shared covariate patterns, with representative covariate vector $\boldsymbol{X}_g$. The effective size of each group is the sum of its censoring weights:
+\[
+W_g(T_i) = \sum_{j \in G_g(T_i)} w_j(T_i)
+\]
+The empirical group proportion within the modified risk set is defined as
+\[
+p_g(T_i)=\frac{W_g(T_i)}{\sum_h W_h(T_i)}.
+\]
+
+To prioritize informative but potentially rare covariate patterns while leveraging the current model state, the importance score for each group combines information gain and model-based relevance:
+\[
+s_g(T_i)=\bigl[-\log p_g(T_i)\bigr]\exp(\hat{\eta}(\boldsymbol{X}_g)),
+\]
+where $\hat{\eta}(\boldsymbol{X}_g)$ denotes the current model risk score. 
+
+Instead of enforcing a fixed sampling quota, independent inclusion probabilities are determined by scaling the importance scores relative to the average group importance, modulated by a baseline retention rate $\rho \in (0, 1]$:
+\[
+\pi_g(T_i)= \min \left( 1, \;\rho \cdot \frac{s_g(T_i)}{\frac{1}{G_i}\sum_{h=1}^{G_i} s_h(T_i)} \right).
+\]
+Under this formulation, highly informative groups ($s_g$ well above the mean) are deterministically retained ($\pi_g = 1$), while redundant or low-information groups are proportionally compressed. Because the sampling size is not fixed, the number of sampled groups dynamically expands or contracts depending on the uncertainty and information density of the current risk set. By performing independent Bernoulli selection based on these probabilities, the design seamlessly preserves the competing-risks structure governed by the Fine-Gray formulation without requiring manual cause-specific stratification.
+
+The sampled set of groups is denoted by $\tilde{\mathcal{G}}(T_i)$, and the contribution of the sampled risk set to the partial likelihood is approximated using an inverse probability weighted estimator:
+\[
+\widehat{\mathcal{L}}(T_i)=\sum_{g \in \tilde{\mathcal{G}}(T_i)} \frac{W_g(T_i)}{\pi_g(T_i)} \exp\bigl(\eta(\boldsymbol{X}_g)\bigr).
+\]
+
+Under standard group-wise inclusion assumptions and correct specification of the inclusion probabilities, this estimator provides a design-consistent approximation of the full risk-set contribution in the Fine-Gray objective. However, because the sampling probabilities depend on the current model via $\hat{\eta}(\cdot)$, the resulting estimator is adaptive and is best interpreted as a biased-variance trade-off controlled approximation rather than an exact unbiased estimator.
+
+\subsubsection{Connection to IPW Estimation}
+All sampling strategies are unified through inverse probability weighting. Each individual or group contributes to the Fine–Gray loss proportionally to the inverse of its inclusion probability, such that the weighted estimating equations recover the full-cohort objective in expectation, under correct specification of the inclusion probabilities and appropriate sampling assumptions (e.g., independent selection given the risk set). 
+
+In particular, let $\pi_i$ denote the inclusion probability of subject $i$ (or $\pi_g(t)$ for a sampled group). The IPW construction ensures that
+\[
+\mathbb{E}\!\left[\frac{\mathbf{1}\{i \in S\}}{\pi_i} \, \phi_i \right] = \phi_i,
+\]
+for any contribution $\phi_i$ to the full data objective, which forms the basis of Horvitz–Thompson type unbiasedness \citep{HorvitzThompson1952}. 
+
+This allows case–cohort, nested case–control, and dynamic grouped sampling to be interpreted within a single coherent IPW Fine–Gray framework, where each method corresponds to a different specification of $\pi_i$ (or $\pi_g(t)$), but the same weighting principle is used to reconstruct the full risk-set contribution.
+
+
+\subsection{Network architecture}
+
+The modelling framework follows the CRISP-NAM design used in the earlier interpretable Fine-Gray study \cite{InterpretableFineGray2025}, but is extended in this thesis to operate under sampling-aware training. The architecture is based on a Neural Additive Model formulation in which each covariate contributes independently to the final prediction through its own dedicated subnetwork. Let $X = (x_1, x_2, \dots, x_p)$ denote the input covariates. Each feature $x_i$ is passed through a feature-specific neural network $f_i(\cdot)$, referred to as a FeatureNet, which learns a non-linear transformation of that individual feature while preserving interpretability through isolation of effects. The output of each FeatureNet is a latent representation
+\[
+h_i = f_i(x_i) \in \mathbb{R}^d,
+\]
+where $d$ denotes the dimension of the learned representation.
+
+Each FeatureNet is implemented as a fully connected feedforward neural network with $L$ layers. The transformation is computed recursively, beginning with the scalar input $z_i^{(0)} = x_i$, and proceeding through the hidden layers according to
+\[
+z_i^{(l)} = \tanh\left(W_i^{(l)} z_i^{(l-1)} + b_i^{(l)}\right), \quad l = 1, \dots, L,
+\]
+where $W_i^{(l)}$ and $b_i^{(l)}$ denote the weights and biases at layer $l$. The final hidden representation is given by $h_i = z_i^{(L)}$. The use of the hyperbolic tangent activation ensures smooth non-linear transformations while maintaining bounded outputs, which contributes to stable optimisation during training.
+
+The overall model combines the feature-wise representations additively to form a global latent risk score. In its simplest interpretable form, this aggregation can be written as
+\[
+\eta_k(\boldsymbol{X}) = \sum_{i=1}^p g_i,_k(f_i(x_i)),
+\]
+where each $g_i(x_i)$ is a scalar contribution derived from the corresponding FeatureNet, typically obtained by projecting $h_i$ onto a one-dimensional output. This additive structure is central to interpretability, as it allows the contribution of each feature to the final prediction to be examined independently. In the more general representation used during training, the concatenated hidden representations $h = [h_1, \dots, h_p]$ may be passed through a final linear layer to produce the log-risk score $\eta(X)$, while still preserving the decomposition into feature-level effects.
+
+Regularisation and stabilisation mechanisms are incorporated directly into the FeatureNet structure. Dropout is applied after hidden layers to prevent overfitting, while feature-level dropout randomly suppresses entire FeatureNets during training to improve robustness and reduce reliance on any single covariate. Optional batch normalisation layers can also be included after linear transformations to stabilise training dynamics, particularly when deeper FeatureNets are used.
+
+Within the context of this thesis, it is important to distinguish between two complementary views of the architecture. The first is the predictive model used during training, in which the aggregated risk score $\eta(X)$ is optimised under the sampling-aware Fine-Gray loss. The second is the interpretability view, where each learned function $g_i(x_i)$ is analysed independently to understand how individual covariates influence the cumulative incidence. This dual perspective ensures that the model remains both expressive and transparent, aligning with the central goal of extending interpretable competing-risk modelling to computationally efficient, sampling-based training regimes.
+
+\subsection{Loss function}
+The model is trained using a sampling-aware extension of the Fine-Gray loss, where the standard subdistribution hazard objective is augmented with inverse probability weighting and stabilisation to correctly account for sampling. To clearly illustrate how the proposed formulation is constructed, the loss is presented in three stages: the standard Fine-Gray objective, the additional weighting components, and the final combined formulation used in this thesis.
+
+We begin with the standard Fine-Gray partial likelihood for a target cause $k$. Let $R(T_i)$ denote the full risk set at time $T_i$. The negative log-partial likelihood can be written as
+\[
+L_{\mathrm{FG}}(\beta)
+=
+-\sum_{i:\Delta_i = k}
+\left[
+\beta^\top \boldsymbol{X}_i
+-
+\log \sum_{j \in R(T_i)} \exp(\beta^\top \boldsymbol{X}_j)
+\right],
+\]
+which models the subdistribution hazard by comparing the contribution of the observed event to that of the entire risk set \cite{FineGray1999}. \textbf{Note:} In the CRISP-NAM implementation, the traditional Fine-Gray term $\exp(\beta^\top \boldsymbol{X}_j)$ is replaced by the additive neural risk function $\exp(\eta_k(\boldsymbol{X}_j)),$ where \(\eta_k(\boldsymbol{X}_j)\) is obtained through the aggregation of the feature-specific subnetworks.
+
+To account for biased sampling designs such as case cohort and nested case control, inverse probability weighting (IPW) is introduced so that each sampled observation represents its corresponding portion of the full cohort \cite{HorvitzThompson1952,Prentice1986}. Let $\pi_i$ denote the inclusion probability for subject $i$. The inverse probability weight is defined as
+\[
+w_i^{\mathrm{IPW}} = \frac{1}{\pi_i}.
+\]
+Since naive IPW can lead to high-variance estimators, stabilisation is applied using the marginal sampling probability $P(S=1)$, giving
+\[
+w_i^{\mathrm{stab}} = \frac{P(S=1)}{\pi_i},
+\]
+which has been shown to improve numerical stability and reduce variance in weighted estimators \cite{Robins2000,Hernan2000}.
+
+In addition, to properly account for right censoring, inverse probability of censoring weighting (IPCW) is incorporated. Let $\hat{G}(T_i^- \mid X_i)$ denote the estimated survival function of the censoring distribution just prior to time $T_i$. The censoring-adjusted weight is then
+\[
+w_i^{\mathrm{cens}} = \frac{1}{\hat{G}(T_i^- \mid \boldsymbol{X}_i)},
+\]
+which ensures unbiased estimation under independent censoring \cite{Graf1999}.
+
+Combining these components yields the overall sampling-aware weight for each subject,
+\[
+w_i = \frac{P(S=1)}{\pi_i} \cdot \frac{1}{\hat{G}(T_i^- \mid \boldsymbol{X}_i)}.
+\]
+
+We now introduce the sampled risk set $R^*(T_i)$, which replaces the full risk set $R(T_i)$ under the sampling schemes considered in this thesis. Incorporating both the weights and the sampled risk set into the Fine-Gray objective yields the final loss function,
+\[
+L_{\mathrm{FG}}^{\mathrm{IPW}}(\beta)
+=
+-\sum_{i:\Delta_i = k}
+w_i
+\left[
+\beta^\top \boldsymbol{X}_i
+-
+\log \sum_{j \in R^*(T_i)}
+w_j \exp(\beta^\top \boldsymbol{X}_j)
+\right].
+\]
+This formulation preserves the structure of the original Fine-Gray loss while correcting for the non-uniform sampling process and censoring. The weighting ensures that the sampled data provide an unbiased representation of the full cohort, while stabilisation controls the variance that would otherwise arise from extreme inverse probabilities.
+
+In this thesis, no weight clipping is applied. Although clipping is sometimes used to control extreme weights, it is not appropriate in this setting because the sampled risk sets are already small. Truncating weights at fixed percentiles would effectively discard a non-trivial portion of the already reduced data, leading to a loss of information and potential bias. Instead, stability is achieved through the use of the marginal sampling fraction and censoring-adjusted weighting, which together provide a principled and consistent correction without artificially reducing the effective sample size.
+
+\subsection{Training details}
+
+The model will be trained using five-fold cross-validation to obtain stable performance estimates across multiple data splits. Within each fold, the study will evaluate both full-batch and mini-batch (Data-loaders) training regimes in order to directly assess how sampling strategies behave under different computational settings. Full-batch training uses the entire (sampled or full) risk set at each optimisation step and therefore provides a baseline that reflects the traditional formulation of the Fine-Gray objective. In contrast, mini-batch training processes subsets of the data at a time, which reduces memory usage and enables scalability to larger datasets, but may introduce additional stochasticity into the optimisation process.
+
+This distinction is particularly important in the context of this thesis, as the interaction between batching and sampling is non-trivial. Sampling techniques such as nested case control, case cohort, and the proposed entropy-guided grouping already reduce the effective size of the risk set. When combined with mini-batching, the model is exposed to only a partial view of an already reduced dataset at each update step. The study therefore explicitly investigates whether this compounded subsampling affects convergence behaviour, stability of the loss, and final predictive performance. In addition, the comparison with full-batch training allows the study to determine whether sampling alone is sufficient to achieve computational gains, or whether further improvements arise when combined with batching in large-scale settings where the full dataset exceeds what can be processed in a single pass.
+
+The optimisation procedure will use the Adam optimiser, which is widely adopted for neural network training because it combines adaptive learning rates with momentum-based updates \cite{kingma2014adam}. L2 regularisation will be applied to reduce overfitting and to promote smoother parameter estimates, particularly in scenarios where the effective sample size is reduced due to sampling. This training protocol extends the earlier interpretable Fine-Gray framework \cite{InterpretableFineGray2025} by introducing a systematic comparison between full-risk and sampled-risk training under both full-batch and mini-batch regimes, thereby aligning the model development with the central objective of evaluating computational efficiency alongside predictive performance.
+
+\subsection{Evaluation metrics}
+
+\subsubsection{Concordance index (C-index)}
+
+The concordance index is used to evaluate how well the predicted risk scores preserve the observed ordering of event times. For a pair of subjects $(i,j)$, the prediction is concordant if the subject who experiences the event earlier is assigned a higher predicted risk score. Let $\eta_i$ and $\eta_j$ denote the predicted log-risk scores.
+
+Due to right censoring, not all subject pairs are comparable. To account for this, an inverse probability of censoring weighted (IPCW) version of the concordance index is used, following \cite{Uno2011}. The estimator is defined as:
+\[
+\widehat{C}_{\mathrm{IPCW}}
+=
+\frac{
+\sum_{i \neq j}
+\mathbf{1}(T_i < T_j,\ \delta_i = 1)\,
+\mathbf{1}(\eta_i > \eta_j)\,
+/ \hat G^2(T_i)
+}{
+\sum_{i \neq j}
+\mathbf{1}(T_i < T_j,\ \delta_i = 1)\,
+/ \hat G^2(T_i)
+},
+\]
+where $\hat G(\cdot)$ denotes the Kaplan–Meier estimator of the censoring survival function.
+
+A value of $0.5$ corresponds to performance no better than chance, whereas a value of $1.0$ indicates perfect ordering \cite{Harrell1982}. Both the standard Harrell C-index and the IPCW-adjusted version are reported to ensure robustness of evaluation under right censoring.
+
+\subsubsection{Brier score and Integrated Brier Score}
+
+The CIF based Brier score is used to evaluate the accuracy of predicted survival probabilities in survival analysis and competing risks settings. For subject $i$, let $\hat{S}(t\mid X_i)$ denote the predicted survival function and let $\mathbf{1}[T_i>t]$ indicate whether the subject is event-free at time $t$. The Brier score is defined as
+\[
+\mathrm{BS}(t)
+=
+\frac{1}{n}
+\sum_{i=1}^n
+w_i(t)\,
+\bigl(\mathbf{1}[T_i>t]-\hat{F}_k(t\mid \boldsymbol{X}_i)\bigr)^2,
+\]
+where $w_i(t)$ is an inverse probability of censoring weight used to correct for right censoring in survival settings \cite{Graf1999}. Smaller values indicate better predictive performance, reflecting improved calibration and probabilistic agreement with the observed outcome process \cite{Schemper2009}.
+
+To provide a single summary measure of predictive accuracy over the full time horizon, the Integrated Brier Score (IBS) is used. The IBS is defined as the average Brier score over a prespecified time interval $[0, \tau]$:
+\[
+\mathrm{IBS}
+=
+\frac{1}{\tau}
+\int_0^{\tau}
+\mathrm{BS}(t)\,dt.
+\]
+The Integrated Brier Score provides an overall measure of prediction error across time, capturing both short-term and long-term survival accuracy in a single value. This makes it particularly suitable for comparing sampling strategies, as it avoids dependence on a specific time point and reflects global predictive performance across the entire follow-up period.
+
+\subsection{Memory and CPU monitoring}
+In addition to predictive performance, the study will measure computational efficiency during training. Profiling tools will be used to monitor CPU usage, memory consumption, and total training time in isolation, ensuring that only the resources required by the model training process are captured. This allows for a consistent comparison between full-risk and sampled approaches in terms of computational cost.
+
+The use of profilers ensures that resource utilisation is recorded independently of external processes, providing an accurate reflection of how each training configuration behaves. These measurements will be used to evaluate whether the proposed sampling strategies reduce computational burden while maintaining predictive performance, aligning with the central objective of the thesis to balance efficiency and accuracy within the interpretable Fine Gray framework \cite{InterpretableFineGray2025}.
+% ======================================================================
+\chapter{Timeline}
+\section{Timeline}
+
+The following timeline outlines the core activities required to complete the research objectives over a 4-month timeframe.
+
+\vspace{1em}
+\noindent
+\begin{tabular}{p{2.5cm} p{12.5cm}}
+\toprule
+\textbf{Timeframe} & \textbf{Tasks and Milestones} \\
+\midrule
+\textbf{Month 1} & \textbf{Setup \& Data:} Finalize literature review, generate synthetic data, and preprocess for modeling. \\
+\textbf{Month 2} & \textbf{Methodology:} Implement baseline (CC, NCC) and dynamic sampling designs, alongside IPW corrections. \\
+\textbf{Month 3} & \textbf{Experiments:} Integrate methods into CRISP-NAM, execute model runs, and log computational metrics. \\
+\textbf{Month 4} & \textbf{Finalization:} Evaluate predictive performance, format codebase, and write the thesis document. \\
+\bottomrule
+\end{tabular}
+% ======================================================================
+\nocite{*}
+
+\bibliography{references}\addcontentsline{toc}{chapter}{References}
+\end{document}
+
