@@ -7,6 +7,16 @@ Odd~O Aalen and S{\o}ren Johansen.
 \newblock {\em Scandinavian Journal of Statistics}, 5(3):141--150, 1978.
 
 
+\bibitem[\protect\citeauthoryear{Agarwal \bgroup \em et al.\egroup
+  }{2021}]{agarwal2021neural}
+Rishabh Agarwal, Levi Melnick, Nicholas Frosst, Xuezhou Zhang, Ben Lengerich,
+  Rich Caruana, and Geoffrey~E Hinton.
+\newblock Neural additive models: Interpretable machine learning with neural
+  nets.
+\newblock {\em Advances in Neural Information Processing Systems},
+  34:4699--4711, 2021.
+
+
 \bibitem[\protect\citeauthoryear{Andersen \bgroup \em et al.\egroup
   }{2012}]{andersen2012competing}
 P.~K. Andersen, R.~B. Geskus, T.~de~Witte, and H.~Putter.
@@ -20,6 +30,19 @@ P.~K. Andersen, R.~B. Geskus, T.~de~Witte, and H.~Putter.
 Laura Antolini, Patrizia Boracchi, and Elia Biganzoli.
 \newblock A time-dependent discrimination index for survival data.
 \newblock {\em Statistics in Medicine}, 24:3927--3944, 2005.
+
+
+\bibitem[\protect\citeauthoryear{Beyersmann \bgroup \em et al.\egroup
+  }{2009}]{beyersmann2009simulating}
+Jan Beyersmann, Aur{\'e}lien Latouche, Anika Buchholz, and Martin Schumacher.
+\newblock Simulating competing risks data in survival analysis.
+\newblock {\em Statistics in Medicine}, 28(6):956--971, 2009.
+
+
+\bibitem[\protect\citeauthoryear{Bishop}{2006}]{bishop2006}
+Christopher~M. Bishop.
+\newblock {\em Pattern Recognition and Machine Learning}.
+\newblock Springer, 2006.
 
 
 \bibitem[\protect\citeauthoryear{Borgan \bgroup \em et al.\egroup
@@ -42,12 +65,28 @@ D.~R. Cox.
   (Methodological)}, 34(2):187--220, 1972.
 
 
+\bibitem[\protect\citeauthoryear{Falk}{2026}]{falk2026crispnam}
+Michael~P. Falk.
+\newblock {\em {CRISP-NAM}: Deep Survival Analysis under Competing Risks using
+  Risk Set Sampling}.
+\newblock
+  \url{https://github.com/MichaelFalk1/Fine-Gray-CRISP-NAM-Survival-Analysis-Using-Risk-Set-Sampling.git},
+  2026.
+
+
 \bibitem[\protect\citeauthoryear{Fine and Gray}{1999}]{FineGray1999}
 Jason~P. Fine and Robert~J. Gray.
 \newblock A proportional hazards model for the subdistribution of a competing
   risk.
 \newblock {\em Journal of the American Statistical Association},
   94(446):496--509, 1999.
+
+
+\bibitem[\protect\citeauthoryear{Fleming and
+  Harrington}{1991}]{fleming1991counting}
+Thomas~R. Fleming and David~P. Harrington.
+\newblock {\em Counting Processes and Survival Analysis}.
+\newblock Wiley, New York, 1991.
 
 
 \bibitem[\protect\citeauthoryear{Graf \bgroup \em et al.\egroup
@@ -89,10 +128,32 @@ J.~L. Katzman, U.~Shaham, A.~Cloninger, J.~Bates, T.~Jiang, and Y.~Kluger.
 \newblock {\em BMC Medical Research Methodology}, 18(1):24, 2018.
 
 
+\bibitem[\protect\citeauthoryear{Kawaguchi \bgroup \em et al.\egroup
+  }{2020}]{kawaguchi2020scalable}
+Eric~S. Kawaguchi, Jenny~I. Shen, and Gang Li.
+\newblock Scalable algorithms for large competing risks data.
+\newblock {\em Journal of Computational and Graphical Statistics},
+  29(3):595--605, 2020.
+
+
+\bibitem[\protect\citeauthoryear{Kim \bgroup \em et al.\egroup
+  }{2020}]{kim2020stratified}
+Jinheum Kim, Gongtang Xu, Jiajia Zhang, and Kwang-Sig Ahn.
+\newblock Stratified proportional subdistribution hazards model with
+  covariate-adjusted censoring weight for case-cohort studies.
+\newblock {\em Statistics in Medicine}, 39(23):3122--3136, 2020.
+
+
 \bibitem[\protect\citeauthoryear{Kingma and Ba}{2014}]{kingma2014adam}
 Diederik~P. Kingma and Jimmy Ba.
 \newblock Adam: A method for stochastic optimization.
 \newblock {\em arXiv:1412.6980}, 2014.
+
+
+\bibitem[\protect\citeauthoryear{Kuhn and Johnson}{2013}]{kuhn2013applied}
+Max Kuhn and Kjell Johnson.
+\newblock {\em Applied Predictive Modeling}.
+\newblock Springer, 2013.
 
 
 \bibitem[\protect\citeauthoryear{Kvamme \bgroup \em et al.\egroup
@@ -129,6 +190,22 @@ C.~Lee, W.~R. Zame, J.~Yoon, and M.~van~der Schaar.
   risks.
 \newblock In {\em Proceedings of the Thirty-Second AAAI Conference on
   Artificial Intelligence}, pages 231--238, 2018.
+
+
+\bibitem[\protect\citeauthoryear{Little and
+  Rubin}{2019}]{little2019statistical}
+Roderick J.~A. Little and Donald~B. Rubin.
+\newblock {\em Statistical Analysis with Missing Data}.
+\newblock John Wiley \& Sons, 3rd edition, 2019.
+
+
+\bibitem[\protect\citeauthoryear{Murtaugh \bgroup \em et al.\egroup
+  }{1994}]{murtaugh1994primary}
+Paul~A. Murtaugh, E.~Rolland Dickson, G.~M. Van~Dam, M.~Malinchoc, Patricia~M.
+  Grambsch, A.~L. Langworthy, and C.~H. Gips.
+\newblock Primary biliary cirrhosis: prediction of short-term survival based on
+  repeated patient visits.
+\newblock {\em Hepatology}, 20(1):126--134, 1994.
 
 
 \bibitem[\protect\citeauthoryear{Pintilie}{2006}]{pintilie2006competing}
@@ -169,11 +246,25 @@ James~M. Robins, Miguel~A. Hern{\'a}n, and Babette Brumback.
 \newblock {\em Epidemiology}, 11(5):550--560, 2000.
 
 
+\bibitem[\protect\citeauthoryear{Rosner}{2015}]{rosner2015fundamentals}
+Bernard Rosner.
+\newblock {\em Fundamentals of biostatistics}.
+\newblock Cengage learning, 2015.
+
+
 \bibitem[\protect\citeauthoryear{Wang \bgroup \em et al.\egroup
   }{2020}]{Wang2020}
 J.~Wang, H.~Zhao, and H.~Chu.
 \newblock Mini‐batch sampling for cox regression in deep learning.
 \newblock {\em Journal of Computational Biology}, 27(1):1--10, 2020.
+
+
+\bibitem[\protect\citeauthoryear{Wilson \bgroup \em et al.\egroup
+  }{1998}]{wilson1998prediction}
+Peter W.~F. Wilson, Ralph~B. D'Agostino, Daniel Levy, Albert~M. Belanger, Halit
+  Silbershatz, and William~B. Kannel.
+\newblock Prediction of coronary heart disease using risk factor categories.
+\newblock {\em Circulation}, 97(18):1837--1847, 1998.
 
 
 \end{thebibliography}

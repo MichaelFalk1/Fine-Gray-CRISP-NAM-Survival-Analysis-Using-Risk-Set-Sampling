@@ -6,7 +6,7 @@
 \contentsline {section}{\numberline {1.2}Research Questions and Objectives}{2}{section.1.2}%
 \contentsline {subsection}{\numberline {1.2.1}Research Questions}{2}{subsection.1.2.1}%
 \contentsline {subsection}{\numberline {1.2.2}Research Objectives}{3}{subsection.1.2.2}%
-\contentsline {section}{\numberline {1.3}Thesis Organization}{3}{section.1.3}%
+\contentsline {section}{\numberline {1.3}Thesis Organization}{4}{section.1.3}%
 \contentsline {chapter}{\numberline {2}Background Theory}{5}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Competing Risks in Survival Analysis}{5}{section.2.1}%
 \contentsline {section}{\numberline {2.2}Past Deep Neural Network Models}{5}{section.2.2}%
@@ -22,73 +22,79 @@
 \contentsline {subsection}{\numberline {3.1.3}Framingham Heart Study Dataset}{14}{subsection.3.1.3}%
 \contentsline {section}{\numberline {3.2}Risk Set Sampling}{14}{section.3.2}%
 \contentsline {subsection}{\numberline {3.2.1}Full Risk}{14}{subsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.2.2}Case Cohort}{14}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.2}Case Cohort}{15}{subsection.3.2.2}%
 \contentsline {subsection}{\numberline {3.2.3}Nested Case Control}{15}{subsection.3.2.3}%
 \contentsline {subsection}{\numberline {3.2.4}Dynamic Sampling Strategy}{15}{subsection.3.2.4}%
-\contentsline {subsection}{\numberline {3.2.5}IPW and Stability}{16}{subsection.3.2.5}%
+\contentsline {subsection}{\numberline {3.2.5}IPW and Stability}{17}{subsection.3.2.5}%
 \contentsline {section}{\numberline {3.3}Network Architecture (CRISPNAM-FG)}{17}{section.3.3}%
 \contentsline {subsection}{\numberline {3.3.1}Network architecture}{17}{subsection.3.3.1}%
 \contentsline {subsubsection}{FeatureNet Formulation}{17}{section*.2}%
 \contentsline {subsubsection}{Global Additive Aggregation}{18}{section*.3}%
-\contentsline {section}{\numberline {3.4}Loss Function}{18}{section.3.4}%
-\contentsline {section}{\numberline {3.5}Training Details}{19}{section.3.5}%
+\contentsline {section}{\numberline {3.4}Loss Function}{19}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Training Details}{20}{section.3.5}%
 \contentsline {section}{\numberline {3.6}Model Evaluation and Diagnostics}{21}{section.3.6}%
 \contentsline {subsection}{\numberline {3.6.1}Brier Score}{21}{subsection.3.6.1}%
-\contentsline {subsection}{\numberline {3.6.2}Integrated Brier Score (IBS)}{21}{subsection.3.6.2}%
-\contentsline {subsection}{\numberline {3.6.3}Time-Dependent Concordance Index (C-Index)}{22}{subsection.3.6.3}%
-\contentsline {subsection}{\numberline {3.6.4}Stratified Aalen-Johansen CIF Calibration}{22}{subsection.3.6.4}%
+\contentsline {subsection}{\numberline {3.6.2}Integrated Brier Score (IBS)}{22}{subsection.3.6.2}%
+\contentsline {subsection}{\numberline {3.6.3}Concordance Index (C-Index)}{22}{subsection.3.6.3}%
+\contentsline {subsection}{\numberline {3.6.4}Stratified Aalen-Johansen CIF Calibration}{23}{subsection.3.6.4}%
 \contentsline {subsection}{\numberline {3.6.5}CPU and Memory Profiling}{23}{subsection.3.6.5}%
-\contentsline {subsection}{\numberline {3.6.6}Synthetic Data Verification (Pearson \& Spearman Correlation)}{23}{subsection.3.6.6}%
-\contentsline {chapter}{\numberline {4}Results and Discussion}{24}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Dataset Characteristics}{24}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Optimization and Convergence}{26}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Hyperparameter Stability and Selection}{26}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Dataset Convergence Analysis}{28}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}Computational Resource Profiling}{30}{subsection.4.2.3}%
-\contentsline {subsubsection}{Resource Utilization and Execution Efficiency}{30}{section*.10}%
-\contentsline {paragraph}{Full Cohort}{31}{section*.11}%
-\contentsline {paragraph}{Static Case-Cohort (SCC) \& Nested Case-Control (NCC)}{31}{section*.12}%
-\contentsline {paragraph}{Entropy Sampling}{31}{section*.13}%
-\contentsline {section}{\numberline {4.3}Predictive performance and training time}{31}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Synthetic Dataset ($N=15,000$)}{31}{subsection.4.3.1}%
-\contentsline {subsubsection}{Sampler: Full Cohort}{32}{section*.15}%
-\contentsline {subsubsection}{Sampler: Nested Case-Control (NCC)}{33}{section*.17}%
-\contentsline {subsubsection}{Sampler: Static Case-Cohort (SCC)}{33}{section*.19}%
-\contentsline {subsubsection}{Sampler: Entropy}{34}{section*.20}%
-\contentsline {subsection}{\numberline {4.3.2}Real-World Clinical Benchmark: PBC Dataset ($N=1,945$)}{34}{subsection.4.3.2}%
-\contentsline {subsubsection}{Sampler: Full Cohort}{35}{section*.22}%
-\contentsline {subsubsection}{Sampler: Nested Case-Control (NCC)}{35}{section*.24}%
-\contentsline {subsubsection}{Sampler: Static Case-Cohort (SCC)}{36}{section*.26}%
-\contentsline {subsubsection}{Sampler: Entropy}{36}{section*.27}%
-\contentsline {subsection}{\numberline {4.3.3}Real-World Semi-Synthetic: Framingham Dataset}{37}{subsection.4.3.3}%
-\contentsline {subsubsection}{Sampler: Full Cohort}{37}{section*.29}%
-\contentsline {subsubsection}{Sampler: Nested Case-Control (NCC)}{38}{section*.31}%
-\contentsline {subsubsection}{Sampler: Static Case-Cohort (SCC)}{39}{section*.33}%
-\contentsline {subsubsection}{Sampler: Entropy}{39}{section*.34}%
-\contentsline {section}{\numberline {4.4}Model Calibration and Discrimination}{39}{section.4.4}%
-\contentsline {subsection}{\numberline {4.4.1}Ground Truth Risk Recovery}{40}{subsection.4.4.1}%
-\contentsline {subsection}{\numberline {4.4.2}Cumulative Incidence Calibration}{40}{subsection.4.4.2}%
-\contentsline {subsection}{\numberline {4.4.3}Entropy Sampler Calibration and Risk Recovery}{41}{subsection.4.4.3}%
-\contentsline {subsection}{\numberline {4.4.4}Nested Case-Control (NCC) Calibration and Risk Recovery}{43}{subsection.4.4.4}%
-\contentsline {subsection}{\numberline {4.4.5}Static Case-Cohort (SCC) Calibration and Risk Recovery}{44}{subsection.4.4.5}%
-\contentsline {section}{\numberline {4.5}Real-World Model Calibration and Discrimination}{46}{section.4.5}%
+\contentsline {subsection}{\numberline {3.6.6}Synthetic Data Verification (Pearson \& Spearman Correlation)}{24}{subsection.3.6.6}%
+\contentsline {section}{\numberline {3.7}Code Availability and Reproducibility}{24}{section.3.7}%
+\contentsline {chapter}{\numberline {4}Results and Discussion}{25}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Dataset Characteristics}{25}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Optimization and Convergence}{27}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Hyperparameter Stability and Selection}{27}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Dataset Convergence Analysis}{29}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Computational Resource Profiling}{31}{subsection.4.2.3}%
+\contentsline {subsubsection}{Resource Utilization and Execution Efficiency}{31}{section*.10}%
+\contentsline {paragraph}{Full Cohort:}{32}{section*.11}%
+\contentsline {paragraph}{Static Case-Cohort (SCC) \& Nested Case-Control (NCC):}{32}{section*.12}%
+\contentsline {paragraph}{Entropy Sampling:}{32}{section*.13}%
+\contentsline {section}{\numberline {4.3}Predictive Performance and Training Time}{32}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Synthetic Dataset ($N=15,000$)}{32}{subsection.4.3.1}%
+\contentsline {subsubsection}{Sampler: Full Cohort}{33}{section*.15}%
+\contentsline {subsubsection}{Sampler: Nested Case-Control (NCC)}{34}{section*.17}%
+\contentsline {subsubsection}{Sampler: Static Case-Cohort (SCC)}{34}{section*.19}%
+\contentsline {subsubsection}{Sampler: Entropy}{35}{section*.20}%
+\contentsline {subsection}{\numberline {4.3.2}Real-World Clinical Benchmark: PBC Dataset ($N=1,945$)}{35}{subsection.4.3.2}%
+\contentsline {subsubsection}{Sampler: Full Cohort}{36}{section*.22}%
+\contentsline {subsubsection}{Sampler: Nested Case-Control (NCC)}{36}{section*.24}%
+\contentsline {subsubsection}{Sampler: Static Case-Cohort (SCC)}{37}{section*.26}%
+\contentsline {subsubsection}{Sampler: Entropy}{37}{section*.27}%
+\contentsline {subsection}{\numberline {4.3.3}Real-World Semi-Synthetic: Framingham Dataset}{38}{subsection.4.3.3}%
+\contentsline {subsubsection}{Sampler: Full Cohort}{38}{section*.29}%
+\contentsline {subsubsection}{Sampler: Nested Case-Control (NCC)}{39}{section*.31}%
+\contentsline {subsubsection}{Sampler: Static Case-Cohort (SCC)}{40}{section*.33}%
+\contentsline {subsubsection}{Sampler: Entropy}{40}{section*.34}%
+\contentsline {section}{\numberline {4.4}Model Calibration and Discrimination}{40}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Ground Truth Risk Recovery}{41}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Cumulative Incidence Calibration}{41}{subsection.4.4.2}%
+\contentsline {subsection}{\numberline {4.4.3}Entropy Sampler Calibration and Risk Recovery}{42}{subsection.4.4.3}%
+\contentsline {subsection}{\numberline {4.4.4}Nested Case-Control (NCC) Calibration and Risk Recovery}{44}{subsection.4.4.4}%
+\contentsline {subsection}{\numberline {4.4.5}Static Case-Cohort (SCC) Calibration and Risk Recovery}{45}{subsection.4.4.5}%
+\contentsline {section}{\numberline {4.5}Real-World Model Calibration and Discrimination}{47}{section.4.5}%
 \contentsline {subsection}{\numberline {4.5.1}Real-World Clinical Benchmark: PBC Dataset}{47}{subsection.4.5.1}%
 \contentsline {subsubsection}{Full Cohort Baseline}{47}{section*.45}%
-\contentsline {subsubsection}{Nested Case-Control (NCC)}{47}{section*.47}%
-\contentsline {subsubsection}{Static Case-Cohort (SCC)}{49}{section*.50}%
-\contentsline {subsubsection}{Entropy Sampler}{50}{section*.53}%
-\contentsline {subsection}{\numberline {4.5.2}Real-World Semi-Synthetic: Framingham Dataset}{52}{subsection.4.5.2}%
-\contentsline {subsubsection}{Full Cohort Baseline}{52}{section*.56}%
+\contentsline {subsubsection}{Nested Case-Control (NCC)}{48}{section*.47}%
+\contentsline {subsubsection}{Static Case-Cohort (SCC)}{50}{section*.50}%
+\contentsline {subsubsection}{Entropy Sampler}{51}{section*.53}%
+\contentsline {subsection}{\numberline {4.5.2}Real-World Semi-Synthetic: Framingham Dataset}{53}{subsection.4.5.2}%
+\contentsline {subsubsection}{Full Cohort Baseline}{53}{section*.56}%
 \contentsline {subsubsection}{Nested Case-Control (NCC)}{53}{section*.58}%
-\contentsline {subsubsection}{Static Case-Cohort (SCC)}{54}{section*.60}%
-\contentsline {subsubsection}{Entropy Sampler}{55}{section*.62}%
-\contentsline {section}{\numberline {4.6}Feature Importance and Interpretability}{56}{section.4.6}%
-\contentsline {section}{\numberline {4.7}Discussion}{56}{section.4.7}%
-\contentsline {subsection}{\numberline {4.7.1}Computational Efficiency and Vectorization}{57}{subsection.4.7.1}%
-\contentsline {chapter}{\numberline {5}Conclusion and Future Work}{58}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Summary of Findings}{58}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Limitations and Future Directions}{58}{section.5.2}%
-\contentsline {chapter}{References}{60}{chapter*.65}%
-\contentsline {chapter}{\numberline {A}Code Listings}{61}{appendix.A}%
-\contentsline {chapter}{\numberline {B}Supplementary Figures}{62}{appendix.B}%
-\contentsline {section}{\numberline {B.1}Hardware Resource Utilization}{62}{section.B.1}%
+\contentsline {subsubsection}{Static Case-Cohort (SCC)}{55}{section*.60}%
+\contentsline {subsubsection}{Entropy Sampler}{56}{section*.62}%
+\contentsline {section}{\numberline {4.6}Feature Contribution and Interpretability}{57}{section.4.6}%
+\contentsline {subsection}{\numberline {4.6.1}Signal Recovery and Noise Isolation}{58}{subsection.4.6.1}%
+\contentsline {subsection}{\numberline {4.6.2}Impact of Risk-Set Sampling on Feature Recovery}{59}{subsection.4.6.2}%
+\contentsline {subsubsection}{Dynamic Entropy Sampler}{59}{section*.66}%
+\contentsline {subsubsection}{Nested Case-Control (NCC)}{60}{section*.68}%
+\contentsline {subsubsection}{Static Case-Cohort (SCC)}{60}{section*.70}%
+\contentsline {section}{\numberline {4.7}Discussion}{61}{section.4.7}%
+\contentsline {subsection}{\numberline {4.7.1}Interpretation of Findings}{61}{subsection.4.7.1}%
+\contentsline {subsection}{\numberline {4.7.2}Comparative Validation Against Existing Literature}{62}{subsection.4.7.2}%
+\contentsline {subsection}{\numberline {4.7.3}Computational Efficiency and Vectorization}{63}{subsection.4.7.3}%
+\contentsline {subsection}{\numberline {4.7.4}Theoretical and Practical Implications}{64}{subsection.4.7.4}%
+\contentsline {chapter}{\numberline {5}Conclusion and Future Work}{65}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Summary of Findings}{65}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Limitations and Future Directions}{66}{section.5.2}%
+\contentsline {chapter}{References}{69}{chapter*.72}%

@@ -1,6 +1,6 @@
-PWD c:\Users\micha\OneDrive\Documents\#Msc Data Science\Research_2026\_Michael_Falk__3052851_Crisp_Nam_survival_analysis_using_risk_set_sampling\Paper
+PWD c:\Users\micha\OneDrive\Documents\#Msc Data Science\Research_2026\Code\Fine-Gray-CRISP-NAM-Survival-Analysis-Using-Risk-Set-Sampling\Documents\thesis\Paper
 INPUT C:\Users\micha\AppData\Local\MiKTeX\miktex\data\le\pdftex\pdflatex.fmt
-INPUT c:\Users\micha\OneDrive\Documents\#Msc Data Science\Research_2026\_Michael_Falk__3052851_Crisp_Nam_survival_analysis_using_risk_set_sampling\Paper\Paper.tex
+INPUT c:\Users\micha\OneDrive\Documents\#Msc Data Science\Research_2026\Code\Fine-Gray-CRISP-NAM-Survival-Analysis-Using-Risk-Set-Sampling\Documents\thesis\Paper\Paper.tex
 OUTPUT Paper.log
 INPUT C:\Users\micha\AppData\Local\Programs\MiKTeX\tex\latex\base\report.cls
 INPUT C:\Users\micha\AppData\Local\Programs\MiKTeX\tex\latex\base\report.cls
@@ -278,9 +278,6 @@ INPUT C:\Users\micha\AppData\Local\Programs\MiKTeX\fonts\vf\bitstrea\charter\bch
 INPUT C:\Users\micha\AppData\Local\Programs\MiKTeX\fonts\tfm\bitstrea\charter\bchb8r.tfm
 INPUT C:\Users\micha\AppData\Local\Programs\MiKTeX\fonts\vf\bitstrea\charter\bchr7t.vf
 INPUT C:\Users\micha\AppData\Local\Programs\MiKTeX\fonts\tfm\bitstrea\charter\bchr8r.tfm
-INPUT .\Paper.toc
-INPUT .\Paper.toc
-INPUT Paper.toc
 INPUT C:\Users\micha\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmr8.tfm
 INPUT C:\Users\micha\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmr6.tfm
 INPUT C:\Users\micha\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmmi12.tfm
@@ -304,6 +301,9 @@ INPUT C:\Users\micha\AppData\Local\Programs\MiKTeX\tex\latex\amsfonts\umsb.fd
 INPUT C:\Users\micha\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
 INPUT C:\Users\micha\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
 INPUT C:\Users\micha\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm7.tfm
+INPUT .\Paper.toc
+INPUT .\Paper.toc
+INPUT Paper.toc
 INPUT C:\Users\micha\AppData\Local\Programs\MiKTeX\fonts\vf\bitstrea\charter\bchb7t.vf
 OUTPUT Paper.toc
 INPUT C:\Users\micha\AppData\Local\Programs\MiKTeX\fonts\tfm\bitstrea\charter\bchr7t.tfm
@@ -795,6 +795,55 @@ INPUT .\images\fh_results\Entropy\Metrics\subject_curves_cause_1_cif_Entropy_tau
 INPUT .\images\fh_results\Entropy\Metrics\subject_curves_cause_1_cif_Entropy_tau_5_compression_0.1.png
 INPUT .\images\fh_results\Entropy\Metrics\subject_curves_cause_1_cif_Entropy_tau_5_compression_0.1.png
 INPUT .\images\fh_results\Entropy\Metrics\subject_curves_cause_1_cif_Entropy_tau_5_compression_0.1.png
+INPUT .\images\Synth_results\FULL\feature_contributions_Event_1_cause_1.png
+INPUT .\images\Synth_results\FULL\feature_contributions_Event_1_cause_1.png
+INPUT .\images\Synth_results\FULL\feature_contributions_Event_1_cause_1.png
+INPUT .\images\Synth_results\FULL\feature_contributions_Event_1_cause_1.png
+INPUT .\images\Synth_results\FULL\feature_contributions_Event_1_cause_1.png
+INPUT .\images\Synth_results\FULL\feature_contributions_Event_1_cause_1.png
+INPUT .\images\Synth_results\FULL\feature_contributions_Event_1_cause_1.png
+INPUT .\images\Synth_results\ENTROPY\feature_contributions_Event_1_cause_1_Entropy_tau_0.5_compression_0.1.png
+INPUT .\images\Synth_results\ENTROPY\feature_contributions_Event_1_cause_1_Entropy_tau_0.5_compression_0.1.png
+INPUT .\images\Synth_results\ENTROPY\feature_contributions_Event_1_cause_1_Entropy_tau_0.5_compression_0.1.png
+INPUT .\images\Synth_results\ENTROPY\feature_contributions_Event_1_cause_1_Entropy_tau_0.5_compression_0.1.png
+INPUT .\images\Synth_results\ENTROPY\feature_contributions_Event_1_cause_1_Entropy_tau_0.5_compression_0.1.png
+INPUT .\images\Synth_results\ENTROPY\feature_contributions_Event_1_cause_1_Entropy_tau_0.5_compression_0.1.png
+INPUT .\images\Synth_results\ENTROPY\feature_contributions_Event_1_cause_1_Entropy_tau_0.5_compression_0.1.png
+INPUT .\images\Synth_results\ENTROPY\feature_contributions_Event_1_cause_1_Entropy_tau_5_compression_0.1.png
+INPUT .\images\Synth_results\ENTROPY\feature_contributions_Event_1_cause_1_Entropy_tau_5_compression_0.1.png
+INPUT .\images\Synth_results\ENTROPY\feature_contributions_Event_1_cause_1_Entropy_tau_5_compression_0.1.png
+INPUT .\images\Synth_results\ENTROPY\feature_contributions_Event_1_cause_1_Entropy_tau_5_compression_0.1.png
+INPUT .\images\Synth_results\ENTROPY\feature_contributions_Event_1_cause_1_Entropy_tau_5_compression_0.1.png
+INPUT .\images\Synth_results\ENTROPY\feature_contributions_Event_1_cause_1_Entropy_tau_5_compression_0.1.png
+INPUT .\images\Synth_results\ENTROPY\feature_contributions_Event_1_cause_1_Entropy_tau_5_compression_0.1.png
+INPUT .\images\Synth_results\NCC\feature_contributions_Event_1_cause_1_NCC_ncontrols_100.png
+INPUT .\images\Synth_results\NCC\feature_contributions_Event_1_cause_1_NCC_ncontrols_100.png
+INPUT .\images\Synth_results\NCC\feature_contributions_Event_1_cause_1_NCC_ncontrols_100.png
+INPUT .\images\Synth_results\NCC\feature_contributions_Event_1_cause_1_NCC_ncontrols_100.png
+INPUT .\images\Synth_results\NCC\feature_contributions_Event_1_cause_1_NCC_ncontrols_100.png
+INPUT .\images\Synth_results\NCC\feature_contributions_Event_1_cause_1_NCC_ncontrols_100.png
+INPUT .\images\Synth_results\NCC\feature_contributions_Event_1_cause_1_NCC_ncontrols_100.png
+INPUT .\images\Synth_results\NCC\feature_contributions_Event_1_cause_1_NCC_ncontrols_5.png
+INPUT .\images\Synth_results\NCC\feature_contributions_Event_1_cause_1_NCC_ncontrols_5.png
+INPUT .\images\Synth_results\NCC\feature_contributions_Event_1_cause_1_NCC_ncontrols_5.png
+INPUT .\images\Synth_results\NCC\feature_contributions_Event_1_cause_1_NCC_ncontrols_5.png
+INPUT .\images\Synth_results\NCC\feature_contributions_Event_1_cause_1_NCC_ncontrols_5.png
+INPUT .\images\Synth_results\NCC\feature_contributions_Event_1_cause_1_NCC_ncontrols_5.png
+INPUT .\images\Synth_results\NCC\feature_contributions_Event_1_cause_1_NCC_ncontrols_5.png
+INPUT .\images\Synth_results\SCC\feature_contributions_Event_1_cause_1_SCC_subcohort_0.5.png
+INPUT .\images\Synth_results\SCC\feature_contributions_Event_1_cause_1_SCC_subcohort_0.5.png
+INPUT .\images\Synth_results\SCC\feature_contributions_Event_1_cause_1_SCC_subcohort_0.5.png
+INPUT .\images\Synth_results\SCC\feature_contributions_Event_1_cause_1_SCC_subcohort_0.5.png
+INPUT .\images\Synth_results\SCC\feature_contributions_Event_1_cause_1_SCC_subcohort_0.5.png
+INPUT .\images\Synth_results\SCC\feature_contributions_Event_1_cause_1_SCC_subcohort_0.5.png
+INPUT .\images\Synth_results\SCC\feature_contributions_Event_1_cause_1_SCC_subcohort_0.5.png
+INPUT .\images\Synth_results\SCC\feature_contributions_Event_1_cause_1_SCC_subcohort_0.05.png
+INPUT .\images\Synth_results\SCC\feature_contributions_Event_1_cause_1_SCC_subcohort_0.05.png
+INPUT .\images\Synth_results\SCC\feature_contributions_Event_1_cause_1_SCC_subcohort_0.05.png
+INPUT .\images\Synth_results\SCC\feature_contributions_Event_1_cause_1_SCC_subcohort_0.05.png
+INPUT .\images\Synth_results\SCC\feature_contributions_Event_1_cause_1_SCC_subcohort_0.05.png
+INPUT .\images\Synth_results\SCC\feature_contributions_Event_1_cause_1_SCC_subcohort_0.05.png
+INPUT .\images\Synth_results\SCC\feature_contributions_Event_1_cause_1_SCC_subcohort_0.05.png
 INPUT .\Paper.bbl
 INPUT .\Paper.bbl
 INPUT Paper.bbl
