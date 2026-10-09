@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.9.8)  6 OCT 2026 14:04
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.9.8)  9 OCT 2026 16:37
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -586,7 +586,7 @@ Package hyperref Info: Link coloring ON on input line 63.
 \@outlinefile=\write4
 \openout4 = `Paper.out'.
 
-<utils/images/wits.jpg, id=288, 281.05pt x 521.95pt>
+<utils/images/wits.jpg, id=280, 281.05pt x 521.95pt>
 File: utils/images/wits.jpg Graphic file (type jpg)
 <use utils/images/wits.jpg>
 Package pdftex.def Info: utils/images/wits.jpg  used on input line 78.
@@ -603,7 +603,12 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 109.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [3] [4] (Paper.toc [5
 
-])
+]
+Overfull \hbox (3.55974pt too wide) in paragraph at lines 50--50
+ [][] [][][]\OT1/bch/m/n/12 Real World Clin-i-cal Bench-mark Pri-mary Bil-iary Cholan-gi-tis (PBC) 
+ []
+
+)
 \tf@toc=\write5
 \openout5 = `Paper.toc'.
 
@@ -617,19 +622,11 @@ LaTeX Font Info:    Trying to load font information for TS1+bch on input line 16
  (C:\Users\micha\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ts1bch.fd
 File: ts1bch.fd 2004/10/18 font definitions for TS1/bch.
 ) [2]
-Overfull \hbox (5.26231pt too wide) in paragraph at lines 177--178
-[]\OT1/bch/m/n/12 To an-a-lyze the im-pact of dif-fer-ent sam-pling strate-gies on the C-index, Brier Score, 
- []
-
-
 Overfull \hbox (2.27425pt too wide) in paragraph at lines 178--179
 \OT1/bch/m/n/12 main-tain in-ter-pretabil-ity, cal-i-bra-tion, sta-bil-ity, and com-pu-ta-tional ef-fi-ciency when 
  []
 
-
-Underfull \vbox (badness 1902) has occurred while \output is active []
-
- [3] [4]
+[3] [4]
 Chapter 2.
 [5
 
@@ -653,312 +650,269 @@ Chapter 3.
 [12
 
 ] [13] [14]
-Overfull \hbox (2.13158pt too wide) in paragraph at lines 332--333
+Overfull \hbox (2.13158pt too wide) in paragraph at lines 334--335
 \OT1/bch/m/n/12 The static case-cohort de-sign of-fers an al-ter-na-tive that op-er-ates in-de-pen-dently of event 
  []
 
 [15] [16]
-Overfull \hbox (6.6622pt too wide) in paragraph at lines 360--361
+Overfull \hbox (6.6622pt too wide) in paragraph at lines 362--363
 []\OT1/bch/m/n/12 Let $\OML/cmm/m/it/12 ^^Y[]$ \OT1/bch/m/n/12 rep-re-sent the gen-er-al-ized in-clu-sion prob-a-bil-ity for sub-ject $\OML/cmm/m/it/12 i$ \OT1/bch/m/n/12 (or $\OML/cmm/m/it/12 ^^Y[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 t\OT1/cmr/m/n/12 )$ \OT1/bch/m/n/12 for a group). 
  []
 
 
-Overfull \hbox (1.23166pt too wide) in paragraph at lines 367--368
+Overfull \hbox (1.23166pt too wide) in paragraph at lines 369--370
 \OT1/bch/m/n/12 The mod-el-ing frame-work fol-lows the CRISP-NAM de-sign [[][]Ra-machan-dram \OT1/bch/m/it/12 et al.[][] [][]\OT1/bch/m/n/12 2025[][]], 
  []
 
 [17]
-Overfull \hbox (0.17557pt too wide) in paragraph at lines 410--411
+Overfull \hbox (0.17557pt too wide) in paragraph at lines 412--413
 \OT1/bch/m/n/12 To op-ti-mize the neu-ral rel-a-tive risk pre-dic-tor un-der vary-ing com-pu-ta-tional con-straints, 
  []
 
 [18] [19]
-Overfull \hbox (2.92352pt too wide) in paragraph at lines 429--430
+Overfull \hbox (2.92352pt too wide) in paragraph at lines 431--432
 []\OT1/bch/m/n/12 Notably, ex-plicit weight clip-ping a tech-nique fre-quently uti-lized in re-in-force-ment learn- 
  []
 
 
-Overfull \hbox (3.6436pt too wide) in paragraph at lines 436--437
+Overfull \hbox (3.6436pt too wide) in paragraph at lines 438--439
 \OT1/bch/m/n/12 To guar-an-tee rig-or-ous and un-bi-ased eval-u-a-tion across the vary-ing datasets, the model's 
  []
 
 
-Overfull \hbox (15.03157pt too wide) in paragraph at lines 436--437
+Overfull \hbox (15.03157pt too wide) in paragraph at lines 438--439
 \OT1/bch/m/n/12 validation frame-work. To ad-dress the in-her-ent im-bal-ance of-ten found in sur-vival datasets 
  []
 
 
-Overfull \hbox (5.59947pt too wide) in paragraph at lines 440--441
+Overfull \hbox (5.59947pt too wide) in paragraph at lines 442--443
 \OT1/bch/m/n/12 This mech-a-nism is cru-cial for scal-ing deep sur-vival mod-els to mas-sive clin-i-cal databases 
  []
 
 
-Overfull \hbox (6.15152pt too wide) in paragraph at lines 440--441
+Overfull \hbox (6.15152pt too wide) in paragraph at lines 442--443
 \OT1/bch/m/n/12 by con-strain-ing mem-ory over-head. To seam-lessly in-te-grate this into the Py-Torch ecosys- 
  []
 
-[20] [21]
-Overfull \hbox (3.63145pt too wide) in paragraph at lines 464--466
-\OT1/bch/m/n/12 crit-i-cal for ob-jec-tively com-par-ing dis-parate sam-pling strate-gies across the en-tire follow- 
- []
-
-[22]
-Underfull \vbox (badness 3375) has occurred while \output is active []
-
- [23]
-Overfull \hbox (131.98239pt too wide) in paragraph at lines 493--494
+[20] [21] [22]
+Overfull \hbox (131.98239pt too wide) in paragraph at lines 495--496
 [][][]$\OT1/cmtt/m/n/12 https : / / github . com / MichaelFalk1 / Fine-[]Gray-[]CRISP-[]NAM-[]Survival-[]Analysis-[]Using-[]Risk-[]Set-[]Sampling . 
  []
 
-[24]
+[23]
 Chapter 4.
-<images/Data/fh.png, id=732, 988.69376pt x 587.19376pt>
-File: images/Data/fh.png Graphic file (type png)
-<use images/Data/fh.png>
-Package pdftex.def Info: images/Data/fh.png  used on input line 504.
+<images/Data/synth.png, id=714, 988.69376pt x 587.19376pt>
+File: images/Data/synth.png Graphic file (type png)
+<use images/Data/synth.png>
+Package pdftex.def Info: images/Data/synth.png  used on input line 506.
 (pdftex.def)             Requested size: 339.72592pt x 201.76671pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 505--505
+Underfull \hbox (badness 10000) in paragraph at lines 507--507
 []\OT1/bch/m/n/10.95 Figure 4.1: |Com-par-i-son of the Cu-mu-la-tive In-ci-dence Func-tion (CIF) and Kaplan-Meier (KM)
+ []
+
+<images/Data/pbc3.png, id=716, 988.69376pt x 587.19376pt>
+File: images/Data/pbc3.png Graphic file (type png)
+<use images/Data/pbc3.png>
+Package pdftex.def Info: images/Data/pbc3.png  used on input line 515.
+(pdftex.def)             Requested size: 339.72592pt x 201.76671pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 516--516
+[]\OT1/bch/m/n/10.95 Figure 4.2: |Cu-mu-la-tive In-ci-dence Func-tion (CIF) ver-sus Kaplan-Meier (KM) es-ti-mate for the
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [25
+ [24
 
 ]
-Overfull \hbox (5.64761pt too wide) in paragraph at lines 509--510
-[]\OT1/bch/m/n/12 Subsequent eval-u-a-tions were con-ducted on es-tab-lished, smaller-scale real-world bench- 
- []
-
-<images/Data/pbc.png, id=740, 988.69376pt x 587.19376pt>
-File: images/Data/pbc.png Graphic file (type png)
-<use images/Data/pbc.png>
-Package pdftex.def Info: images/Data/pbc.png  used on input line 513.
+<images/Data/fh2.png, id=724, 988.69376pt x 587.19376pt>
+File: images/Data/fh2.png Graphic file (type png)
+<use images/Data/fh2.png>
+Package pdftex.def Info: images/Data/fh2.png  used on input line 524.
 (pdftex.def)             Requested size: 339.72592pt x 201.76671pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 514--514
-[]\OT1/bch/m/n/10.95 Figure 4.2: |Cu-mu-la-tive In-ci-dence Func-tion (CIF) ver-sus Kaplan-Meier (KM) es-ti-mate for the
- []
-
-
-Underfull \vbox (badness 1248) has occurred while \output is active []
-
- [26 <./images/Data/fh.png (PNG copy)> <./images/Data/pbc.png (PNG copy)>]
-File: images/Data/fh.png Graphic file (type png)
-<use images/Data/fh.png>
-Package pdftex.def Info: images/Data/fh.png  used on input line 522.
-(pdftex.def)             Requested size: 339.72592pt x 201.76671pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 523--523
+Underfull \hbox (badness 10000) in paragraph at lines 525--525
 []\OT1/bch/m/n/10.95 Figure 4.3: |Cu-mu-la-tive In-ci-dence Func-tion (CIF) ver-sus Kaplan-Meier (KM) es-ti-mate for the
  []
 
 
-Overfull \hbox (0.97961pt too wide) in paragraph at lines 538--539
-[]\OT1/bch/m/n/12 For \OT1/bch/b/n/12 Nested Case-Control (NCC) Sam-pling\OT1/bch/m/n/12 , the op-ti-mal num-ber of con-trols was found 
- []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[27]
-Overfull \hbox (6.52582pt too wide) in paragraph at lines 542--543
-\OT1/bch/m/n/12 the tem-per-a-ture was pushed to-ward max-i-mum greed-i-ness ($\OML/cmm/m/it/12 ^^\ \OT1/cmr/m/n/12 = 0\OML/cmm/m/it/12 :\OT1/cmr/m/n/12 1$\OT1/bch/m/n/12 ), the model severely 
- []
-
-[28]
-<images/Synth_results/FULL/LOSS/fold_1_loss_cause_1.png, id=761, 717.1593pt x 333.4056pt>
+ [25 <./images/Data/synth.png (PNG copy)> <./images/Data/pbc3.png (PNG copy)>] [26 <./images/Data/fh2.png (PNG copy)>] [27]
+<images/Synth_results/FULL/LOSS/fold_1_loss_cause_1.png, id=744, 717.1593pt x 333.4056pt>
 File: images/Synth_results/FULL/LOSS/fold_1_loss_cause_1.png Graphic file (type png)
 <use images/Synth_results/FULL/LOSS/fold_1_loss_cause_1.png>
-Package pdftex.def Info: images/Synth_results/FULL/LOSS/fold_1_loss_cause_1.png  used on input line 553.
+Package pdftex.def Info: images/Synth_results/FULL/LOSS/fold_1_loss_cause_1.png  used on input line 555.
 (pdftex.def)             Requested size: 217.42265pt x 101.07552pt.
-<images/Synth_results/NCC/LOSS/fold_1_loss_cause_1_NCC_ncontrols_5.png, id=763, 722.7pt x 333.4056pt>
+<images/Synth_results/NCC/LOSS/fold_1_loss_cause_1_NCC_ncontrols_5.png, id=746, 722.7pt x 333.4056pt>
 File: images/Synth_results/NCC/LOSS/fold_1_loss_cause_1_NCC_ncontrols_5.png Graphic file (type png)
 <use images/Synth_results/NCC/LOSS/fold_1_loss_cause_1_NCC_ncontrols_5.png>
-Package pdftex.def Info: images/Synth_results/NCC/LOSS/fold_1_loss_cause_1_NCC_ncontrols_5.png  used on input line 558.
+Package pdftex.def Info: images/Synth_results/NCC/LOSS/fold_1_loss_cause_1_NCC_ncontrols_5.png  used on input line 560.
 (pdftex.def)             Requested size: 217.42265pt x 100.30225pt.
-<images/Synth_results/SCC/LOSS/fold_1_loss_cause_1_SCC_subcohort_0.5.png, id=764, 717.1593pt x 333.4056pt>
+<images/Synth_results/SCC/LOSS/fold_1_loss_cause_1_SCC_subcohort_0.5.png, id=747, 717.1593pt x 333.4056pt>
 File: images/Synth_results/SCC/LOSS/fold_1_loss_cause_1_SCC_subcohort_0.5.png Graphic file (type png)
 <use images/Synth_results/SCC/LOSS/fold_1_loss_cause_1_SCC_subcohort_0.5.png>
-Package pdftex.def Info: images/Synth_results/SCC/LOSS/fold_1_loss_cause_1_SCC_subcohort_0.5.png  used on input line 563.
+Package pdftex.def Info: images/Synth_results/SCC/LOSS/fold_1_loss_cause_1_SCC_subcohort_0.5.png  used on input line 565.
 (pdftex.def)             Requested size: 217.42265pt x 101.07552pt.
-<images/Synth_results/ENTROPY/LOSS/fold_1_loss_cause_1_Entropy_tau_0.5_compression_0.1.png, id=765, 717.1593pt x 333.4056pt>
+<images/Synth_results/ENTROPY/LOSS/fold_1_loss_cause_1_Entropy_tau_0.5_compression_0.1.png, id=748, 717.1593pt x 333.4056pt>
 File: images/Synth_results/ENTROPY/LOSS/fold_1_loss_cause_1_Entropy_tau_0.5_compression_0.1.png Graphic file (type png)
 <use images/Synth_results/ENTROPY/LOSS/fold_1_loss_cause_1_Entropy_tau_0.5_compression_0.1.png>
-Package pdftex.def Info: images/Synth_results/ENTROPY/LOSS/fold_1_loss_cause_1_Entropy_tau_0.5_compression_0.1.png  used on input line 568.
+Package pdftex.def Info: images/Synth_results/ENTROPY/LOSS/fold_1_loss_cause_1_Entropy_tau_0.5_compression_0.1.png  used on input line 570.
 (pdftex.def)             Requested size: 217.42265pt x 101.07552pt.
 
-Underfull \hbox (badness 2221) in paragraph at lines 571--571
+Underfull \hbox (badness 2221) in paragraph at lines 573--573
 []\OT1/bch/m/n/10.95 Figure 4.4: |Loss tra-jec-to-ries for the syn-thetic dataset ($\OML/cmm/m/it/10.95 N \OT1/cmr/m/n/10.95 = 15\OML/cmm/m/it/10.95 ; \OT1/cmr/m/n/10.95 000$\OT1/bch/m/n/10.95 ) un-der op-ti-mal hy-per-pa-
  []
 
 
-Overfull \hbox (2.88757pt too wide) in paragraph at lines 575--576
-[]\OT1/bch/m/n/12 The op-ti-miza-tion tra-jec-to-ries for the real-world PBC dataset (Fig-ure [][]4.5[][]) ex-hibit higher 
+Overfull \hbox (2.39557pt too wide) in paragraph at lines 577--578
+[]\OT1/bch/m/n/12 The op-ti-miza-tion tra-jec-to-ries for the real world PBC dataset (Fig-ure [][]4.5[][]) ex-hibit higher 
  []
 
-<images/pbc_results/FULL/LOSS/fold_1_loss_cause_1.png, id=767, 726.7953pt x 340.6326pt>
+<images/pbc_results/FULL/LOSS/fold_1_loss_cause_1.png, id=750, 726.7953pt x 340.6326pt>
 File: images/pbc_results/FULL/LOSS/fold_1_loss_cause_1.png Graphic file (type png)
 <use images/pbc_results/FULL/LOSS/fold_1_loss_cause_1.png>
-Package pdftex.def Info: images/pbc_results/FULL/LOSS/fold_1_loss_cause_1.png  used on input line 580.
+Package pdftex.def Info: images/pbc_results/FULL/LOSS/fold_1_loss_cause_1.png  used on input line 582.
 (pdftex.def)             Requested size: 217.42265pt x 101.89949pt.
-<images/pbc_results/NCC/LOSS/fold_1_loss_cause_1_NCC_ncontrols_5.png, id=768, 719.8092pt x 334.6101pt>
+<images/pbc_results/NCC/LOSS/fold_1_loss_cause_1_NCC_ncontrols_5.png, id=751, 719.8092pt x 334.6101pt>
 File: images/pbc_results/NCC/LOSS/fold_1_loss_cause_1_NCC_ncontrols_5.png Graphic file (type png)
 <use images/pbc_results/NCC/LOSS/fold_1_loss_cause_1_NCC_ncontrols_5.png>
-Package pdftex.def Info: images/pbc_results/NCC/LOSS/fold_1_loss_cause_1_NCC_ncontrols_5.png  used on input line 585.
+Package pdftex.def Info: images/pbc_results/NCC/LOSS/fold_1_loss_cause_1_NCC_ncontrols_5.png  used on input line 587.
 (pdftex.def)             Requested size: 217.42265pt x 101.06796pt.
-<images/pbc_results/SCC/LOSS/fold_1_loss_cause_1_SCC_subcohort_0.5.png, id=769, 719.8092pt x 334.6101pt>
+<images/pbc_results/SCC/LOSS/fold_1_loss_cause_1_SCC_subcohort_0.5.png, id=752, 719.8092pt x 334.6101pt>
 File: images/pbc_results/SCC/LOSS/fold_1_loss_cause_1_SCC_subcohort_0.5.png Graphic file (type png)
 <use images/pbc_results/SCC/LOSS/fold_1_loss_cause_1_SCC_subcohort_0.5.png>
-Package pdftex.def Info: images/pbc_results/SCC/LOSS/fold_1_loss_cause_1_SCC_subcohort_0.5.png  used on input line 590.
+Package pdftex.def Info: images/pbc_results/SCC/LOSS/fold_1_loss_cause_1_SCC_subcohort_0.5.png  used on input line 592.
 (pdftex.def)             Requested size: 217.42265pt x 101.06796pt.
-<images/pbc_results/ENTROPY/LOSS/fold_1_loss_cause_1_Entropy_tau_0.5_compression_0.1.png, id=770, 719.8092pt x 334.851pt>
+<images/pbc_results/ENTROPY/LOSS/fold_1_loss_cause_1_Entropy_tau_0.5_compression_0.1.png, id=753, 719.8092pt x 334.851pt>
 File: images/pbc_results/ENTROPY/LOSS/fold_1_loss_cause_1_Entropy_tau_0.5_compression_0.1.png Graphic file (type png)
 <use images/pbc_results/ENTROPY/LOSS/fold_1_loss_cause_1_Entropy_tau_0.5_compression_0.1.png>
-Package pdftex.def Info: images/pbc_results/ENTROPY/LOSS/fold_1_loss_cause_1_Entropy_tau_0.5_compression_0.1.png  used on input line 595.
+Package pdftex.def Info: images/pbc_results/ENTROPY/LOSS/fold_1_loss_cause_1_Entropy_tau_0.5_compression_0.1.png  used on input line 597.
 (pdftex.def)             Requested size: 217.42265pt x 101.14073pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 598--598
+Underfull \hbox (badness 10000) in paragraph at lines 600--600
 []\OT1/bch/m/n/10.95 Figure 4.5: |PBC dataset loss tra-jec-to-ries demon-strat-ing sta-ble con-ver-gence across all sam-pling
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [29 <./images/Synth_results/FULL/LOSS/fold_1_loss_cause_1.png> <./images/Synth_results/NCC/LOSS/fold_1_loss_cause_1_NCC_ncontrols_5.png> <./images/Synth_results/SCC/LOSS/fold_1_loss_cause_1_SCC_subcohort_0.5.png> <./images/Synth_results/ENTROPY/LOSS/fold_1_loss_cause_1_Entropy_tau_0.5_compression_0.1.png>]
-<images/fh_results/FULL/LOSS/fold_1_loss_cause_1.png, id=782, 714.2685pt x 334.6101pt>
+ [28 <./images/Synth_results/FULL/LOSS/fold_1_loss_cause_1.png> <./images/Synth_results/NCC/LOSS/fold_1_loss_cause_1_NCC_ncontrols_5.png> <./images/Synth_results/SCC/LOSS/fold_1_loss_cause_1_SCC_subcohort_0.5.png> <./images/Synth_results/ENTROPY/LOSS/fold_1_loss_cause_1_Entropy_tau_0.5_compression_0.1.png>]
+<images/fh_results/FULL/LOSS/fold_1_loss_cause_1.png, id=765, 714.2685pt x 334.6101pt>
 File: images/fh_results/FULL/LOSS/fold_1_loss_cause_1.png Graphic file (type png)
 <use images/fh_results/FULL/LOSS/fold_1_loss_cause_1.png>
-Package pdftex.def Info: images/fh_results/FULL/LOSS/fold_1_loss_cause_1.png  used on input line 609.
+Package pdftex.def Info: images/fh_results/FULL/LOSS/fold_1_loss_cause_1.png  used on input line 611.
 (pdftex.def)             Requested size: 217.42265pt x 101.85425pt.
-<images/fh_results/NCC/LOSS/fold_1_loss_cause_1_NCC_ncontrols_5.png, id=783, 714.2685pt x 334.6101pt>
+<images/fh_results/NCC/LOSS/fold_1_loss_cause_1_NCC_ncontrols_5.png, id=766, 714.2685pt x 334.6101pt>
 File: images/fh_results/NCC/LOSS/fold_1_loss_cause_1_NCC_ncontrols_5.png Graphic file (type png)
 <use images/fh_results/NCC/LOSS/fold_1_loss_cause_1_NCC_ncontrols_5.png>
-Package pdftex.def Info: images/fh_results/NCC/LOSS/fold_1_loss_cause_1_NCC_ncontrols_5.png  used on input line 614.
+Package pdftex.def Info: images/fh_results/NCC/LOSS/fold_1_loss_cause_1_NCC_ncontrols_5.png  used on input line 616.
 (pdftex.def)             Requested size: 217.42265pt x 101.85425pt.
-<images/fh_results/SCC/LOSS/fold_1_loss_cause_1_SCC_subcohort_0.5.png, id=784, 714.2685pt x 334.6101pt>
+<images/fh_results/SCC/LOSS/fold_1_loss_cause_1_SCC_subcohort_0.5.png, id=767, 714.2685pt x 334.6101pt>
 File: images/fh_results/SCC/LOSS/fold_1_loss_cause_1_SCC_subcohort_0.5.png Graphic file (type png)
 <use images/fh_results/SCC/LOSS/fold_1_loss_cause_1_SCC_subcohort_0.5.png>
-Package pdftex.def Info: images/fh_results/SCC/LOSS/fold_1_loss_cause_1_SCC_subcohort_0.5.png  used on input line 619.
+Package pdftex.def Info: images/fh_results/SCC/LOSS/fold_1_loss_cause_1_SCC_subcohort_0.5.png  used on input line 621.
 (pdftex.def)             Requested size: 217.42265pt x 101.85425pt.
-<images/fh_results/ENTROPY/LOSS/fold_1_loss_cause_1_Entropy_tau_0.5_compression_0.1.png, id=785, 714.2685pt x 334.851pt>
+<images/fh_results/ENTROPY/LOSS/fold_1_loss_cause_1_Entropy_tau_0.5_compression_0.1.png, id=768, 714.2685pt x 334.851pt>
 File: images/fh_results/ENTROPY/LOSS/fold_1_loss_cause_1_Entropy_tau_0.5_compression_0.1.png Graphic file (type png)
 <use images/fh_results/ENTROPY/LOSS/fold_1_loss_cause_1_Entropy_tau_0.5_compression_0.1.png>
-Package pdftex.def Info: images/fh_results/ENTROPY/LOSS/fold_1_loss_cause_1_Entropy_tau_0.5_compression_0.1.png  used on input line 624.
+Package pdftex.def Info: images/fh_results/ENTROPY/LOSS/fold_1_loss_cause_1_Entropy_tau_0.5_compression_0.1.png  used on input line 626.
 (pdftex.def)             Requested size: 217.42265pt x 101.92758pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 627--627
+Underfull \hbox (badness 10000) in paragraph at lines 629--629
 []\OT1/bch/m/n/10.95 Figure 4.6: |Fram-ing-ham dataset loss tra-jec-to-ries show-ing sta-ble con-ver-gence de-spite vi-sual
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [30 <./images/pbc_results/FULL/LOSS/fold_1_loss_cause_1.png> <./images/pbc_results/NCC/LOSS/fold_1_loss_cause_1_NCC_ncontrols_5.png> <./images/pbc_results/SCC/LOSS/fold_1_loss_cause_1_SCC_subcohort_0.5.png> <./images/pbc_results/ENTROPY/LOSS/fold_1_loss_cause_1_Entropy_tau_0.5_compression_0.1.png>]
-Overfull \hbox (2.32355pt too wide) in paragraph at lines 639--640
+ [29 <./images/pbc_results/FULL/LOSS/fold_1_loss_cause_1.png> <./images/pbc_results/NCC/LOSS/fold_1_loss_cause_1_NCC_ncontrols_5.png> <./images/pbc_results/SCC/LOSS/fold_1_loss_cause_1_SCC_subcohort_0.5.png> <./images/pbc_results/ENTROPY/LOSS/fold_1_loss_cause_1_Entropy_tau_0.5_compression_0.1.png>]
+Overfull \hbox (2.32355pt too wide) in paragraph at lines 641--642
 \OT1/bch/m/n/12 mately 50% dur-ing the ac-tive train-ing phase, in-di-cat-ing con-sis-tent dat-aloader through- 
  []
 
 
 Underfull \vbox (badness 1215) has occurred while \output is active []
 
- [31 <./images/fh_results/FULL/LOSS/fold_1_loss_cause_1.png> <./images/fh_results/NCC/LOSS/fold_1_loss_cause_1_NCC_ncontrols_5.png> <./images/fh_results/SCC/LOSS/fold_1_loss_cause_1_SCC_subcohort_0.5.png> <./images/fh_results/ENTROPY/LOSS/fold_1_loss_cause_1_Entropy_tau_0.5_compression_0.1.png>]
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 650.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 650.
-
-<images/Synth_results/Pooled_C-Index.png, id=805, 853.5087pt x 495.0495pt>
+ [30 <./images/fh_results/FULL/LOSS/fold_1_loss_cause_1.png> <./images/fh_results/NCC/LOSS/fold_1_loss_cause_1_NCC_ncontrols_5.png> <./images/fh_results/SCC/LOSS/fold_1_loss_cause_1_SCC_subcohort_0.5.png> <./images/fh_results/ENTROPY/LOSS/fold_1_loss_cause_1_Entropy_tau_0.5_compression_0.1.png>]
+<images/Synth_results/Pooled_C-Index.png, id=787, 853.5087pt x 495.0495pt>
 File: images/Synth_results/Pooled_C-Index.png Graphic file (type png)
 <use images/Synth_results/Pooled_C-Index.png>
-Package pdftex.def Info: images/Synth_results/Pooled_C-Index.png  used on input line 656.
+Package pdftex.def Info: images/Synth_results/Pooled_C-Index.png  used on input line 660.
 (pdftex.def)             Requested size: 385.02547pt x 223.32164pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [32]
-<images/Synth_results/Training_Duration_mean_std_error.png, id=815, 853.5087pt x 495.2904pt>
+ [31]
+<images/Synth_results/Training_Duration_mean_std_error.png, id=795, 853.5087pt x 495.2904pt>
 File: images/Synth_results/Training_Duration_mean_std_error.png Graphic file (type png)
 <use images/Synth_results/Training_Duration_mean_std_error.png>
-Package pdftex.def Info: images/Synth_results/Training_Duration_mean_std_error.png  used on input line 666.
+Package pdftex.def Info: images/Synth_results/Training_Duration_mean_std_error.png  used on input line 670.
 (pdftex.def)             Requested size: 385.02547pt x 223.43031pt.
- [33 <./images/Synth_results/Pooled_C-Index.png> <./images/Synth_results/Training_Duration_mean_std_error.png>]
-<images/Synth_results/Pooled_Brier.png, id=828, 853.5087pt x 495.0495pt>
+
+Underfull \vbox (badness 4726) has occurred while \output is active []
+
+ [32 <./images/Synth_results/Pooled_C-Index.png> <./images/Synth_results/Training_Duration_mean_std_error.png>]
+<images/Synth_results/Pooled_Brier.png, id=807, 853.5087pt x 495.0495pt>
 File: images/Synth_results/Pooled_Brier.png Graphic file (type png)
 <use images/Synth_results/Pooled_Brier.png>
-Package pdftex.def Info: images/Synth_results/Pooled_Brier.png  used on input line 677.
+Package pdftex.def Info: images/Synth_results/Pooled_Brier.png  used on input line 681.
 (pdftex.def)             Requested size: 385.02547pt x 223.32164pt.
-
-Underfull \vbox (badness 7030) has occurred while \output is active []
-
- [34 <./images/Synth_results/Pooled_Brier.png>]
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 690.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 690.
-
-
-Overfull \hbox (4.99953pt too wide) in paragraph at lines 692--693
+ [33 <./images/Synth_results/Pooled_Brier.png>]
+Overfull \hbox (4.99953pt too wide) in paragraph at lines 696--697
 \OT1/bch/m/n/12 der se-vere com-pet-ing risk con-di-tions, the Pri-mary Bil-iary Cir-rho-sis (PBC) dataset serves 
  []
 
-<images/pbc_results/Pooled_C-Index_PBC.png, id=840, 853.5087pt x 495.0495pt>
+<images/pbc_results/Pooled_C-Index_PBC.png, id=817, 853.5087pt x 495.0495pt>
 File: images/pbc_results/Pooled_C-Index_PBC.png Graphic file (type png)
 <use images/pbc_results/Pooled_C-Index_PBC.png>
-Package pdftex.def Info: images/pbc_results/Pooled_C-Index_PBC.png  used on input line 698.
+Package pdftex.def Info: images/pbc_results/Pooled_C-Index_PBC.png  used on input line 702.
 (pdftex.def)             Requested size: 385.02547pt x 223.32164pt.
 
-Underfull \vbox (badness 1052) has occurred while \output is active []
+Overfull \hbox (10.44763pt too wide) in paragraph at lines 707--708
+\OT1/bch/m/n/12 data, achiev-ing a pooled C-index of 0.756 and a Brier Score of 0.180. Due to the smaller 
+ []
 
- [35 <./images/pbc_results/Pooled_C-Index_PBC.png>]
-<images/pbc_results/Pooled_Brier_PBC.png, id=850, 853.5087pt x 495.0495pt>
+<images/pbc_results/Pooled_Brier_PBC.png, id=818, 853.5087pt x 495.0495pt>
 File: images/pbc_results/Pooled_Brier_PBC.png Graphic file (type png)
 <use images/pbc_results/Pooled_Brier_PBC.png>
-Package pdftex.def Info: images/pbc_results/Pooled_Brier_PBC.png  used on input line 708.
+Package pdftex.def Info: images/pbc_results/Pooled_Brier_PBC.png  used on input line 711.
 (pdftex.def)             Requested size: 385.02547pt x 223.32164pt.
-<images/pbc_results/Training_Duration_mean_std_error_PBC.png, id=851, 853.5087pt x 495.2904pt>
+[34 <./images/pbc_results/Pooled_C-Index_PBC.png>]
+<images/pbc_results/Training_Duration_mean_std_error_PBC.png, id=827, 853.5087pt x 495.2904pt>
 File: images/pbc_results/Training_Duration_mean_std_error_PBC.png Graphic file (type png)
 <use images/pbc_results/Training_Duration_mean_std_error_PBC.png>
-Package pdftex.def Info: images/pbc_results/Training_Duration_mean_std_error_PBC.png  used on input line 718.
+Package pdftex.def Info: images/pbc_results/Training_Duration_mean_std_error_PBC.png  used on input line 720.
 (pdftex.def)             Requested size: 385.02547pt x 223.43031pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [36 <./images/pbc_results/Pooled_Brier_PBC.png>] [37 <./images/pbc_results/Training_Duration_mean_std_error_PBC.png>]
-<images/fh_results/Pooled_C-Index_FH.png, id=870, 853.5087pt x 495.0495pt>
+ [35 <./images/pbc_results/Pooled_Brier_PBC.png> <./images/pbc_results/Training_Duration_mean_std_error_PBC.png>]
+<images/fh_results/Pooled_C-Index_FH.png, id=837, 853.5087pt x 495.0495pt>
 File: images/fh_results/Pooled_C-Index_FH.png Graphic file (type png)
 <use images/fh_results/Pooled_C-Index_FH.png>
 Package pdftex.def Info: images/fh_results/Pooled_C-Index_FH.png  used on input line 739.
 (pdftex.def)             Requested size: 385.02547pt x 223.32164pt.
 
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [36]
 Overfull \hbox (5.80353pt too wide) in paragraph at lines 745--746
 \OT1/bch/m/n/12 vec-tor-ized ten-sor op-er-a-tions. Con-se-quently, the Full Co-hort train-ing is ex-e-cuted rapidly, 
  []
 
-<images/fh_results/Pooled_Brier_FH.png, id=871, 853.5087pt x 495.0495pt>
+<images/fh_results/Pooled_Brier_FH.png, id=845, 853.5087pt x 495.0495pt>
 File: images/fh_results/Pooled_Brier_FH.png Graphic file (type png)
 <use images/fh_results/Pooled_Brier_FH.png>
 Package pdftex.def Info: images/fh_results/Pooled_Brier_FH.png  used on input line 749.
 (pdftex.def)             Requested size: 385.02547pt x 223.32164pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [38 <./images/fh_results/Pooled_C-Index_FH.png>]
-<images/fh_results/Training_Duration_mean_std_error_FH.png, id=881, 853.5087pt x 495.2904pt>
+[37 <./images/fh_results/Pooled_C-Index_FH.png> <./images/fh_results/Pooled_Brier_FH.png>]
+<images/fh_results/Training_Duration_mean_std_error_FH.png, id=853, 853.5087pt x 495.2904pt>
 File: images/fh_results/Training_Duration_mean_std_error_FH.png Graphic file (type png)
 <use images/fh_results/Training_Duration_mean_std_error_FH.png>
 Package pdftex.def Info: images/fh_results/Training_Duration_mean_std_error_FH.png  used on input line 761.
 (pdftex.def)             Requested size: 385.02547pt x 223.43031pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [39 <./images/fh_results/Pooled_Brier_FH.png>] [40 <./images/fh_results/Training_Duration_mean_std_error_FH.png>]
-<images/Synth_results/FULL/Metrics/model_diagnostics_cause_1.png, id=896, 1003.3485pt x 381.3447pt>
+ [38 <./images/fh_results/Training_Duration_mean_std_error_FH.png>]
+<images/Synth_results/FULL/Metrics/model_diagnostics_cause_1.png, id=860, 1003.3485pt x 381.3447pt>
 File: images/Synth_results/FULL/Metrics/model_diagnostics_cause_1.png Graphic file (type png)
 <use images/Synth_results/FULL/Metrics/model_diagnostics_cause_1.png>
 Package pdftex.def Info: images/Synth_results/FULL/Metrics/model_diagnostics_cause_1.png  used on input line 787.
@@ -973,7 +927,8 @@ Overfull \hbox (4.47148pt too wide) in paragraph at lines 796--797
 \OT1/bch/m/n/12 There is no vis-i-ble di-ver-gence, prob-a-bil-ity col-lapse, or in-fla-tion at the tem-po-ral bounds, 
  []
 
-<images/Synth_results/FULL/Metrics/subject_curves_cause_1_cif.png, id=898, 1146.4431pt x 418.9251pt>
+[39 <./images/Synth_results/FULL/Metrics/model_diagnostics_cause_1.png>]
+<images/Synth_results/FULL/Metrics/subject_curves_cause_1_cif.png, id=868, 1146.4431pt x 418.9251pt>
 File: images/Synth_results/FULL/Metrics/subject_curves_cause_1_cif.png Graphic file (type png)
 <use images/Synth_results/FULL/Metrics/subject_curves_cause_1_cif.png>
 Package pdftex.def Info: images/Synth_results/FULL/Metrics/subject_curves_cause_1_cif.png  used on input line 800.
@@ -983,12 +938,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 801--801
 []\OT1/bch/m/n/10.95 Figure 4.17: |In-di-vid-ual pa-tient Cu-mu-la-tive In-ci-dence tra-jec-to-ries com-pared against the pop-u-
  []
 
-[41 <./images/Synth_results/FULL/Metrics/model_diagnostics_cause_1.png>]
+
 Overfull \hbox (6.2956pt too wide) in paragraph at lines 809--810
 []\OT1/bch/m/n/12 Remarkably, the di-ag-nos-tic eval-u-a-tions re-veal that the En-tropy sam-pler does not merely 
  []
 
-<images/Synth_results/ENTROPY/Metrics/model_diagnostics_cause_1_Entropy_tau_0.5_compression_0.1.png, id=906, 1003.3485pt x 381.3447pt>
+<images/Synth_results/ENTROPY/Metrics/model_diagnostics_cause_1_Entropy_tau_0.5_compression_0.1.png, id=870, 1003.3485pt x 381.3447pt>
 File: images/Synth_results/ENTROPY/Metrics/model_diagnostics_cause_1_Entropy_tau_0.5_compression_0.1.png Graphic file (type png)
 <use images/Synth_results/ENTROPY/Metrics/model_diagnostics_cause_1_Entropy_tau_0.5_compression_0.1.png>
 Package pdftex.def Info: images/Synth_results/ENTROPY/Metrics/model_diagnostics_cause_1_Entropy_tau_0.5_compression_0.1.png  used on input line 815.
@@ -998,7 +953,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 816--816
 []\OT1/bch/m/n/10.95 Figure 4.18: |Model di-ag-nos-tics for the op-ti-mal En-tropy Sam-pler ($\OML/cmm/m/it/10.95 ^^\ \OT1/cmr/m/n/10.95 = 0\OML/cmm/m/it/10.95 :\OT1/cmr/m/n/10.95 5$\OT1/bch/m/n/10.95 ) demon-strat-ing
  []
 
-<images/Synth_results/ENTROPY/Metrics/subject_curves_cause_1_cif_Entropy_tau_0.5_compression_0.1.png, id=908, 1146.4431pt x 418.9251pt>
+
+Underfull \vbox (badness 2865) has occurred while \output is active []
+
+ [40 <./images/Synth_results/FULL/Metrics/subject_curves_cause_1_cif.png>]
+<images/Synth_results/ENTROPY/Metrics/subject_curves_cause_1_cif_Entropy_tau_0.5_compression_0.1.png, id=879, 1146.4431pt x 418.9251pt>
 File: images/Synth_results/ENTROPY/Metrics/subject_curves_cause_1_cif_Entropy_tau_0.5_compression_0.1.png Graphic file (type png)
 <use images/Synth_results/ENTROPY/Metrics/subject_curves_cause_1_cif_Entropy_tau_0.5_compression_0.1.png>
 Package pdftex.def Info: images/Synth_results/ENTROPY/Metrics/subject_curves_cause_1_cif_Entropy_tau_0.5_compression_0.1.png  used on input line 824.
@@ -1008,26 +967,24 @@ Underfull \hbox (badness 10000) in paragraph at lines 825--825
 []\OT1/bch/m/n/10.95 Figure 4.19: |In-di-vid-ual pa-tient Cu-mu-la-tive In-ci-dence tra-jec-to-ries gen-er-ated via the En-tropy
  []
 
-[42 <./images/Synth_results/FULL/Metrics/subject_curves_cause_1_cif.png>] [43 <./images/Synth_results/ENTROPY/Metrics/model_diagnostics_cause_1_Entropy_tau_0.5_compression_0.1.png> <./images/Synth_results/ENTROPY/Metrics/subject_curves_cause_1_cif_Entropy_tau_0.5_compression_0.1.png>]
+
 Overfull \hbox (24.84756pt too wide) in paragraph at lines 834--835
 \OT1/bch/m/n/12 im-pacts ab-so-lute cal-i-bra-tion and fea-ture re-cov-ery. As es-tab-lished in the macro-performance 
  []
 
-<images/Synth_results/NCC/Metrics/model_diagnostics_cause_1_NCC_ncontrols_100.png, id=926, 1003.3485pt x 381.3447pt>
+[41 <./images/Synth_results/ENTROPY/Metrics/model_diagnostics_cause_1_Entropy_tau_0.5_compression_0.1.png> <./images/Synth_results/ENTROPY/Metrics/subject_curves_cause_1_cif_Entropy_tau_0.5_compression_0.1.png>]
+<images/Synth_results/NCC/Metrics/model_diagnostics_cause_1_NCC_ncontrols_100.png, id=889, 1003.3485pt x 381.3447pt>
 File: images/Synth_results/NCC/Metrics/model_diagnostics_cause_1_NCC_ncontrols_100.png Graphic file (type png)
 <use images/Synth_results/NCC/Metrics/model_diagnostics_cause_1_NCC_ncontrols_100.png>
 Package pdftex.def Info: images/Synth_results/NCC/Metrics/model_diagnostics_cause_1_NCC_ncontrols_100.png  used on input line 840.
 (pdftex.def)             Requested size: 385.02547pt x 146.33228pt.
-<images/Synth_results/NCC/Metrics/model_diagnostics_cause_1_NCC_ncontrols_5.png, id=928, 1003.1076pt x 381.3447pt>
+<images/Synth_results/NCC/Metrics/model_diagnostics_cause_1_NCC_ncontrols_5.png, id=891, 1003.1076pt x 381.3447pt>
 File: images/Synth_results/NCC/Metrics/model_diagnostics_cause_1_NCC_ncontrols_5.png Graphic file (type png)
 <use images/Synth_results/NCC/Metrics/model_diagnostics_cause_1_NCC_ncontrols_5.png>
 Package pdftex.def Info: images/Synth_results/NCC/Metrics/model_diagnostics_cause_1_NCC_ncontrols_5.png  used on input line 849.
 (pdftex.def)             Requested size: 385.02547pt x 146.37302pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [44 <./images/Synth_results/NCC/Metrics/model_diagnostics_cause_1_NCC_ncontrols_100.png>]
-<images/Synth_results/NCC/Metrics/subject_curves_cause_1_cif_NCC_ncontrols_100.png, id=936, 1146.4431pt x 418.9251pt>
+ [42 <./images/Synth_results/NCC/Metrics/model_diagnostics_cause_1_NCC_ncontrols_100.png> <./images/Synth_results/NCC/Metrics/model_diagnostics_cause_1_NCC_ncontrols_5.png>]
+<images/Synth_results/NCC/Metrics/subject_curves_cause_1_cif_NCC_ncontrols_100.png, id=900, 1146.4431pt x 418.9251pt>
 File: images/Synth_results/NCC/Metrics/subject_curves_cause_1_cif_NCC_ncontrols_100.png Graphic file (type png)
 <use images/Synth_results/NCC/Metrics/subject_curves_cause_1_cif_NCC_ncontrols_100.png>
 Package pdftex.def Info: images/Synth_results/NCC/Metrics/subject_curves_cause_1_cif_NCC_ncontrols_100.png  used on input line 858.
@@ -1037,19 +994,21 @@ Underfull \hbox (badness 10000) in paragraph at lines 859--859
 []\OT1/bch/m/n/10.95 Figure 4.22: |In-di-vid-ual pa-tient Cu-mu-la-tive In-ci-dence tra-jec-to-ries gen-er-ated via NCC
  []
 
-[45 <./images/Synth_results/NCC/Metrics/model_diagnostics_cause_1_NCC_ncontrols_5.png> <./images/Synth_results/NCC/Metrics/subject_curves_cause_1_cif_NCC_ncontrols_100.png>]
-<images/Synth_results/SCC/Metrics/model_diagnostics_cause_1_SCC_subcohort_0.5.png, id=946, 1003.3485pt x 381.3447pt>
+<images/Synth_results/SCC/Metrics/model_diagnostics_cause_1_SCC_subcohort_0.5.png, id=903, 1003.3485pt x 381.3447pt>
 File: images/Synth_results/SCC/Metrics/model_diagnostics_cause_1_SCC_subcohort_0.5.png Graphic file (type png)
 <use images/Synth_results/SCC/Metrics/model_diagnostics_cause_1_SCC_subcohort_0.5.png>
 Package pdftex.def Info: images/Synth_results/SCC/Metrics/model_diagnostics_cause_1_SCC_subcohort_0.5.png  used on input line 873.
 (pdftex.def)             Requested size: 385.02547pt x 146.33228pt.
-<images/Synth_results/SCC/Metrics/model_diagnostics_cause_1_SCC_subcohort_0.05.png, id=948, 1003.3485pt x 381.3447pt>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [43 <./images/Synth_results/NCC/Metrics/subject_curves_cause_1_cif_NCC_ncontrols_100.png>]
+<images/Synth_results/SCC/Metrics/model_diagnostics_cause_1_SCC_subcohort_0.05.png, id=913, 1003.3485pt x 381.3447pt>
 File: images/Synth_results/SCC/Metrics/model_diagnostics_cause_1_SCC_subcohort_0.05.png Graphic file (type png)
 <use images/Synth_results/SCC/Metrics/model_diagnostics_cause_1_SCC_subcohort_0.05.png>
 Package pdftex.def Info: images/Synth_results/SCC/Metrics/model_diagnostics_cause_1_SCC_subcohort_0.05.png  used on input line 882.
 (pdftex.def)             Requested size: 385.02547pt x 146.33228pt.
- [46 <./images/Synth_results/SCC/Metrics/model_diagnostics_cause_1_SCC_subcohort_0.5.png> <./images/Synth_results/SCC/Metrics/model_diagnostics_cause_1_SCC_subcohort_0.05.png>]
-<images/Synth_results/SCC/Metrics/subject_curves_cause_1_cif_SCC_subcohort_0.5.png, id=957, 1146.4431pt x 418.9251pt>
+<images/Synth_results/SCC/Metrics/subject_curves_cause_1_cif_SCC_subcohort_0.5.png, id=914, 1146.4431pt x 418.9251pt>
 File: images/Synth_results/SCC/Metrics/subject_curves_cause_1_cif_SCC_subcohort_0.5.png Graphic file (type png)
 <use images/Synth_results/SCC/Metrics/subject_curves_cause_1_cif_SCC_subcohort_0.5.png>
 Package pdftex.def Info: images/Synth_results/SCC/Metrics/subject_curves_cause_1_cif_SCC_subcohort_0.5.png  used on input line 891.
@@ -1059,13 +1018,13 @@ Overfull \hbox (3.40356pt too wide) in paragraph at lines 896--897
 \OT1/bch/m/n/12 strates that the op-ti-mal SCC con-fig-u-ra-tion suc-cess-fully gen-er-ates in-di-vid-u-al-ized, mono- 
  []
 
-[47 <./images/Synth_results/SCC/Metrics/subject_curves_cause_1_cif_SCC_subcohort_0.5.png>]
-<images/pbc_results/FULL/Metrics/cif_calibration_cause_1.png, id=968, 635.4942pt x 426.1521pt>
+[44 <./images/Synth_results/SCC/Metrics/model_diagnostics_cause_1_SCC_subcohort_0.5.png> <./images/Synth_results/SCC/Metrics/model_diagnostics_cause_1_SCC_subcohort_0.05.png>]
+<images/pbc_results/FULL/Metrics/cif_calibration_cause_1.png, id=925, 635.4942pt x 426.1521pt>
 File: images/pbc_results/FULL/Metrics/cif_calibration_cause_1.png Graphic file (type png)
 <use images/pbc_results/FULL/Metrics/cif_calibration_cause_1.png>
 Package pdftex.def Info: images/pbc_results/FULL/Metrics/cif_calibration_cause_1.png  used on input line 916.
 (pdftex.def)             Requested size: 217.42265pt x 145.80014pt.
-<images/pbc_results/FULL/Metrics/subject_curves_cause_1_cif.png, id=969, 1144.9977pt x 444.2196pt>
+<images/pbc_results/FULL/Metrics/subject_curves_cause_1_cif.png, id=926, 1144.9977pt x 444.2196pt>
 File: images/pbc_results/FULL/Metrics/subject_curves_cause_1_cif.png Graphic file (type png)
 <use images/pbc_results/FULL/Metrics/subject_curves_cause_1_cif.png>
 Package pdftex.def Info: images/pbc_results/FULL/Metrics/subject_curves_cause_1_cif.png  used on input line 921.
@@ -1075,282 +1034,270 @@ Overfull \hbox (7.31555pt too wide) in paragraph at lines 928--929
 \OT1/bch/m/n/12 against the over-all pop-u-la-tion Aalen-Johansen base-line (dashed black line). The shaded 
  []
 
-
+[45 <./images/Synth_results/SCC/Metrics/subject_curves_cause_1_cif_SCC_subcohort_0.5.png>]
 Overfull \hbox (5.04753pt too wide) in paragraph at lines 934--935
 \OT1/bch/m/n/12 nism func-tions as in-tended, neu-tral-iz-ing the sam-pling bias and pre-vent-ing the Marginal 
  []
 
-<images/pbc_results/NCC/Metrics/cif_calibration_cause_1_NCC_ncontrols_100.png, id=972, 643.6848pt x 426.1521pt>
+<images/pbc_results/NCC/Metrics/cif_calibration_cause_1_NCC_ncontrols_100.png, id=936, 643.6848pt x 426.1521pt>
 File: images/pbc_results/NCC/Metrics/cif_calibration_cause_1_NCC_ncontrols_100.png Graphic file (type png)
 <use images/pbc_results/NCC/Metrics/cif_calibration_cause_1_NCC_ncontrols_100.png>
 Package pdftex.def Info: images/pbc_results/NCC/Metrics/cif_calibration_cause_1_NCC_ncontrols_100.png  used on input line 939.
 (pdftex.def)             Requested size: 217.42265pt x 143.94691pt.
-<images/pbc_results/NCC/Metrics/subject_curves_cause_1_cif_NCC_ncontrols_100.png, id=973, 1144.9977pt x 444.2196pt>
+<images/pbc_results/NCC/Metrics/subject_curves_cause_1_cif_NCC_ncontrols_100.png, id=937, 1144.9977pt x 444.2196pt>
 File: images/pbc_results/NCC/Metrics/subject_curves_cause_1_cif_NCC_ncontrols_100.png Graphic file (type png)
 <use images/pbc_results/NCC/Metrics/subject_curves_cause_1_cif_NCC_ncontrols_100.png>
 Package pdftex.def Info: images/pbc_results/NCC/Metrics/subject_curves_cause_1_cif_NCC_ncontrols_100.png  used on input line 944.
 (pdftex.def)             Requested size: 217.42265pt x 84.34837pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [48 <./images/pbc_results/FULL/Metrics/cif_calibration_cause_1.png> <./images/pbc_results/FULL/Metrics/subject_curves_cause_1_cif.png>]
-<images/pbc_results/NCC/Metrics/cif_calibration_cause_1_NCC_ncontrols_5.png, id=983, 635.7351pt x 426.1521pt>
+[46 <./images/pbc_results/FULL/Metrics/cif_calibration_cause_1.png> <./images/pbc_results/FULL/Metrics/subject_curves_cause_1_cif.png> <./images/pbc_results/NCC/Metrics/cif_calibration_cause_1_NCC_ncontrols_100.png> <./images/pbc_results/NCC/Metrics/subject_curves_cause_1_cif_NCC_ncontrols_100.png>]
+<images/pbc_results/NCC/Metrics/cif_calibration_cause_1_NCC_ncontrols_5.png, id=949, 635.7351pt x 426.1521pt>
 File: images/pbc_results/NCC/Metrics/cif_calibration_cause_1_NCC_ncontrols_5.png Graphic file (type png)
 <use images/pbc_results/NCC/Metrics/cif_calibration_cause_1_NCC_ncontrols_5.png>
 Package pdftex.def Info: images/pbc_results/NCC/Metrics/cif_calibration_cause_1_NCC_ncontrols_5.png  used on input line 956.
 (pdftex.def)             Requested size: 217.42265pt x 145.74812pt.
-<images/pbc_results/NCC/Metrics/subject_curves_cause_1_cif_NCC_ncontrols_5.png, id=984, 1144.9977pt x 444.2196pt>
+<images/pbc_results/NCC/Metrics/subject_curves_cause_1_cif_NCC_ncontrols_5.png, id=950, 1144.9977pt x 444.2196pt>
 File: images/pbc_results/NCC/Metrics/subject_curves_cause_1_cif_NCC_ncontrols_5.png Graphic file (type png)
 <use images/pbc_results/NCC/Metrics/subject_curves_cause_1_cif_NCC_ncontrols_5.png>
 Package pdftex.def Info: images/pbc_results/NCC/Metrics/subject_curves_cause_1_cif_NCC_ncontrols_5.png  used on input line 961.
 (pdftex.def)             Requested size: 217.42265pt x 84.34837pt.
 
-Underfull \vbox (badness 1264) has occurred while \output is active []
-
- [49 <./images/pbc_results/NCC/Metrics/cif_calibration_cause_1_NCC_ncontrols_100.png> <./images/pbc_results/NCC/Metrics/subject_curves_cause_1_cif_NCC_ncontrols_100.png> <./images/pbc_results/NCC/Metrics/cif_calibration_cause_1_NCC_ncontrols_5.png> <./images/pbc_results/NCC/Metrics/subject_curves_cause_1_cif_NCC_ncontrols_5.png>]
 Overfull \hbox (0.28357pt too wide) in paragraph at lines 974--975
 \OT1/bch/m/n/12 the Strat-i-fied CIF curves is pre-served, there is no-tice-able de-vi-a-tion across all risk strata 
  []
 
-<images/pbc_results/SCC/Metrics/cif_calibration_cause_1_SCC_subcohort_0.5.png, id=996, 643.203pt x 426.1521pt>
+<images/pbc_results/SCC/Metrics/cif_calibration_cause_1_SCC_subcohort_0.5.png, id=952, 643.203pt x 426.1521pt>
 File: images/pbc_results/SCC/Metrics/cif_calibration_cause_1_SCC_subcohort_0.5.png Graphic file (type png)
 <use images/pbc_results/SCC/Metrics/cif_calibration_cause_1_SCC_subcohort_0.5.png>
 Package pdftex.def Info: images/pbc_results/SCC/Metrics/cif_calibration_cause_1_SCC_subcohort_0.5.png  used on input line 979.
 (pdftex.def)             Requested size: 217.42265pt x 144.05096pt.
-<images/pbc_results/SCC/Metrics/subject_curves_cause_1_cif_SCC_subcohort_0.5.png, id=997, 1144.9977pt x 444.2196pt>
+<images/pbc_results/SCC/Metrics/subject_curves_cause_1_cif_SCC_subcohort_0.5.png, id=953, 1144.9977pt x 444.2196pt>
 File: images/pbc_results/SCC/Metrics/subject_curves_cause_1_cif_SCC_subcohort_0.5.png Graphic file (type png)
 <use images/pbc_results/SCC/Metrics/subject_curves_cause_1_cif_SCC_subcohort_0.5.png>
 Package pdftex.def Info: images/pbc_results/SCC/Metrics/subject_curves_cause_1_cif_SCC_subcohort_0.5.png  used on input line 984.
 (pdftex.def)             Requested size: 217.42265pt x 84.34837pt.
-<images/pbc_results/SCC/Metrics/cif_calibration_cause_1_SCC_subcohort_0.05.png, id=1000, 647.0574pt x 426.1521pt>
+[47 <./images/pbc_results/NCC/Metrics/cif_calibration_cause_1_NCC_ncontrols_5.png> <./images/pbc_results/NCC/Metrics/subject_curves_cause_1_cif_NCC_ncontrols_5.png>]
+<images/pbc_results/SCC/Metrics/cif_calibration_cause_1_SCC_subcohort_0.05.png, id=965, 647.0574pt x 426.1521pt>
 File: images/pbc_results/SCC/Metrics/cif_calibration_cause_1_SCC_subcohort_0.05.png Graphic file (type png)
 <use images/pbc_results/SCC/Metrics/cif_calibration_cause_1_SCC_subcohort_0.05.png>
 Package pdftex.def Info: images/pbc_results/SCC/Metrics/cif_calibration_cause_1_SCC_subcohort_0.05.png  used on input line 998.
 (pdftex.def)             Requested size: 217.42265pt x 143.19263pt.
-<images/pbc_results/SCC/Metrics/subject_curves_cause_1_cif_SCC_subcohort_0.05.png, id=1001, 1144.9977pt x 444.2196pt>
+<images/pbc_results/SCC/Metrics/subject_curves_cause_1_cif_SCC_subcohort_0.05.png, id=966, 1144.9977pt x 444.2196pt>
 File: images/pbc_results/SCC/Metrics/subject_curves_cause_1_cif_SCC_subcohort_0.05.png Graphic file (type png)
 <use images/pbc_results/SCC/Metrics/subject_curves_cause_1_cif_SCC_subcohort_0.05.png>
 Package pdftex.def Info: images/pbc_results/SCC/Metrics/subject_curves_cause_1_cif_SCC_subcohort_0.05.png  used on input line 1003.
 (pdftex.def)             Requested size: 217.42265pt x 84.34837pt.
-[50 <./images/pbc_results/SCC/Metrics/cif_calibration_cause_1_SCC_subcohort_0.5.png> <./images/pbc_results/SCC/Metrics/subject_curves_cause_1_cif_SCC_subcohort_0.5.png>]
-<images/pbc_results/Entropy/Metrics/cif_calibration_cause_1_Entropy_tau_0.5_compression_0.1.png, id=1012, 702.2235pt x 426.1521pt>
+ [48 <./images/pbc_results/SCC/Metrics/cif_calibration_cause_1_SCC_subcohort_0.5.png> <./images/pbc_results/SCC/Metrics/subject_curves_cause_1_cif_SCC_subcohort_0.5.png> <./images/pbc_results/SCC/Metrics/cif_calibration_cause_1_SCC_subcohort_0.05.png> <./images/pbc_results/SCC/Metrics/subject_curves_cause_1_cif_SCC_subcohort_0.05.png>]
+<images/pbc_results/Entropy/Metrics/cif_calibration_cause_1_Entropy_tau_0.5_compression_0.1.png, id=977, 702.2235pt x 426.1521pt>
 File: images/pbc_results/Entropy/Metrics/cif_calibration_cause_1_Entropy_tau_0.5_compression_0.1.png Graphic file (type png)
 <use images/pbc_results/Entropy/Metrics/cif_calibration_cause_1_Entropy_tau_0.5_compression_0.1.png>
 Package pdftex.def Info: images/pbc_results/Entropy/Metrics/cif_calibration_cause_1_Entropy_tau_0.5_compression_0.1.png  used on input line 1023.
 (pdftex.def)             Requested size: 217.42265pt x 131.9432pt.
-<images/pbc_results/Entropy/Metrics/subject_curves_cause_1_cif_Entropy_tau_0.5_compression_0.1.png, id=1013, 1144.9977pt x 444.2196pt>
+<images/pbc_results/Entropy/Metrics/subject_curves_cause_1_cif_Entropy_tau_0.5_compression_0.1.png, id=978, 1144.9977pt x 444.2196pt>
 File: images/pbc_results/Entropy/Metrics/subject_curves_cause_1_cif_Entropy_tau_0.5_compression_0.1.png Graphic file (type png)
 <use images/pbc_results/Entropy/Metrics/subject_curves_cause_1_cif_Entropy_tau_0.5_compression_0.1.png>
 Package pdftex.def Info: images/pbc_results/Entropy/Metrics/subject_curves_cause_1_cif_Entropy_tau_0.5_compression_0.1.png  used on input line 1028.
 (pdftex.def)             Requested size: 217.42265pt x 84.34837pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [51 <./images/pbc_results/SCC/Metrics/cif_calibration_cause_1_SCC_subcohort_0.05.png> <./images/pbc_results/SCC/Metrics/subject_curves_cause_1_cif_SCC_subcohort_0.05.png>]
-<images/pbc_results/Entropy/Metrics/cif_calibration_cause_1_Entropy_tau_5_compression_0.1.png, id=1023, 696.201pt x 426.1521pt>
+<images/pbc_results/Entropy/Metrics/cif_calibration_cause_1_Entropy_tau_5_compression_0.1.png, id=980, 696.201pt x 426.1521pt>
 File: images/pbc_results/Entropy/Metrics/cif_calibration_cause_1_Entropy_tau_5_compression_0.1.png Graphic file (type png)
 <use images/pbc_results/Entropy/Metrics/cif_calibration_cause_1_Entropy_tau_5_compression_0.1.png>
 Package pdftex.def Info: images/pbc_results/Entropy/Metrics/cif_calibration_cause_1_Entropy_tau_5_compression_0.1.png  used on input line 1042.
 (pdftex.def)             Requested size: 217.42265pt x 133.08766pt.
-<images/pbc_results/Entropy/Metrics/subject_curves_cause_1_cif_Entropy_tau_5_compression_0.1.png, id=1024, 1144.9977pt x 444.2196pt>
+<images/pbc_results/Entropy/Metrics/subject_curves_cause_1_cif_Entropy_tau_5_compression_0.1.png, id=981, 1144.9977pt x 444.2196pt>
 File: images/pbc_results/Entropy/Metrics/subject_curves_cause_1_cif_Entropy_tau_5_compression_0.1.png Graphic file (type png)
 <use images/pbc_results/Entropy/Metrics/subject_curves_cause_1_cif_Entropy_tau_5_compression_0.1.png>
 Package pdftex.def Info: images/pbc_results/Entropy/Metrics/subject_curves_cause_1_cif_Entropy_tau_5_compression_0.1.png  used on input line 1047.
 (pdftex.def)             Requested size: 217.42265pt x 84.34837pt.
- [52 <./images/pbc_results/Entropy/Metrics/cif_calibration_cause_1_Entropy_tau_0.5_compression_0.1.png> <./images/pbc_results/Entropy/Metrics/subject_curves_cause_1_cif_Entropy_tau_0.5_compression_0.1.png> <./images/pbc_results/Entropy/Metrics/cif_calibration_cause_1_Entropy_tau_5_compression_0.1.png> <./images/pbc_results/Entropy/Metrics/subject_curves_cause_1_cif_Entropy_tau_5_compression_0.1.png>]
-<images/fh_results/FULL/Metrics/cif_calibration_cause_1.png, id=1036, 635.0124pt x 426.1521pt>
+ [49 <./images/pbc_results/Entropy/Metrics/cif_calibration_cause_1_Entropy_tau_0.5_compression_0.1.png> <./images/pbc_results/Entropy/Metrics/subject_curves_cause_1_cif_Entropy_tau_0.5_compression_0.1.png>] [50 <./images/pbc_results/Entropy/Metrics/cif_calibration_cause_1_Entropy_tau_5_compression_0.1.png> <./images/pbc_results/Entropy/Metrics/subject_curves_cause_1_cif_Entropy_tau_5_compression_0.1.png>]
+<images/fh_results/FULL/Metrics/cif_calibration_cause_1.png, id=1000, 635.0124pt x 426.1521pt>
 File: images/fh_results/FULL/Metrics/cif_calibration_cause_1.png Graphic file (type png)
 <use images/fh_results/FULL/Metrics/cif_calibration_cause_1.png>
-Package pdftex.def Info: images/fh_results/FULL/Metrics/cif_calibration_cause_1.png  used on input line 1071.
+Package pdftex.def Info: images/fh_results/FULL/Metrics/cif_calibration_cause_1.png  used on input line 1072.
 (pdftex.def)             Requested size: 217.42265pt x 145.91069pt.
-<images/fh_results/FULL/Metrics/subject_curves_cause_1_cif.png, id=1037, 1146.9249pt x 444.2196pt>
+<images/fh_results/FULL/Metrics/subject_curves_cause_1_cif.png, id=1001, 1146.9249pt x 444.2196pt>
 File: images/fh_results/FULL/Metrics/subject_curves_cause_1_cif.png Graphic file (type png)
 <use images/fh_results/FULL/Metrics/subject_curves_cause_1_cif.png>
-Package pdftex.def Info: images/fh_results/FULL/Metrics/subject_curves_cause_1_cif.png  used on input line 1076.
+Package pdftex.def Info: images/fh_results/FULL/Metrics/subject_curves_cause_1_cif.png  used on input line 1077.
 (pdftex.def)             Requested size: 217.42265pt x 84.20602pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1079--1079
+Underfull \hbox (badness 10000) in paragraph at lines 1080--1080
 []\OT1/bch/m/n/10.95 Figure 4.33: |Cal-i-bra-tion di-ag-nos-tics for the Full Co-hort base-line on the heav-ily cen-sored Fram-
  []
 
-[53 <./images/fh_results/FULL/Metrics/cif_calibration_cause_1.png> <./images/fh_results/FULL/Metrics/subject_curves_cause_1_cif.png>]
-<images/fh_results/NCC/Metrics/cif_calibration_cause_1_NCC_ncontrols_100.png, id=1048, 635.0124pt x 426.1521pt>
+[51 <./images/fh_results/FULL/Metrics/cif_calibration_cause_1.png> <./images/fh_results/FULL/Metrics/subject_curves_cause_1_cif.png>]
+<images/fh_results/NCC/Metrics/cif_calibration_cause_1_NCC_ncontrols_100.png, id=1011, 635.0124pt x 426.1521pt>
 File: images/fh_results/NCC/Metrics/cif_calibration_cause_1_NCC_ncontrols_100.png Graphic file (type png)
 <use images/fh_results/NCC/Metrics/cif_calibration_cause_1_NCC_ncontrols_100.png>
-Package pdftex.def Info: images/fh_results/NCC/Metrics/cif_calibration_cause_1_NCC_ncontrols_100.png  used on input line 1090.
+Package pdftex.def Info: images/fh_results/NCC/Metrics/cif_calibration_cause_1_NCC_ncontrols_100.png  used on input line 1093.
 (pdftex.def)             Requested size: 217.42265pt x 145.91069pt.
-<images/fh_results/NCC/Metrics/subject_curves_cause_1_cif_NCC_ncontrols_100.png, id=1049, 1146.9249pt x 444.2196pt>
+<images/fh_results/NCC/Metrics/subject_curves_cause_1_cif_NCC_ncontrols_100.png, id=1012, 1146.9249pt x 444.2196pt>
 File: images/fh_results/NCC/Metrics/subject_curves_cause_1_cif_NCC_ncontrols_100.png Graphic file (type png)
 <use images/fh_results/NCC/Metrics/subject_curves_cause_1_cif_NCC_ncontrols_100.png>
-Package pdftex.def Info: images/fh_results/NCC/Metrics/subject_curves_cause_1_cif_NCC_ncontrols_100.png  used on input line 1095.
+Package pdftex.def Info: images/fh_results/NCC/Metrics/subject_curves_cause_1_cif_NCC_ncontrols_100.png  used on input line 1098.
 (pdftex.def)             Requested size: 217.42265pt x 84.20602pt.
-<images/fh_results/NCC/Metrics/cif_calibration_cause_1_NCC_ncontrols_5.png, id=1050, 634.7715pt x 426.1521pt>
+<images/fh_results/NCC/Metrics/cif_calibration_cause_1_NCC_ncontrols_5.png, id=1013, 634.7715pt x 426.1521pt>
 File: images/fh_results/NCC/Metrics/cif_calibration_cause_1_NCC_ncontrols_5.png Graphic file (type png)
 <use images/fh_results/NCC/Metrics/cif_calibration_cause_1_NCC_ncontrols_5.png>
-Package pdftex.def Info: images/fh_results/NCC/Metrics/cif_calibration_cause_1_NCC_ncontrols_5.png  used on input line 1102.
+Package pdftex.def Info: images/fh_results/NCC/Metrics/cif_calibration_cause_1_NCC_ncontrols_5.png  used on input line 1105.
 (pdftex.def)             Requested size: 217.42265pt x 145.9627pt.
-<images/fh_results/NCC/Metrics/subject_curves_cause_1_cif_NCC_ncontrols_5.png, id=1051, 1146.9249pt x 444.2196pt>
+<images/fh_results/NCC/Metrics/subject_curves_cause_1_cif_NCC_ncontrols_5.png, id=1014, 1146.9249pt x 444.2196pt>
 File: images/fh_results/NCC/Metrics/subject_curves_cause_1_cif_NCC_ncontrols_5.png Graphic file (type png)
 <use images/fh_results/NCC/Metrics/subject_curves_cause_1_cif_NCC_ncontrols_5.png>
-Package pdftex.def Info: images/fh_results/NCC/Metrics/subject_curves_cause_1_cif_NCC_ncontrols_5.png  used on input line 1107.
+Package pdftex.def Info: images/fh_results/NCC/Metrics/subject_curves_cause_1_cif_NCC_ncontrols_5.png  used on input line 1110.
 (pdftex.def)             Requested size: 217.42265pt x 84.20602pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1110--1110
+Underfull \hbox (badness 10000) in paragraph at lines 1113--1113
 []\OT1/bch/m/n/10.95 Figure 4.34: |Cal-i-bra-tion di-ag-nos-tics for op-ti-mal and con-strained NCC con-fig-u-ra-tions on the
  []
 
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [54 <./images/fh_results/NCC/Metrics/cif_calibration_cause_1_NCC_ncontrols_100.png> <./images/fh_results/NCC/Metrics/subject_curves_cause_1_cif_NCC_ncontrols_100.png> <./images/fh_results/NCC/Metrics/cif_calibration_cause_1_NCC_ncontrols_5.png> <./images/fh_results/NCC/Metrics/subject_curves_cause_1_cif_NCC_ncontrols_5.png>]
-<images/fh_results/SCC/Metrics/cif_calibration_cause_1_SCC_subcohort_0.5.png, id=1062, 634.7715pt x 426.1521pt>
+[52 <./images/fh_results/NCC/Metrics/cif_calibration_cause_1_NCC_ncontrols_100.png> <./images/fh_results/NCC/Metrics/subject_curves_cause_1_cif_NCC_ncontrols_100.png> <./images/fh_results/NCC/Metrics/cif_calibration_cause_1_NCC_ncontrols_5.png> <./images/fh_results/NCC/Metrics/subject_curves_cause_1_cif_NCC_ncontrols_5.png>]
+<images/fh_results/SCC/Metrics/cif_calibration_cause_1_SCC_subcohort_0.5.png, id=1026, 634.7715pt x 426.1521pt>
 File: images/fh_results/SCC/Metrics/cif_calibration_cause_1_SCC_subcohort_0.5.png Graphic file (type png)
 <use images/fh_results/SCC/Metrics/cif_calibration_cause_1_SCC_subcohort_0.5.png>
-Package pdftex.def Info: images/fh_results/SCC/Metrics/cif_calibration_cause_1_SCC_subcohort_0.5.png  used on input line 1129.
+Package pdftex.def Info: images/fh_results/SCC/Metrics/cif_calibration_cause_1_SCC_subcohort_0.5.png  used on input line 1132.
 (pdftex.def)             Requested size: 217.42265pt x 145.9627pt.
-<images/fh_results/SCC/Metrics/subject_curves_cause_1_cif_SCC_subcohort_0.5.png, id=1063, 1146.9249pt x 444.2196pt>
+<images/fh_results/SCC/Metrics/subject_curves_cause_1_cif_SCC_subcohort_0.5.png, id=1027, 1146.9249pt x 444.2196pt>
 File: images/fh_results/SCC/Metrics/subject_curves_cause_1_cif_SCC_subcohort_0.5.png Graphic file (type png)
 <use images/fh_results/SCC/Metrics/subject_curves_cause_1_cif_SCC_subcohort_0.5.png>
-Package pdftex.def Info: images/fh_results/SCC/Metrics/subject_curves_cause_1_cif_SCC_subcohort_0.5.png  used on input line 1134.
+Package pdftex.def Info: images/fh_results/SCC/Metrics/subject_curves_cause_1_cif_SCC_subcohort_0.5.png  used on input line 1137.
 (pdftex.def)             Requested size: 217.42265pt x 84.20602pt.
-<images/fh_results/SCC/Metrics/cif_calibration_cause_1_SCC_subcohort_0.05.png, id=1064, 635.4942pt x 426.1521pt>
+<images/fh_results/SCC/Metrics/cif_calibration_cause_1_SCC_subcohort_0.05.png, id=1028, 635.4942pt x 426.1521pt>
 File: images/fh_results/SCC/Metrics/cif_calibration_cause_1_SCC_subcohort_0.05.png Graphic file (type png)
 <use images/fh_results/SCC/Metrics/cif_calibration_cause_1_SCC_subcohort_0.05.png>
-Package pdftex.def Info: images/fh_results/SCC/Metrics/cif_calibration_cause_1_SCC_subcohort_0.05.png  used on input line 1142.
+Package pdftex.def Info: images/fh_results/SCC/Metrics/cif_calibration_cause_1_SCC_subcohort_0.05.png  used on input line 1145.
 (pdftex.def)             Requested size: 217.42265pt x 145.80014pt.
-<images/fh_results/SCC/Metrics/subject_curves_cause_1_cif_SCC_subcohort_0.05.png, id=1065, 1146.9249pt x 444.2196pt>
+<images/fh_results/SCC/Metrics/subject_curves_cause_1_cif_SCC_subcohort_0.05.png, id=1029, 1146.9249pt x 444.2196pt>
 File: images/fh_results/SCC/Metrics/subject_curves_cause_1_cif_SCC_subcohort_0.05.png Graphic file (type png)
 <use images/fh_results/SCC/Metrics/subject_curves_cause_1_cif_SCC_subcohort_0.05.png>
-Package pdftex.def Info: images/fh_results/SCC/Metrics/subject_curves_cause_1_cif_SCC_subcohort_0.05.png  used on input line 1147.
+Package pdftex.def Info: images/fh_results/SCC/Metrics/subject_curves_cause_1_cif_SCC_subcohort_0.05.png  used on input line 1150.
 (pdftex.def)             Requested size: 217.42265pt x 84.20602pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1150--1150
+Underfull \hbox (badness 10000) in paragraph at lines 1153--1153
 []\OT1/bch/m/n/10.95 Figure 4.35: |Cal-i-bra-tion di-ag-nos-tics for SCC on the Fram-ing-ham dataset, con-trast-ing the op-ti-
  []
 
-[55 <./images/fh_results/SCC/Metrics/cif_calibration_cause_1_SCC_subcohort_0.5.png> <./images/fh_results/SCC/Metrics/subject_curves_cause_1_cif_SCC_subcohort_0.5.png> <./images/fh_results/SCC/Metrics/cif_calibration_cause_1_SCC_subcohort_0.05.png> <./images/fh_results/SCC/Metrics/subject_curves_cause_1_cif_SCC_subcohort_0.05.png>]
-<images/fh_results/Entropy/Metrics/cif_calibration_cause_1_Entropy_tau_0.5_compression_0.1.png, id=1078, 693.5511pt x 426.1521pt>
+[53 <./images/fh_results/SCC/Metrics/cif_calibration_cause_1_SCC_subcohort_0.5.png> <./images/fh_results/SCC/Metrics/subject_curves_cause_1_cif_SCC_subcohort_0.5.png> <./images/fh_results/SCC/Metrics/cif_calibration_cause_1_SCC_subcohort_0.05.png> <./images/fh_results/SCC/Metrics/subject_curves_cause_1_cif_SCC_subcohort_0.05.png>]
+<images/fh_results/Entropy/Metrics/cif_calibration_cause_1_Entropy_tau_0.5_compression_0.1.png, id=1041, 693.5511pt x 426.1521pt>
 File: images/fh_results/Entropy/Metrics/cif_calibration_cause_1_Entropy_tau_0.5_compression_0.1.png Graphic file (type png)
 <use images/fh_results/Entropy/Metrics/cif_calibration_cause_1_Entropy_tau_0.5_compression_0.1.png>
-Package pdftex.def Info: images/fh_results/Entropy/Metrics/cif_calibration_cause_1_Entropy_tau_0.5_compression_0.1.png  used on input line 1167.
+Package pdftex.def Info: images/fh_results/Entropy/Metrics/cif_calibration_cause_1_Entropy_tau_0.5_compression_0.1.png  used on input line 1170.
 (pdftex.def)             Requested size: 217.42265pt x 133.59486pt.
-<images/fh_results/Entropy/Metrics/subject_curves_cause_1_cif_Entropy_tau_0.5_compression_0.1.png, id=1079, 1146.9249pt x 444.2196pt>
+<images/fh_results/Entropy/Metrics/subject_curves_cause_1_cif_Entropy_tau_0.5_compression_0.1.png, id=1042, 1146.9249pt x 444.2196pt>
 File: images/fh_results/Entropy/Metrics/subject_curves_cause_1_cif_Entropy_tau_0.5_compression_0.1.png Graphic file (type png)
 <use images/fh_results/Entropy/Metrics/subject_curves_cause_1_cif_Entropy_tau_0.5_compression_0.1.png>
-Package pdftex.def Info: images/fh_results/Entropy/Metrics/subject_curves_cause_1_cif_Entropy_tau_0.5_compression_0.1.png  used on input line 1172.
+Package pdftex.def Info: images/fh_results/Entropy/Metrics/subject_curves_cause_1_cif_Entropy_tau_0.5_compression_0.1.png  used on input line 1175.
 (pdftex.def)             Requested size: 217.42265pt x 84.20602pt.
-<images/fh_results/Entropy/Metrics/cif_calibration_cause_1_Entropy_tau_5_compression_0.1.png, id=1081, 684.6378pt x 426.1521pt>
+ [54 <./images/fh_results/Entropy/Metrics/cif_calibration_cause_1_Entropy_tau_0.5_compression_0.1.png> <./images/fh_results/Entropy/Metrics/subject_curves_cause_1_cif_Entropy_tau_0.5_compression_0.1.png>]
+<images/fh_results/Entropy/Metrics/cif_calibration_cause_1_Entropy_tau_5_compression_0.1.png, id=1052, 684.6378pt x 426.1521pt>
 File: images/fh_results/Entropy/Metrics/cif_calibration_cause_1_Entropy_tau_5_compression_0.1.png Graphic file (type png)
 <use images/fh_results/Entropy/Metrics/cif_calibration_cause_1_Entropy_tau_5_compression_0.1.png>
-Package pdftex.def Info: images/fh_results/Entropy/Metrics/cif_calibration_cause_1_Entropy_tau_5_compression_0.1.png  used on input line 1186.
+Package pdftex.def Info: images/fh_results/Entropy/Metrics/cif_calibration_cause_1_Entropy_tau_5_compression_0.1.png  used on input line 1189.
 (pdftex.def)             Requested size: 217.42265pt x 135.33104pt.
-<images/fh_results/Entropy/Metrics/subject_curves_cause_1_cif_Entropy_tau_5_compression_0.1.png, id=1082, 1146.9249pt x 444.2196pt>
+<images/fh_results/Entropy/Metrics/subject_curves_cause_1_cif_Entropy_tau_5_compression_0.1.png, id=1053, 1146.9249pt x 444.2196pt>
 File: images/fh_results/Entropy/Metrics/subject_curves_cause_1_cif_Entropy_tau_5_compression_0.1.png Graphic file (type png)
 <use images/fh_results/Entropy/Metrics/subject_curves_cause_1_cif_Entropy_tau_5_compression_0.1.png>
-Package pdftex.def Info: images/fh_results/Entropy/Metrics/subject_curves_cause_1_cif_Entropy_tau_5_compression_0.1.png  used on input line 1191.
+Package pdftex.def Info: images/fh_results/Entropy/Metrics/subject_curves_cause_1_cif_Entropy_tau_5_compression_0.1.png  used on input line 1194.
 (pdftex.def)             Requested size: 217.42265pt x 84.20602pt.
- [56 <./images/fh_results/Entropy/Metrics/cif_calibration_cause_1_Entropy_tau_0.5_compression_0.1.png> <./images/fh_results/Entropy/Metrics/subject_curves_cause_1_cif_Entropy_tau_0.5_compression_0.1.png>]
-<images/Synth_results/FULL/feature_contributions_Event_1_cause_1.png, id=1093, 1148.1294pt x 886.2711pt>
+<images/Synth_results/FULL/feature_contributions_Event_1_cause_1.png, id=1056, 1148.1294pt x 886.2711pt>
 File: images/Synth_results/FULL/feature_contributions_Event_1_cause_1.png Graphic file (type png)
 <use images/Synth_results/FULL/feature_contributions_Event_1_cause_1.png>
-Package pdftex.def Info: images/Synth_results/FULL/feature_contributions_Event_1_cause_1.png  used on input line 1210.
+Package pdftex.def Info: images/Synth_results/FULL/feature_contributions_Event_1_cause_1.png  used on input line 1213.
 (pdftex.def)             Requested size: 385.02547pt x 297.20355pt.
- [57 <./images/fh_results/Entropy/Metrics/cif_calibration_cause_1_Entropy_tau_5_compression_0.1.png> <./images/fh_results/Entropy/Metrics/subject_curves_cause_1_cif_Entropy_tau_5_compression_0.1.png>]
+ [55 <./images/fh_results/Entropy/Metrics/cif_calibration_cause_1_Entropy_tau_5_compression_0.1.png> <./images/fh_results/Entropy/Metrics/subject_curves_cause_1_cif_Entropy_tau_5_compression_0.1.png>]
 Underfull \vbox (badness 1303) has occurred while \output is active []
 
- [58 <./images/Synth_results/FULL/feature_contributions_Event_1_cause_1.png>]
-<images/Synth_results/ENTROPY/feature_contributions_Event_1_cause_1_Entropy_tau_0.5_compression_0.1.png, id=1108, 1148.1294pt x 886.2711pt>
+ [56 <./images/Synth_results/FULL/feature_contributions_Event_1_cause_1.png>]
+<images/Synth_results/ENTROPY/feature_contributions_Event_1_cause_1_Entropy_tau_0.5_compression_0.1.png, id=1072, 1148.1294pt x 886.2711pt>
 File: images/Synth_results/ENTROPY/feature_contributions_Event_1_cause_1_Entropy_tau_0.5_compression_0.1.png Graphic file (type png)
 <use images/Synth_results/ENTROPY/feature_contributions_Event_1_cause_1_Entropy_tau_0.5_compression_0.1.png>
-Package pdftex.def Info: images/Synth_results/ENTROPY/feature_contributions_Event_1_cause_1_Entropy_tau_0.5_compression_0.1.png  used on input line 1239.
+Package pdftex.def Info: images/Synth_results/ENTROPY/feature_contributions_Event_1_cause_1_Entropy_tau_0.5_compression_0.1.png  used on input line 1242.
 (pdftex.def)             Requested size: 217.42265pt x 167.82527pt.
-<images/Synth_results/ENTROPY/feature_contributions_Event_1_cause_1_Entropy_tau_5_compression_0.1.png, id=1109, 1148.1294pt x 886.2711pt>
+<images/Synth_results/ENTROPY/feature_contributions_Event_1_cause_1_Entropy_tau_5_compression_0.1.png, id=1073, 1148.1294pt x 886.2711pt>
 File: images/Synth_results/ENTROPY/feature_contributions_Event_1_cause_1_Entropy_tau_5_compression_0.1.png Graphic file (type png)
 <use images/Synth_results/ENTROPY/feature_contributions_Event_1_cause_1_Entropy_tau_5_compression_0.1.png>
-Package pdftex.def Info: images/Synth_results/ENTROPY/feature_contributions_Event_1_cause_1_Entropy_tau_5_compression_0.1.png  used on input line 1244.
+Package pdftex.def Info: images/Synth_results/ENTROPY/feature_contributions_Event_1_cause_1_Entropy_tau_5_compression_0.1.png  used on input line 1247.
 (pdftex.def)             Requested size: 217.42265pt x 167.82527pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1247--1247
+Underfull \hbox (badness 10000) in paragraph at lines 1250--1250
 []\OT1/bch/m/n/10.95 Figure 4.39: |Fea-ture re-cov-ery for the En-tropy sam-pler com-par-ing op-ti-mal greedy be-hav-ior to
  []
 
-[59 <./images/Synth_results/ENTROPY/feature_contributions_Event_1_cause_1_Entropy_tau_0.5_compression_0.1.png> <./images/Synth_results/ENTROPY/feature_contributions_Event_1_cause_1_Entropy_tau_5_compression_0.1.png>]
-<images/Synth_results/NCC/feature_contributions_Event_1_cause_1_NCC_ncontrols_100.png, id=1119, 1148.1294pt x 886.2711pt>
+[57 <./images/Synth_results/ENTROPY/feature_contributions_Event_1_cause_1_Entropy_tau_0.5_compression_0.1.png> <./images/Synth_results/ENTROPY/feature_contributions_Event_1_cause_1_Entropy_tau_5_compression_0.1.png>]
+<images/Synth_results/NCC/feature_contributions_Event_1_cause_1_NCC_ncontrols_100.png, id=1083, 1148.1294pt x 886.2711pt>
 File: images/Synth_results/NCC/feature_contributions_Event_1_cause_1_NCC_ncontrols_100.png Graphic file (type png)
 <use images/Synth_results/NCC/feature_contributions_Event_1_cause_1_NCC_ncontrols_100.png>
-Package pdftex.def Info: images/Synth_results/NCC/feature_contributions_Event_1_cause_1_NCC_ncontrols_100.png  used on input line 1260.
+Package pdftex.def Info: images/Synth_results/NCC/feature_contributions_Event_1_cause_1_NCC_ncontrols_100.png  used on input line 1263.
 (pdftex.def)             Requested size: 217.42265pt x 167.82527pt.
-<images/Synth_results/NCC/feature_contributions_Event_1_cause_1_NCC_ncontrols_5.png, id=1120, 1148.1294pt x 886.2711pt>
+<images/Synth_results/NCC/feature_contributions_Event_1_cause_1_NCC_ncontrols_5.png, id=1084, 1148.1294pt x 886.2711pt>
 File: images/Synth_results/NCC/feature_contributions_Event_1_cause_1_NCC_ncontrols_5.png Graphic file (type png)
 <use images/Synth_results/NCC/feature_contributions_Event_1_cause_1_NCC_ncontrols_5.png>
-Package pdftex.def Info: images/Synth_results/NCC/feature_contributions_Event_1_cause_1_NCC_ncontrols_5.png  used on input line 1265.
+Package pdftex.def Info: images/Synth_results/NCC/feature_contributions_Event_1_cause_1_NCC_ncontrols_5.png  used on input line 1268.
 (pdftex.def)             Requested size: 217.42265pt x 167.82527pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1268--1268
+Underfull \hbox (badness 10000) in paragraph at lines 1271--1271
 []\OT1/bch/m/n/10.95 Figure 4.40: |Fea-ture re-cov-ery for the NCC sam-pler demon-strat-ing sig-nal damp-en-ing un-der
  []
 
-<images/Synth_results/SCC/feature_contributions_Event_1_cause_1_SCC_subcohort_0.5.png, id=1122, 1148.1294pt x 886.2711pt>
+<images/Synth_results/SCC/feature_contributions_Event_1_cause_1_SCC_subcohort_0.5.png, id=1086, 1148.1294pt x 886.2711pt>
 File: images/Synth_results/SCC/feature_contributions_Event_1_cause_1_SCC_subcohort_0.5.png Graphic file (type png)
 <use images/Synth_results/SCC/feature_contributions_Event_1_cause_1_SCC_subcohort_0.5.png>
-Package pdftex.def Info: images/Synth_results/SCC/feature_contributions_Event_1_cause_1_SCC_subcohort_0.5.png  used on input line 1281.
+Package pdftex.def Info: images/Synth_results/SCC/feature_contributions_Event_1_cause_1_SCC_subcohort_0.5.png  used on input line 1284.
 (pdftex.def)             Requested size: 217.42265pt x 167.82527pt.
-<images/Synth_results/SCC/feature_contributions_Event_1_cause_1_SCC_subcohort_0.05.png, id=1123, 1148.1294pt x 886.2711pt>
+<images/Synth_results/SCC/feature_contributions_Event_1_cause_1_SCC_subcohort_0.05.png, id=1087, 1148.1294pt x 886.2711pt>
 File: images/Synth_results/SCC/feature_contributions_Event_1_cause_1_SCC_subcohort_0.05.png Graphic file (type png)
 <use images/Synth_results/SCC/feature_contributions_Event_1_cause_1_SCC_subcohort_0.05.png>
-Package pdftex.def Info: images/Synth_results/SCC/feature_contributions_Event_1_cause_1_SCC_subcohort_0.05.png  used on input line 1286.
+Package pdftex.def Info: images/Synth_results/SCC/feature_contributions_Event_1_cause_1_SCC_subcohort_0.05.png  used on input line 1289.
 (pdftex.def)             Requested size: 217.42265pt x 167.82527pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1289--1289
+Underfull \hbox (badness 10000) in paragraph at lines 1292--1292
 []\OT1/bch/m/n/10.95 Figure 4.41: |Fea-ture re-cov-ery for the SCC sam-pler com-par-ing op-ti-mal sub-co-hort re-ten-tion to
  []
 
-[60 <./images/Synth_results/NCC/feature_contributions_Event_1_cause_1_NCC_ncontrols_100.png> <./images/Synth_results/NCC/feature_contributions_Event_1_cause_1_NCC_ncontrols_5.png>]
-Overfull \hbox (4.5316pt too wide) in paragraph at lines 1306--1307
+[58 <./images/Synth_results/NCC/feature_contributions_Event_1_cause_1_NCC_ncontrols_100.png> <./images/Synth_results/NCC/feature_contributions_Event_1_cause_1_NCC_ncontrols_5.png>]
+Overfull \hbox (4.5316pt too wide) in paragraph at lines 1309--1310
 \OT1/bch/m/n/12 The over-ar-ch-ing take-away from the em-pir-i-cal eval-u-a-tions is that dy-namic, information- 
  []
 
 
-Overfull \hbox (0.51157pt too wide) in paragraph at lines 1306--1307
+Overfull \hbox (0.51157pt too wide) in paragraph at lines 1309--1310
 \OT1/bch/m/n/12 ground pop-u-la-tion skewed the In-verse Prob-a-bil-ity Weight-ing (IPW) mech-a-nisms, caus- 
  []
 
-[61 <./images/Synth_results/SCC/feature_contributions_Event_1_cause_1_SCC_subcohort_0.5.png> <./images/Synth_results/SCC/feature_contributions_Event_1_cause_1_SCC_subcohort_0.05.png>]
-Overfull \hbox (12.87001pt too wide) in paragraph at lines 1320--1321
+[59 <./images/Synth_results/SCC/feature_contributions_Event_1_cause_1_SCC_subcohort_0.5.png> <./images/Synth_results/SCC/feature_contributions_Event_1_cause_1_SCC_subcohort_0.05.png>]
+Overfull \hbox (12.87001pt too wide) in paragraph at lines 1323--1324
 \OT1/bch/m/n/12 TD-CI ($\OML/cmm/m/it/12 q[]$\OT1/bch/m/n/12 ) of $\OT1/cmr/m/n/12 0\OML/cmm/m/it/12 :\OT1/cmr/m/n/12 813 \OMS/cmsy/m/n/12 ^^F \OT1/cmr/m/n/12 0\OML/cmm/m/it/12 :\OT1/cmr/m/n/12 016$ \OT1/bch/m/n/12 and a me-dian Brier Score of $\OT1/cmr/m/n/12 0\OML/cmm/m/it/12 :\OT1/cmr/m/n/12 249 \OMS/cmsy/m/n/12 ^^F \OT1/cmr/m/n/12 0\OML/cmm/m/it/12 :\OT1/cmr/m/n/12 089$ \OT1/bch/m/n/12 for the CRISPNAM- 
  []
 
-[62] [63] [64]
+[60] [61] [62]
 Chapter 5.
 
-Overfull \hbox (12.67952pt too wide) in paragraph at lines 1355--1356
+Overfull \hbox (12.67952pt too wide) in paragraph at lines 1358--1359
 \OT1/bch/m/n/12 Despite the ro-bust find-ings, sev-eral lim-i-ta-tions in-her-ent to the study's scope and method- 
  []
 
-[65
+[63
 
-] (Paper.bbl [66] [67
+] (Paper.bbl [64] [65
 
-] [68]) [69] (Paper.aux)
+] [66]) [67] (Paper.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
  ***********
 Package rerunfilecheck Info: File `Paper.out' has not changed.
-(rerunfilecheck)             Checksum: 53B2D671BA54466F1950544D165A2E2D;14802.
+(rerunfilecheck)             Checksum: 1B6F2C308275E980E029E2D38B3267E8;14385.
  ) 
 Here is how much of TeX's memory you used:
- 24997 strings out of 467870
- 501620 string characters out of 5418356
- 866735 words of memory out of 5000000
- 53213 multiletter control sequences out of 15000+600000
- 664894 words of font info for 120 fonts, out of 8000000 for 9000
+ 24974 strings out of 467870
+ 501439 string characters out of 5418356
+ 865735 words of memory out of 5000000
+ 53210 multiletter control sequences out of 15000+600000
+ 663042 words of font info for 113 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  102i,12n,107p,1869b,603s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/micha/AppData/Local/Programs/MiKTeX/fonts/type1/bitstrea/charter/bchb8a.pfb><C:/Users/micha/AppData/Local/Programs/MiKTeX/fonts/type1/bitstrea/charter/bchr8a.pfb><C:/Users/micha/AppData/Local/Programs/MiKTeX/fonts/type1/bitstrea/charter/bchri8a.pfb><C:/Users/micha/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/micha/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/micha/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/micha/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/micha/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/micha/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/micha/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmib10.pfb><C:/Users/micha/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/micha/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/micha/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/micha/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/micha/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/micha/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/micha/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/micha/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb><C:/Users/micha/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Paper.pdf (75 pages, 25888732 bytes).
+Output written on Paper.pdf (73 pages, 25908508 bytes).
 PDF statistics:
- 1317 PDF objects out of 1440 (max. 8388607)
- 258 named destinations out of 1000 (max. 500000)
- 926 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1277 PDF objects out of 1440 (max. 8388607)
+ 238 named destinations out of 1000 (max. 500000)
+ 915 words of extra memory for PDF output out of 10000 (max. 10000000)
 
