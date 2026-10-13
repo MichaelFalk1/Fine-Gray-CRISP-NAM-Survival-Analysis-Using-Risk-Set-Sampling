@@ -336,33 +336,123 @@ The static case-cohort design offers an alternative that operates independently 
 \subsection{Nested Case Control}
 Conversely, nested case-control sampling employs a time-dependent matching strategy \citep{Borgan2000}. At each precise event time $t_j$, the observed case is paired with a specific quota of $m$ controls, which are drawn strictly from the active risk set at that exact moment. Because the size of the risk set shrinks over time as patients experience events or are censored, the probability of a control being sampled, denoted as $\pi_{i,j}$, dynamically fluctuates. To ensure the sampled subset unbiasedly mimics the full cohort's structural contribution, these time-varying inclusion probabilities must be explicitly neutralized via inverse probability weighting within the partial likelihood function \citep{HorvitzThompson1952,Borgan2000}.
 
+
 \subsection{Dynamic Sampling Strategy}
-Moving beyond classical methodologies, recent literature has begun exploring scalable algorithms for large competing risks data \cite{kawaguchi2020scalable} and combining traditional sampling designs with the Fine-Gray model \cite{kim2020stratified}. Building upon these foundations, this thesis introduces a novel, adaptive, entropy-guided sampling framework applied directly to the subdistribution risk set. In the context of the Fine-Gray model, the modified risk pool at time $T_i$, denoted $\tilde{R}(T_i)$, mathematically retains individuals who have already experienced competing events, adjusting their influence via Inverse Probability of Censoring Weights (IPCW), $w_j(T_i) \,.$
 
-This dynamic strategy begins by partitioning the active risk set into distinct groups $\{G_g(T_i)\}_{g=1}^{G_i}$ based on shared covariate profiles, represented by a covariate vector $\boldsymbol{X}_g$. The cumulative effective size of any specific group is calculated by summing its censoring weights:
-$$W_g(T_i) = \sum_{j \in G_g(T_i)} w_j(T_i) \,.$$
-The empirical proportion of that group relative to the entire modified risk set is then calculated as:
-$$p_g(T_i) = \frac{W_g(T_i)}{\sum_h W_h(T_i)} \,.$$
+Moving beyond classical methodologies, recent literature has begun exploring scalable algorithms for large competing risks datasets \cite{kawaguchi2020scalable} and combining traditional sampling designs with the Fine--Gray model \cite{kim2020stratified}. Building upon these foundations, this thesis introduces a novel, adaptive, entropy-guided sampling framework applied directly to the Fine--Gray subdistribution risk set. The proposed strategy operates within each training mini-batch, where individuals who have previously experienced competing events remain eligible for selection according to the modified Fine--Gray risk-set definition.
 
-To intelligently target informative yet potentially rare clinical profiles while leveraging the model's current predictive state, an importance score is generated for each group. This score fuses Shannon information gain with the model's current risk assessment:
-$$s_g(T_i) = \bigl[-\log p_g(T_i)\bigr]\exp(\hat{\eta}(\boldsymbol{X}_g)) \,,$$
-where $\hat{\eta}(\boldsymbol{X}_g)$ acts as the current neural risk prediction.
+Unlike traditional sampling methods, which select controls randomly or according to fixed sampling fractions, the proposed method evaluates the informational characteristics of individual observations using the neural network's current risk predictions.
 
-Rather than forcing a rigid sampling quota like the nested case-control design, this approach scales the importance scores against the average group importance to dictate independent inclusion probabilities, bounded by a baseline retention rate $\rho \in (0, 1]$:
-$$\pi_g(T_i) = \min \left( 1, \;\rho \cdot \frac{s_g(T_i)}{\frac{1}{G_i}\sum_{h=1}^{G_i} s_h(T_i)} \right) \,.$$
-Through this mechanism, highly informative groups ($s_g$ significantly exceeding the mean) are deterministically retained ($\pi_g = 1$), whereas redundant or statistically dense groups are aggressively down-sampled. Because the sampling volume is fluid, the computational batch size organically expands or contracts based on the current informational density of the risk set. 
+For each individual $j$, the predicted neural relative risk score $\hat{\eta}(\boldsymbol{X}_j)$ is first transformed using the sigmoid function:
 
-The resulting sampled collection of groups is denoted as $\tilde{\mathcal{G}}(T_i)$. The contribution of this intelligently sampled subset to the partial likelihood is then estimated using IPW:
-$$\widehat{\mathcal{L}}(T_i) = \sum_{g \in \tilde{\mathcal{G}}(T_i)} \frac{W_g(T_i)}{\pi_g(T_i)} \exp\bigl(\eta(\boldsymbol{X}_g)\bigr) \,.$$
-Assuming proper specification of inclusion probabilities, this dynamic estimator is theoretically expected to maintain design consistency, this hence follows the established covariate-adjusted weighting schemes in case-cohort competing risks \citep{kim2020stratified}. However, because the inclusion probability $\pi_g(T_i)$ relies on the actively updating model state $\hat{\eta}(\cdot)$, the approach functions as an adaptive estimator. Consistent with recent computational advancements for large scale survival data \cite{kawaguchi2020scalable}, this design intentionally trades a negligible degree of finite sample bias for significant gains in variance reduction and computational efficiency theoretically.
+\begin{equation}
+p_j =
+\sigma\left(\hat{\eta}(\boldsymbol{X}_j)\right)
+=
+\frac{1}{1+\exp(-\hat{\eta}(\boldsymbol{X}_j))}.
+\end{equation}
+
+This transformation maps the unbounded neural risk score onto the interval $(0,1)$, allowing a bounded measure of information to be calculated. The transformed value is used as a sampling score rather than being interpreted as a calibrated probability of experiencing the event of interest.
+
+The informational value of each individual is subsequently evaluated using normalized binary Shannon entropy:
+
+\begin{equation}
+H_j =
+\frac{
+-p_j\log(p_j)
+-(1-p_j)\log(1-p_j)
+}{\log 2}.
+\end{equation}
+
+The division by $\log 2$ normalizes the binary entropy by its theoretical maximum, ensuring that $H_j \in [0,1]$. Entropy reaches its maximum when $p_j=0.5$, representing the greatest uncertainty in the transformed prediction, and approaches zero as $p_j$ approaches either zero or one. Consequently, individuals with higher entropy scores receive greater sampling preference. Here, entropy represents a heuristic measure of uncertainty in the transformed neural risk score, rather than directly measuring clinical outcome uncertainty.
+
+To regulate the strength of this sampling preference, an importance score is assigned to each individual using a temperature parameter $\tau>0$:
+
+\begin{equation}
+a_j =
+\exp\left(\frac{H_j}{\tau}\right).
+\end{equation}
+
+The temperature parameter controls the concentration of the importance scores. Smaller values of $\tau$ amplify differences between entropy scores, placing greater emphasis on high-entropy individuals, whereas larger values reduce these differences and produce a sampling distribution closer to uniform selection.
+
+For an observed event of interest at time $T_i$, let $C_{\mathcal{B}}(T_i)$ denote the eligible controls within the modified Fine--Gray risk set of the current mini-batch $\mathcal{B}$, excluding the event case itself. The average importance score among these controls is defined as:
+
+\begin{equation}
+\bar{a}(T_i) =
+\frac{1}{|C_{\mathcal{B}}(T_i)|}
+\sum_{j\in C_{\mathcal{B}}(T_i)} a_j.
+\end{equation}
+
+Rather than enforcing a fixed number of controls, the importance score of each individual is scaled relative to the average importance of the eligible controls. This produces an individual inclusion probability:
+
+\begin{equation}
+\pi_{ij} =
+\min\left(
+1,\;
+\max\left(
+\epsilon,\;
+\rho
+\frac{a_j}{\bar{a}(T_i)}
+\right)
+\right),
+\end{equation}
+
+where $\rho\in(0,1]$ represents the baseline retention rate and $\epsilon>0$ is a small numerical constant ensuring positive inclusion probabilities. The parameter $\rho$ governs the overall level of sampling compression, while $\tau$ controls the relative preference for high-entropy observations.
+
+Each eligible control is subsequently selected independently using a Bernoulli distribution:
+
+\begin{equation}
+S_{ij} \sim \operatorname{Bernoulli}(\pi_{ij}).
+\end{equation}
+
+The observed event case is always retained, with $\pi_{ii}=1$. If no eligible controls are available, only the event case is retained. The resulting sampled risk set, denoted by $\widetilde{\mathcal{R}}_{\mathcal{B}}(T_i)$, therefore contains the current event case together with the controls selected through entropy-guided Bernoulli sampling.
+
+Through this mechanism, the number of selected controls can vary across event-specific risk sets, rather than remaining fixed as in nested case-control sampling. Although the underlying mini-batch size remains constant, the number of retained risk-set observations changes according to their individual inclusion probabilities. Furthermore, because these probabilities depend on the neural network's current predictions, the sampling distribution adapts as the model parameters are updated throughout training.
+
+The contribution of the sampled risk set to the Fine--Gray partial-likelihood denominator is estimated using inverse-probability weighting:
+
+\begin{equation}
+\widehat{D}_{\mathcal{B}}(T_i)
+=
+\sum_{j\in\widetilde{\mathcal{R}}_{\mathcal{B}}(T_i)}
+\frac{w_{ij}^{FG}}{\pi_{ij}}
+\exp\left(\eta(\boldsymbol{X}_j)\right),
+\end{equation}
+
+where $w_{ij}^{FG}$ denotes the Fine--Gray censoring adjustment and $\pi_{ij}$ represents the individual's inclusion probability. The corresponding event-specific negative log-partial-likelihood contribution is:
+
+\begin{equation}
+\widehat{\mathcal{L}}(T_i)
+=
+-\left[
+\eta(\boldsymbol{X}_i)
+-
+\log\widehat{D}_{\mathcal{B}}(T_i)
+\right].
+\end{equation}
+
+This formulation adjusts the sampled risk-set contributions according to their inclusion probabilities, while retaining the censoring correction required by the Fine--Gray model. The complete weighting formulation and mini-batch loss function are developed in Section~3.4.
+
+Because the sampling probabilities are derived from the actively updating neural network, the proposed strategy functions as an adaptive risk-set approximation. Although inverse-probability weighting provides a mechanism for correcting unequal inclusion probabilities in the risk-set denominator, it does not independently guarantee unbiasedness of the resulting partial-likelihood estimator. The effectiveness of this strategy is therefore investigated empirically, evaluating its ability to maintain predictive performance while reducing computational requirements relative to the alternative sampling methods.
+
+
 
 \subsection{IPW and Stability}
-Fundamentally, all evaluated sampling strategies such as case-cohort, nested case-control, and the dynamic entropy design are structurally unified through the Inverse Probability Weighting framework. In each design, a selected individual or group contributes to the final Fine-Gray loss inversely proportional to its likelihood of being sampled. 
 
-Let $\pi_i$ represent the generalized inclusion probability for subject $i$ (or $\pi_g(t)$ for a group). The core mechanism of IPW dictates that, under correct probability specification, the weighted estimator seamlessly recovers the full-cohort objective in expectation. This is grounded in Horvitz-Thompson unbiasedness \citep{HorvitzThompson1952}, defined as:
-$$\mathbb{E}\!\left[\frac{\mathbf{1}\{i \in S\}}{\pi_i} \, \phi_i \right] = \phi_i \,,$$
-where $\phi_i$ represents any individual contribution to the full dataset objective. As a unifying mathematical principle, under positive and correctly specified inclusion probabilities, inverse probability weighting provides an unbiased estimate of fixed, additive full risk set quantities, conditional on the information used to determine the sampling probabilities. This theoretical property motivates its use across the sampling designs considered in this study. However, this weighting does not by itself establish the absolute unbiasedness or stability of the resulting Fine-Gray loss or the final non-linear risk predictions. Therefore, the empirical bias, variability, and overall stability of the proposed method are explicitly assessed through the simulation studies.
+Fundamentally, all evaluated sampling strategies, including case-cohort, nested case-control, and the proposed dynamic entropy-guided design, are unified through the Inverse Probability Weighting (IPW) framework. Under each sampling design, selected individuals contribute to the Fine--Gray risk-set denominator inversely proportional to their probabilities of inclusion.
 
+Let $\pi_i$ represent the inclusion probability of an individual $i$. Under correctly specified positive inclusion probabilities, the Horvitz--Thompson \cite{HorvitzThompson1952} principle establishes that
+\begin{equation}
+    \mathbb{E}\left[
+        \frac{\mathbf{1}\{i \in S\}}{\pi_i}\phi_i
+    \right]
+    = \phi_i,
+\end{equation}
+where $\phi_i$ represents a fixed individual contribution to a complete risk-set quantity. This establishes the theoretical justification for applying IPW to recover additive risk-set contributions in expectation.
+
+However, although inverse-probability weighting corrects unequal representation in expectation, small inclusion probabilities can produce large weights and increase estimator variability. To support numerical stability, the implementation enforces strictly positive inclusion probabilities, evaluates weighted risk-set denominators in the logarithmic domain using the log-sum-exp operation, and applies gradient clipping during neural-network optimization.
+
+These numerical safeguards do not guarantee unbiasedness or consistency of the resulting nonlinear partial-likelihood estimator. Consequently, the effectiveness and stability of the weighting framework are evaluated empirically across the different sampling strategies.
 \section{Network Architecture (CRISPNAM-FG)}
 \subsection{Network architecture}
 
@@ -405,6 +495,118 @@ All linear layer weights are initialized using Xavier uniform initialization
 \end{equation}
 
 with biases initialized to zero. During training, the aggregated risk score $\eta(\mathbf{x})$ is optimized directly against the sampling-weighted Fine Gray partial likelihood loss. For post hoc model interpretation, each univariate shape function $f_i(x_i)$ can be visualized over its covariate support domain to inspect linear or non-linear effects on sub-distribution incidence.
+
+
+\section{Loss Function}
+
+To optimize the neural relative risk predictor under varying computational constraints, the network is trained by minimizing a sampling-aware approximation of the Fine--Gray partial likelihood. This objective integrates the additive neural predictor, accounts for right censoring through Fine--Gray risk-set weighting, and adjusts for the unequal inclusion probabilities introduced by the different risk-set sampling strategies.
+
+The formulation begins with the Fine--Gray objective applied to the complete modified risk sets within each training mini-batch. Let $\mathcal{B}$ denote the current mini-batch, and let $\mathcal{R}_{\mathcal{B}}(T_i)$ represent the modified Fine--Gray risk set evaluated at event time $T_i$ for the target cause $k$. This risk set includes individuals who remain under observation at $T_i$, as well as those who have previously experienced a competing event.
+
+To correctly account for the contributions of individuals retained following competing events, Inverse Probability of Censoring Weighting (IPCW) is incorporated into the Fine--Gray formulation \citep{FineGray1999}. Let $\widehat{G}(t)$ denote the Kaplan--Meier estimate of the censoring survival function, fitted using the training fold. Assuming independent right censoring, the Fine--Gray risk-set weight for an individual $j$ at event time $T_i$ is defined as:
+
+\begin{equation}
+w_{ij}^{FG}
+=
+\begin{cases}
+1,
+& T_j \geq T_i, \\[6pt]
+\dfrac{\widehat{G}(T_i^-)}
+{\widehat{G}(T_j^-)},
+& T_j < T_i,\quad
+\Delta_j \notin \{0,k\}, \\[10pt]
+0,
+& \text{otherwise}.
+\end{cases}
+\end{equation}
+
+Under this formulation, individuals who remain under observation at the event time contribute with unit weight, while those who previously experienced a competing event receive a time-dependent adjustment. This adjustment accounts for the probability of remaining uncensored between the competing event and the current event time. Individuals who were previously censored or experienced the target event are excluded from the corresponding risk set. The formulation assumes positive censoring survival probabilities at the relevant times.
+
+Replacing the traditional linear predictor with the additive neural risk score $\eta_{\theta,k}(\boldsymbol{X})$, the complete mini-batch Fine--Gray risk-set denominator is expressed as:
+
+\begin{equation}
+D_{\mathcal{B}}(T_i)
+=
+\sum_{j \in \mathcal{R}_{\mathcal{B}}(T_i)}
+w_{ij}^{FG}
+\exp\left(\eta_{\theta,k}(\boldsymbol{X}_j)\right),
+\end{equation}
+
+where $\theta$ represents the neural network parameters.
+
+Let $I_k(\mathcal{B}) = \{i \in \mathcal{B} : \Delta_i = k\}$ denote the set of observed target-cause events within the mini-batch. The corresponding negative log-partial-likelihood objective is formulated as:
+
+\begin{equation}
+\mathcal{L}_{FG}(\theta)
+=
+-\frac{1}{|I_k(\mathcal{B})|}
+\sum_{i \in I_k(\mathcal{B})}
+\left[
+\eta_{\theta,k}(\boldsymbol{X}_i)
+-
+\log D_{\mathcal{B}}(T_i)
+\right].
+\end{equation}
+
+This formulation provides the unsampled reference objective against which the different risk-set sampling strategies are evaluated. Since the risk sets are constructed within individual training mini-batches rather than across the entire training cohort, the objective represents a computational approximation of the full-cohort Fine--Gray partial likelihood.
+
+When subsampling strategies such as nested case-control, case-cohort, or the proposed dynamic entropy-guided method are employed, the complete mini-batch risk set is replaced by a sampled subset, denoted as $\widetilde{\mathcal{R}}_{\mathcal{B}}(T_i)$. However, because individuals may have unequal probabilities of inclusion, the sampled risk-set denominator must account for the resulting selection mechanism.
+
+To address this, Inverse Probability Weighting (IPW) is applied using the inclusion probabilities associated with each sampling design \citep{HorvitzThompson1952, Prentice1986}. Let $\pi_{ij}$ denote the probability that individual $j$ is selected into the risk set associated with event $i$. The inverse sampling weight is then defined as:
+
+\begin{equation}
+w_{ij}^{S}
+=
+\frac{1}{\pi_{ij}}.
+\end{equation}
+
+The observed event case is always retained, such that $\pi_{ii}=1$. Individuals with lower inclusion probabilities receive larger sampling weights, compensating for their reduced representation within the sampled risk set.
+
+The combined contribution weight for individual $j$ at event time $T_i$ is therefore obtained by multiplying the Fine--Gray censoring adjustment by the inverse sampling probability:
+
+\begin{equation}
+w_{ij}
+=
+w_{ij}^{FG} \cdot w_{ij}^{S}
+=
+\frac{w_{ij}^{FG}}{\pi_{ij}}.
+\end{equation}
+
+These two weighting components address distinct sources of adjustment. The Fine--Gray weight accounts for right censoring within the modified subdistribution risk set, whereas the sampling weight adjusts for unequal control selection probabilities.
+
+Using these combined weights, the sampled risk-set denominator is estimated as:
+
+\begin{equation}
+\widehat{D}_{\mathcal{B}}(T_i)
+=
+\sum_{j \in \widetilde{\mathcal{R}}_{\mathcal{B}}(T_i)}
+\frac{w_{ij}^{FG}}{\pi_{ij}}
+\exp\left(\eta_{\theta,k}(\boldsymbol{X}_j)\right).
+\end{equation}
+
+The final sampling-aware negative log-partial-likelihood objective used to train the neural network is consequently defined as:
+
+\begin{equation}
+\boxed{
+\widehat{\mathcal{L}}_{FG}^{IPW}(\theta)
+=
+-\frac{1}{|I_k(\mathcal{B})|}
+\sum_{i \in I_k(\mathcal{B})}
+\left[
+\eta_{\theta,k}(\boldsymbol{X}_i)
+-
+\log\widehat{D}_{\mathcal{B}}(T_i)
+\right]
+}
+\end{equation}
+
+This objective allows the same neural architecture and loss formulation to be used across the different sampling strategies. For the unsampled mini-batch baseline, all eligible individuals are retained with inclusion probability equal to one, reducing the sampled objective to the complete mini-batch Fine--Gray formulation.
+
+For numerical stability, small positive constants are used in logarithmic and division operations, and inclusion probabilities are constrained to remain positive. Explicit upper truncation of the combined inverse-probability weights is not applied. During optimization, gradient clipping is used separately to limit extreme neural network gradients.
+
+Under correctly specified positive inclusion probabilities, inverse-probability weighting provides a conditionally unbiased estimate of the complete mini-batch risk-set denominator. However, because the denominator enters the partial likelihood through a logarithmic transformation, this property does not guarantee an unbiased estimate of the complete partial-likelihood objective.
+
+Consequently, the proposed sampling-aware loss is treated as a stochastic approximation of the complete mini-batch Fine--Gray objective. Its effectiveness is assessed empirically through predictive discrimination, calibration, training stability, and computational resource comparisons across the different sampling strategies.
 
 
 \section{Loss Function}
@@ -466,12 +668,12 @@ where $\mathbf{1}[\cdot]$ is the indicator function denoting whether the specifi
 % $$\text{IBS} = \frac{1}{\tau} \int_0^{\tau} \text{BS}(t) \, dt$$
 % By integrating the predictive error across all valid time steps, the IBS collapses short-term and long-term probabilistic accuracy into a single scalar value. This metric is critical for objectively comparing disparate sampling strategies across the entire follow-up period.
 
-% \subsection{Concordance Index (C-Index)}
-% While the Brier Score measures absolute probabilistic error, the Concordance Index (C-Index) quantifies the model's discriminative ability by evaluating how accurately the predicted relative risk scores rank the observed event times. In a clinical setting, discrimination answers the question: \textit{If Patient A experiences a fatal cardiac event before Patient B, did the model assign Patient A a higher risk score?}
+\subsection{Concordance Index (C-Index)}
+While the Brier Score measures absolute probabilistic error, the Concordance Index (C-Index) quantifies the model's discriminative ability by evaluating how accurately the predicted relative risk scores rank the observed event times. In a clinical setting, discrimination answers the question: \textit{If Patient A experiences a fatal cardiac event before Patient B, did the model assign Patient A a higher risk score?}
 
-% Let $\eta_i$ and $\eta_j$ denote the predicted log-risk scores for a pair of subjects. A pair is considered concordant if the subject who fails earlier was assigned a higher risk score ($\eta_i > \eta_j$). Because right-censoring obscures the true temporal ordering for certain patients, an IPCW adjustment is integrated to ensure unbiased evaluation. To properly evaluate non-proportional hazards where risk predictions vary over time, we rely on the time-dependent concordance index proposed by Antolini et al. \citep{Antolini2005}. Adapted for time-dependent and competing risks scenarios, the estimator is defined as:
-% $$\widehat{C}_{\text{IPCW}} = \frac{ \sum_{i \neq j} \mathbf{1}(T_i < T_j, \Delta_i = k) \mathbf{1}(\eta_i > \eta_j) / \hat{G}^2(T_i) }{ \sum_{i \neq j} \mathbf{1}(T_i < T_j, \Delta_i = k) / \hat{G}^2(T_i) }$$
-% A value of $0.5$ indicates performance equivalent to random chance, whereas a value approaching $1.0$ proves strong clinical discriminative rank-ordering.
+Let $\eta_i$ and $\eta_j$ denote the predicted log-risk scores for a pair of subjects. A pair is considered concordant if the subject who fails earlier was assigned a higher risk score ($\eta_i > \eta_j$). Because right-censoring obscures the true temporal ordering for certain patients, an IPCW adjustment is integrated to ensure unbiased evaluation. To properly evaluate non-proportional hazards where risk predictions vary over time, we rely on the time-dependent concordance index proposed by Antolini et al. \citep{Antolini2005}. Adapted for time-dependent and competing risks scenarios, the estimator is defined as:
+$$\widehat{C}_{\text{IPCW}} = \frac{ \sum_{i \neq j} \mathbf{1}(T_i < T_j, \Delta_i = k) \mathbf{1}(\eta_i > \eta_j) / \hat{G}^2(T_i) }{ \sum_{i \neq j} \mathbf{1}(T_i < T_j, \Delta_i = k) / \hat{G}^2(T_i) }$$
+A value of $0.5$ indicates performance equivalent to random chance, whereas a value approaching $1.0$ proves strong clinical discriminative rank-ordering.
 
 \subsection{Stratified Aalen-Johansen CIF Calibration}
 Strong discrimination (a high C-Index) guarantees that the model correctly ranks patient risk, but it does not guarantee calibration. Calibration asks: \textit{If the model predicts a 20\% risk of an event for a group of patients, do approximately 20\% of those patients actually experience the event?} To prove that the absolute risk estimations output by the Fine-Gray loss are reliable, a Stratified CIF calibration diagnostic was developed.

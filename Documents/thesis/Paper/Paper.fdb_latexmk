@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex Paper"] 1791553861.7614 "Paper.aux" "Paper.bbl" "Paper" 1791556679.15085 0
+["bibtex Paper"] 1791900719.58886 "Paper.aux" "Paper.bbl" "Paper" 1791900765.53169 0
   "./references.bib" 1791288142 11489 0d94e711ebd8c3eac8254f3a6a5ab3b6 ""
   "./utils/named-wits.bst" 1788868590 24478 56eea4624f667e2501a72a17f2eb9d42 ""
-  "Paper.aux" 1791556678 35796 578c0113f1517461026c74f1cf03fa42 "pdflatex"
+  "Paper.aux" 1791900764 36170 2e4ea0c0a96561c181acc422c147fda5 "pdflatex"
   (generated)
   "Paper.bbl"
   "Paper.blg"
   (rewritten before read)
-["pdflatex"] 1791556633.32781 "c:/Users/micha/OneDrive/Documents/#Msc Data Science/Research_2026/Code/Fine-Gray-CRISP-NAM-Survival-Analysis-Using-Risk-Set-Sampling/Documents/thesis/Paper/Paper.tex" "Paper.pdf" "Paper" 1791556679.15171 0
+["pdflatex"] 1791900719.89459 "c:/Users/micha/OneDrive/Documents/#Msc Data Science/Research_2026/Code/Fine-Gray-CRISP-NAM-Survival-Analysis-Using-Risk-Set-Sampling/Documents/thesis/Paper/Paper.tex" "Paper.pdf" "Paper" 1791900765.53253 0
   "C:/Users/micha/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1788869397 82507 a9eef8696c92627b87e9975edea03b2a ""
   "C:/Users/micha/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1788868708 13333527 86789163dcc0d8359a124f93dd44836a ""
   "C:/Users/micha/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc" 1458473887 4993 80dc9bab7f31fb78a000ccfed0e27cab ""
@@ -70,6 +70,7 @@
   "C:/Users/micha/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb" 1247596667 32587 65067f817f408bc71a7312f3d9828a9b ""
   "C:/Users/micha/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb" 1247596667 32626 5abc8bb2f28aa647d4c70f8ea38cc0d3 ""
   "C:/Users/micha/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb" 1247596666 24252 1e4e051947e12dfb50fee0b7f4e26e3a ""
+  "C:/Users/micha/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cmextra/cmex8.pfb" 1247596670 30273 87a352d78b6810ae5cfdc68d2fb827b2 ""
   "C:/Users/micha/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb" 1247596673 34694 870c211f62cb72718a00e353f14f254d ""
   "C:/Users/micha/AppData/Local/Programs/MiKTeX/fonts/vf/bitstrea/charter/bchb7t.vf" 1136765054 1372 ea6b112e4d27477183c2c2a90a3b7b01 ""
   "C:/Users/micha/AppData/Local/Programs/MiKTeX/fonts/vf/bitstrea/charter/bchbc7t.vf" 1136765054 1948 8756c185d16c133ab8b62dca88f95869 ""
@@ -203,12 +204,12 @@
   "C:/Users/micha/AppData/Local/Programs/MiKTeX/tex/latex/tools/varioref.sty" 1761901070 44048 2d79759f1937d55dd01f16b2b545c1c7 ""
   "C:/Users/micha/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/micha/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
-  "Paper.aux" 1791556678 35796 578c0113f1517461026c74f1cf03fa42 "pdflatex"
-  "Paper.bbl" 1791553862 9929 3f61abc6396602989de43e8e7b68bef1 "bibtex Paper"
-  "Paper.out" 1791556678 14385 1b6f2c308275e980e029e2d38b3267e8 "pdflatex"
-  "Paper.tex" 1791556632 159349 e78623740579627b736e808aafbd7135 ""
-  "Paper.toc" 1791556678 7468 899d724364dd1771a085623fe6b22740 "pdflatex"
-  "c:/Users/micha/OneDrive/Documents/#Msc Data Science/Research_2026/Code/Fine-Gray-CRISP-NAM-Survival-Analysis-Using-Risk-Set-Sampling/Documents/thesis/Paper/Paper.tex" 1791556632 159349 e78623740579627b736e808aafbd7135 ""
+  "Paper.aux" 1791900764 36170 2e4ea0c0a96561c181acc422c147fda5 "pdflatex"
+  "Paper.bbl" 1791900719 10214 ce6d3a68b4f573a30555dcfe122dca70 "bibtex Paper"
+  "Paper.out" 1791900764 14715 e1c85d33b8f6f11cf6ea219cd6d7117d "pdflatex"
+  "Paper.tex" 1791900673 169333 1912c2df39be44cef8944a5b5850076c ""
+  "Paper.toc" 1791900764 7640 8b9767f02f2567d9ac5479d3cf9fdec4 "pdflatex"
+  "c:/Users/micha/OneDrive/Documents/#Msc Data Science/Research_2026/Code/Fine-Gray-CRISP-NAM-Survival-Analysis-Using-Risk-Set-Sampling/Documents/thesis/Paper/Paper.tex" 1791900673 169333 1912c2df39be44cef8944a5b5850076c ""
   "images/Data/fh2.png" 1791447460 101468 a3bf12bafd100896ec7283da34bd8010 ""
   "images/Data/pbc3.png" 1791554310 61711 35ef9a65f5d3b9e181d16cc19c8d804d ""
   "images/Data/synth.png" 1788868590 62149 dc7d829864d7bfd383fad93c72e0fe7d ""

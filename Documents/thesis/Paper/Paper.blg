@@ -8,45 +8,45 @@ Database file #1: references.bib
 Warning--can't use both volume and number fields in andersen2012competing
 Warning--empty publisher in andersen2012competing
 Warning--there's a url but no retrieval date in kingma2014adam
-You've used 35 entries,
+You've used 36 entries,
             2541 wiz_defined-function locations,
-            807 strings with 10848 characters,
-and the built_in function-call counts, 14112 in all, are:
-= -- 1400
-> -- 642
+            813 strings with 10999 characters,
+and the built_in function-call counts, 14556 in all, are:
+= -- 1447
+> -- 660
 < -- 2
-+ -- 224
-- -- 218
-* -- 1201
-:= -- 2283
-add.period$ -- 105
-call.type$ -- 35
-change.case$ -- 241
-chr.to.int$ -- 35
-cite$ -- 38
-duplicate$ -- 504
-empty$ -- 1084
-format.name$ -- 262
-if$ -- 2851
++ -- 231
+- -- 224
+* -- 1239
+:= -- 2353
+add.period$ -- 108
+call.type$ -- 36
+change.case$ -- 248
+chr.to.int$ -- 36
+cite$ -- 39
+duplicate$ -- 518
+empty$ -- 1118
+format.name$ -- 269
+if$ -- 2941
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 42
-newline$ -- 213
-num.names$ -- 105
-pop$ -- 206
+missing$ -- 43
+newline$ -- 219
+num.names$ -- 108
+pop$ -- 210
 preamble$ -- 1
-purify$ -- 284
+purify$ -- 292
 quote$ -- 0
-skip$ -- 400
+skip$ -- 411
 stack$ -- 0
-substring$ -- 729
-swap$ -- 83
+substring$ -- 766
+swap$ -- 85
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 248
+type$ -- 256
 warning$ -- 3
-while$ -- 116
-width$ -- 37
-write$ -- 517
+while$ -- 120
+width$ -- 38
+write$ -- 532
 (There were 3 warnings)

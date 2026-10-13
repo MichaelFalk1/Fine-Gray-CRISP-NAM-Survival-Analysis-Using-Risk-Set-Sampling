@@ -25,59 +25,61 @@
 \contentsline {subsection}{\numberline {3.2.2}Case Cohort}{15}{subsection.3.2.2}%
 \contentsline {subsection}{\numberline {3.2.3}Nested Case Control}{15}{subsection.3.2.3}%
 \contentsline {subsection}{\numberline {3.2.4}Dynamic Sampling Strategy}{15}{subsection.3.2.4}%
-\contentsline {subsection}{\numberline {3.2.5}IPW and Stability}{17}{subsection.3.2.5}%
-\contentsline {section}{\numberline {3.3}Network Architecture (CRISPNAM-FG)}{17}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}Network architecture}{17}{subsection.3.3.1}%
-\contentsline {subsubsection}{FeatureNet Formulation}{17}{section*.2}%
-\contentsline {subsubsection}{Global Additive Aggregation}{18}{section*.3}%
-\contentsline {section}{\numberline {3.4}Loss Function}{19}{section.3.4}%
-\contentsline {section}{\numberline {3.5}Training Details}{20}{section.3.5}%
-\contentsline {section}{\numberline {3.6}Model Evaluation and Diagnostics}{21}{section.3.6}%
-\contentsline {subsection}{\numberline {3.6.1}Brier Score}{21}{subsection.3.6.1}%
-\contentsline {subsection}{\numberline {3.6.2}Stratified Aalen-Johansen CIF Calibration}{22}{subsection.3.6.2}%
-\contentsline {subsection}{\numberline {3.6.3}CPU and Memory Profiling}{22}{subsection.3.6.3}%
-\contentsline {subsection}{\numberline {3.6.4}Synthetic Data Verification (Pearson \& Spearman Correlation)}{23}{subsection.3.6.4}%
-\contentsline {section}{\numberline {3.7}Code Availability and Reproducibility}{23}{section.3.7}%
-\contentsline {chapter}{\numberline {4}Results and Discussion}{24}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Dataset Characteristics}{24}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Optimization and Convergence}{26}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Hyperparameter Stability and Selection}{26}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Dataset Convergence Analysis}{28}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}Computational Resource Profiling}{30}{subsection.4.2.3}%
-\contentsline {subsubsection}{Resource Utilization and Execution Efficiency}{30}{section*.10}%
-\contentsline {section}{\numberline {4.3}Predictive Performance and Training Time}{31}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Synthetic Dataset}{31}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}Real World Clinical Benchmark Primary Biliary Cholangitis (PBC) Dataset}{34}{subsection.4.3.2}%
-\contentsline {subsection}{\numberline {4.3.3}Real World Framingham Dataset}{36}{subsection.4.3.3}%
-\contentsline {section}{\numberline {4.4}Model Calibration and Discrimination}{39}{section.4.4}%
-\contentsline {subsection}{\numberline {4.4.1}Ground Truth Risk Recovery}{39}{subsection.4.4.1}%
-\contentsline {subsection}{\numberline {4.4.2}Cumulative Incidence Calibration}{39}{subsection.4.4.2}%
-\contentsline {subsection}{\numberline {4.4.3}Entropy Sampler Calibration and Risk Recovery}{40}{subsection.4.4.3}%
-\contentsline {subsection}{\numberline {4.4.4}Nested Case-Control (NCC) Calibration and Risk Recovery}{41}{subsection.4.4.4}%
-\contentsline {subsection}{\numberline {4.4.5}Static Case-Cohort (SCC) Calibration and Risk Recovery}{43}{subsection.4.4.5}%
-\contentsline {section}{\numberline {4.5}Real World Model Calibration and Discrimination}{45}{section.4.5}%
-\contentsline {subsection}{\numberline {4.5.1}Real World Clinical Benchmark Primary Biliary Cholangitis Dataset}{45}{subsection.4.5.1}%
-\contentsline {subsubsection}{Full Cohort Baseline}{45}{section*.30}%
-\contentsline {subsubsection}{Nested Case-Control (NCC)}{46}{section*.32}%
-\contentsline {subsubsection}{Static Case-Cohort (SCC)}{47}{section*.35}%
-\contentsline {subsubsection}{Entropy Sampler}{49}{section*.38}%
-\contentsline {subsection}{\numberline {4.5.2}Real World Framingham Dataset}{51}{subsection.4.5.2}%
-\contentsline {subsubsection}{Full Cohort Baseline}{51}{section*.41}%
-\contentsline {subsubsection}{Nested Case-Control (NCC)}{52}{section*.43}%
-\contentsline {subsubsection}{Static Case-Cohort (SCC)}{53}{section*.45}%
-\contentsline {subsubsection}{Entropy Sampler}{54}{section*.47}%
-\contentsline {section}{\numberline {4.6}Feature Contribution and Interpretability}{55}{section.4.6}%
-\contentsline {subsection}{\numberline {4.6.1}Signal Recovery and Noise Isolation}{56}{subsection.4.6.1}%
-\contentsline {subsection}{\numberline {4.6.2}Impact of Risk-Set Sampling on Feature Recovery}{57}{subsection.4.6.2}%
-\contentsline {subsubsection}{Dynamic Entropy Sampler}{57}{section*.51}%
-\contentsline {subsubsection}{Nested Case-Control (NCC)}{58}{section*.53}%
-\contentsline {subsubsection}{Static Case-Cohort (SCC)}{58}{section*.55}%
-\contentsline {section}{\numberline {4.7}Discussion}{59}{section.4.7}%
-\contentsline {subsection}{\numberline {4.7.1}Interpretation of Findings}{59}{subsection.4.7.1}%
-\contentsline {subsection}{\numberline {4.7.2}Comparative Validation Against Existing Literature}{60}{subsection.4.7.2}%
-\contentsline {subsection}{\numberline {4.7.3}Computational Efficiency and Vectorization}{61}{subsection.4.7.3}%
-\contentsline {subsection}{\numberline {4.7.4}Theoretical and Practical Implications}{62}{subsection.4.7.4}%
-\contentsline {chapter}{\numberline {5}Conclusion and Future Work}{63}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Summary of Findings}{63}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Limitations and Future Directions}{64}{section.5.2}%
-\contentsline {chapter}{References}{67}{chapter*.57}%
+\contentsline {subsection}{\numberline {3.2.5}IPW and Stability}{18}{subsection.3.2.5}%
+\contentsline {section}{\numberline {3.3}Network Architecture (CRISPNAM-FG)}{18}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Network architecture}{18}{subsection.3.3.1}%
+\contentsline {subsubsection}{FeatureNet Formulation}{19}{section*.2}%
+\contentsline {subsubsection}{Global Additive Aggregation}{19}{section*.3}%
+\contentsline {section}{\numberline {3.4}Loss Function}{20}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Loss Function}{22}{section.3.5}%
+\contentsline {section}{\numberline {3.6}Training Details}{24}{section.3.6}%
+\contentsline {section}{\numberline {3.7}Model Evaluation and Diagnostics}{25}{section.3.7}%
+\contentsline {subsection}{\numberline {3.7.1}Brier Score}{25}{subsection.3.7.1}%
+\contentsline {subsection}{\numberline {3.7.2}Concordance Index (C-Index)}{26}{subsection.3.7.2}%
+\contentsline {subsection}{\numberline {3.7.3}Stratified Aalen-Johansen CIF Calibration}{26}{subsection.3.7.3}%
+\contentsline {subsection}{\numberline {3.7.4}CPU and Memory Profiling}{27}{subsection.3.7.4}%
+\contentsline {subsection}{\numberline {3.7.5}Synthetic Data Verification (Pearson \& Spearman Correlation)}{27}{subsection.3.7.5}%
+\contentsline {section}{\numberline {3.8}Code Availability and Reproducibility}{27}{section.3.8}%
+\contentsline {chapter}{\numberline {4}Results and Discussion}{29}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Dataset Characteristics}{29}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Optimization and Convergence}{31}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Hyperparameter Stability and Selection}{31}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Dataset Convergence Analysis}{33}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Computational Resource Profiling}{35}{subsection.4.2.3}%
+\contentsline {subsubsection}{Resource Utilization and Execution Efficiency}{35}{section*.10}%
+\contentsline {section}{\numberline {4.3}Predictive Performance and Training Time}{36}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Synthetic Dataset}{36}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Real World Clinical Benchmark Primary Biliary Cholangitis (PBC) Dataset}{39}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}Real World Framingham Dataset}{41}{subsection.4.3.3}%
+\contentsline {section}{\numberline {4.4}Model Calibration and Discrimination}{44}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Ground Truth Risk Recovery}{44}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Cumulative Incidence Calibration}{44}{subsection.4.4.2}%
+\contentsline {subsection}{\numberline {4.4.3}Entropy Sampler Calibration and Risk Recovery}{45}{subsection.4.4.3}%
+\contentsline {subsection}{\numberline {4.4.4}Nested Case-Control (NCC) Calibration and Risk Recovery}{46}{subsection.4.4.4}%
+\contentsline {subsection}{\numberline {4.4.5}Static Case-Cohort (SCC) Calibration and Risk Recovery}{48}{subsection.4.4.5}%
+\contentsline {section}{\numberline {4.5}Real World Model Calibration and Discrimination}{50}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}Real World Clinical Benchmark Primary Biliary Cholangitis Dataset}{50}{subsection.4.5.1}%
+\contentsline {subsubsection}{Full Cohort Baseline}{50}{section*.30}%
+\contentsline {subsubsection}{Nested Case-Control (NCC)}{51}{section*.32}%
+\contentsline {subsubsection}{Static Case-Cohort (SCC)}{52}{section*.35}%
+\contentsline {subsubsection}{Entropy Sampler}{54}{section*.38}%
+\contentsline {subsection}{\numberline {4.5.2}Real World Framingham Dataset}{56}{subsection.4.5.2}%
+\contentsline {subsubsection}{Full Cohort Baseline}{56}{section*.41}%
+\contentsline {subsubsection}{Nested Case-Control (NCC)}{57}{section*.43}%
+\contentsline {subsubsection}{Static Case-Cohort (SCC)}{58}{section*.45}%
+\contentsline {subsubsection}{Entropy Sampler}{59}{section*.47}%
+\contentsline {section}{\numberline {4.6}Feature Contribution and Interpretability}{60}{section.4.6}%
+\contentsline {subsection}{\numberline {4.6.1}Signal Recovery and Noise Isolation}{61}{subsection.4.6.1}%
+\contentsline {subsection}{\numberline {4.6.2}Impact of Risk-Set Sampling on Feature Recovery}{62}{subsection.4.6.2}%
+\contentsline {subsubsection}{Dynamic Entropy Sampler}{62}{section*.51}%
+\contentsline {subsubsection}{Nested Case-Control (NCC)}{63}{section*.53}%
+\contentsline {subsubsection}{Static Case-Cohort (SCC)}{63}{section*.55}%
+\contentsline {section}{\numberline {4.7}Discussion}{64}{section.4.7}%
+\contentsline {subsection}{\numberline {4.7.1}Interpretation of Findings}{64}{subsection.4.7.1}%
+\contentsline {subsection}{\numberline {4.7.2}Comparative Validation Against Existing Literature}{65}{subsection.4.7.2}%
+\contentsline {subsection}{\numberline {4.7.3}Computational Efficiency and Vectorization}{66}{subsection.4.7.3}%
+\contentsline {subsection}{\numberline {4.7.4}Theoretical and Practical Implications}{67}{subsection.4.7.4}%
+\contentsline {chapter}{\numberline {5}Conclusion and Future Work}{68}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Summary of Findings}{68}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Limitations and Future Directions}{69}{section.5.2}%
+\contentsline {chapter}{References}{72}{chapter*.57}%
