@@ -7,22 +7,11 @@ Odd~O Aalen and S{\o}ren Johansen.
 \newblock {\em Scandinavian Journal of Statistics}, 5(3):141--150, 1978.
 
 
-\bibitem[\protect\citeauthoryear{Agarwal \bgroup \em et al.\egroup
-  }{2021}]{agarwal2021neural}
-Rishabh Agarwal, Levi Melnick, Nicholas Frosst, Xuezhou Zhang, Ben Lengerich,
-  Rich Caruana, and Geoffrey~E Hinton.
-\newblock Neural additive models: Interpretable machine learning with neural
-  nets.
-\newblock {\em Advances in Neural Information Processing Systems},
-  34:4699--4711, 2021.
-
-
 \bibitem[\protect\citeauthoryear{Andersen \bgroup \em et al.\egroup
   }{2012}]{andersen2012competing}
 P.~K. Andersen, R.~B. Geskus, T.~de~Witte, and H.~Putter.
-\newblock {\em Competing risks in epidemiology: possibilities and pitfalls},
-  volume~41.
-\newblock 2012.
+\newblock Competing risks in epidemiology: possibilities and pitfalls.
+\newblock {\em International Journal of Epidemiology}, 41(3):861--870, 2012.
 
 
 \bibitem[\protect\citeauthoryear{Antolini \bgroup \em et al.\egroup
@@ -43,19 +32,6 @@ Jan Beyersmann, Aur{\'e}lien Latouche, Anika Buchholz, and Martin Schumacher.
 Christopher~M. Bishop.
 \newblock {\em Pattern Recognition and Machine Learning}.
 \newblock Springer, 2006.
-
-
-\bibitem[\protect\citeauthoryear{Borgan \bgroup \em et al.\egroup
-  }{2000}]{Borgan2000}
-{{\O}}rnulf Borgan, Larry Goldstein, and Bryan Langholz.
-\newblock Sampling designs for cox regression.
-\newblock {\em Scandinavian Journal of Statistics}, 27(4):601--618, 2000.
-
-
-\bibitem[\protect\citeauthoryear{Breslow}{1974}]{Breslow1974}
-N.~Breslow.
-\newblock Covariance analysis of censored survival data.
-\newblock {\em Biometrics}, 30(1):89--99, 1974.
 
 
 \bibitem[\protect\citeauthoryear{Cox}{1972}]{Cox1972}
@@ -97,13 +73,6 @@ E.~Graf, C.~Schmoor, W.~Sauerbrei, and M.~Schumacher.
 \newblock {\em Statistics in Medicine}, 18(17-18):2529--2545, 1999.
 
 
-\bibitem[\protect\citeauthoryear{Hern{\'a}n and Robins}{2000}]{Hernan2000}
-Miguel~A. Hern{\'a}n and James~M. Robins.
-\newblock Causal inference from observational data.
-\newblock {\em Journal of Epidemiology \& Community Health}, 54(10):753--758,
-  2000.
-
-
 \bibitem[\protect\citeauthoryear{Horvitz and
   Thompson}{1952}]{HorvitzThompson1952}
 Daniel~G. Horvitz and Donovan~J. Thompson.
@@ -111,13 +80,6 @@ Daniel~G. Horvitz and Donovan~J. Thompson.
   universe.
 \newblock {\em Journal of the American Statistical Association},
   47(260):663--685, 1952.
-
-
-\bibitem[\protect\citeauthoryear{Kalbfleisch and
-  Prentice}{2002}]{kalbfleisch2002statistical}
-J.~D. Kalbfleisch and R.~L. Prentice.
-\newblock {\em The statistical analysis of failure time data}.
-\newblock Wiley, 2002.
 
 
 \bibitem[\protect\citeauthoryear{Katzman \bgroup \em et al.\egroup
@@ -239,24 +201,10 @@ Dhanesh Ramachandram, Anne Loefler, Surain Roberts, Amol Verma, Maia Norman,
 \newblock {\em arXiv preprint arXiv:2511.12409}, 2025.
 
 
-\bibitem[\protect\citeauthoryear{Robins \bgroup \em et al.\egroup
-  }{2000}]{Robins2000}
-James~M. Robins, Miguel~A. Hern{\'a}n, and Babette Brumback.
-\newblock Marginal structural models and causal inference in epidemiology.
-\newblock {\em Epidemiology}, 11(5):550--560, 2000.
-
-
 \bibitem[\protect\citeauthoryear{Rosner}{2015}]{rosner2015fundamentals}
 Bernard Rosner.
 \newblock {\em Fundamentals of biostatistics}.
 \newblock Cengage learning, 2015.
-
-
-\bibitem[\protect\citeauthoryear{Wang \bgroup \em et al.\egroup
-  }{2020}]{Wang2020}
-J.~Wang, H.~Zhao, and H.~Chu.
-\newblock Mini‐batch sampling for cox regression in deep learning.
-\newblock {\em Journal of Computational Biology}, 27(1):1--10, 2020.
 
 
 \bibitem[\protect\citeauthoryear{Wilson \bgroup \em et al.\egroup

@@ -1,0 +1,189 @@
+# Thesis collaboration guide
+
+Updated: 2026-10-17. This file records the user's agreed workflow and the current project state. Read it before thesis work; read only the source sections needed for the active task. New user instructions take precedence. Findings below are a starting point, not proof that current files are unchanged.
+
+## Purpose and research objective
+
+This is Michael Falk's MSc thesis on CRISP-NAM survival analysis under competing risks using Fine-Gray risk-set sampling. The aim is to reduce training time substantially while limiting deterioration in C-index and predictive accuracy, with calibration and computational resources also evaluated. Do not frame the objective as requiring entropy to win every predictive metric.
+
+The user corrected Fine-Gray censoring weights and static case-cohort (SCC) sampling. The thesis must now agree with the corrected implementation and results. Existing text contains obsolete interpretations and conflicting formulations. Do not assume that a sentence is correct because it already appears in the thesis.
+
+## Mandatory review workflow
+
+1. Work from the top of the thesis down, one manageable section at a time.
+2. Read the current section and relevant implementation/results before proposing edits.
+3. Prefer targeted edits that preserve the user's structure and voice. A previous wholesale introduction rewrite was rejected in favour of lighter edits.
+4. Show proposed wording in chat BEFORE changing the thesis. Bold additions/replacements and strike through ALL deletions, including citation removals and equations. Show the full change transparently; do not present replacement text as though it shows all removals. Explain substantive mathematical or empirical changes briefly.
+5. Wait for explicit user approval. The user may revise wording through several exchanges. Apply only the latest approved version.
+6. After approval, edit only the approved passage. Remove review markup, preserve LaTeX commands, and verify the scope of the change.
+7. State what was applied and what remains next. Do not silently revise adjacent sections, equations, bibliography or results.
+
+This approval requirement is the user's explicit preference, not a general requirement for every repository action. Read-only investigation and routine build troubleshooting are authorized when requested. Do not ask repeatedly for approval already given.
+
+## Writing and citation preferences
+
+- Use clear, direct MSc-level academic prose. Avoid inflated claims, vague motivation, unnecessary technical detail and promotional language.
+- Existing research-question/objective lists should remain lists. New thesis explanations should be connected paragraphs, not new lists.
+- Cite new literature-based claims using verified, relevant sources. Use `\citep{key}` at the end of the supported claim/sentence, before the final full stop. Use `\cite{key}` only within a sentence.
+- Check that citation keys exist and that sources support the particular claim. Do not use a Cox/DeepHit citation as evidence of an implementation-specific Fine-Gray bottleneck.
+- Experimental findings should point to this study's relevant results/figures/tables. Do not add literature citations as substitutes for empirical evidence.
+- Do not promise statistical validity, unbiased loss, exact equivalence, universal superiority or guaranteed speed-ups without support.
+- Do not equate lower Brier score with proof of calibration alone.
+- Explain the computational motivation directly. The user disliked the event-by-observation matrix explanation in the introduction as unnecessary detail.
+- Do not state that all survival algorithms necessarily have quadratic complexity. Distinguish the implementation, batch size and full cohort when needed.
+
+## File map
+
+Paths are relative to this repository; use absolute links in user-facing responses.
+
+- Main thesis: `Documents/thesis/Paper/Paper.tex`
+- Bibliography: `Documents/thesis/Paper/References.bib` (Windows paths are case-insensitive)
+- Main compiled PDF: `Documents/thesis/Paper/Paper.pdf`
+- Synthetic notebook: `Models/fine_gray_sampling.ipynb`
+- Framingham notebook: `Models/fine_gray_sampling_real_world.ipynb`
+- PBC notebook: `Models/fine_gray_sampling_real_world_PBC.ipynb`
+- Plot aggregation notebook: `visulization.ipynb`
+- New synthetic results: `Results/FULL`, `Results/NCC`, `Results/SCC`, `Results/ENTROPY`
+- New PBC results: the corresponding `*_PBC` folders
+- New Framingham results: the corresponding `*_FH` folders
+- Old archive: `Results/OLD_RESULTS_FOLDER_WRONG_SCC_LOSS/`
+- Thesis figures: `Documents/thesis/Paper/images/`
+- Overview images: `synth_overview/`, `PBC_overview/`, `fh_overview/` (inventory can change)
+- Detailed CSV comparison: `Documents/results_comparison/old_vs_new_results.md`
+- Compact numerical comparison: `Documents/results_comparison/summary.json`
+- Comparison helper: `tmp/compare_results.py`
+
+The detailed comparison is large (~550 KB) and includes source paths, fold statistics, individual fold values, correlation comparisons and raw Brier summaries. Read `summary.json` first; do not load the entire report into context. The helper generates the base report; additional interpretation was appended afterward, so rerunning it overwrites that commentary.
+
+## Current revision checklist
+
+- [x] Section 1.1 Background and Motivation: approved and applied.
+- [x] Section 1.2.1 Research Questions: five revised questions approved and applied; prediction error replaces explained variation, sampling settings replace unsupported design guarantees, and speed-accuracy trade-off is explicit.
+- [x] Section 1.2.2 Research Objectives: seven revised objectives approved and applied; separate Fine-Gray/sampling weights, unsampled mini-batch baseline, speed-accuracy trade-off, sampling-setting effects and practical sampling guidance. Existing list and repository citation retained.
+- [x] Thesis Organization: approved and applied; proposed entropy-guided sampling, sampling-aware loss, and synthetic/PBC/modified Framingham datasets explicitly named.
+- [x] Background theory: approved changes through Section 2.7 applied; background review closed.
+  - Chapter opening and Section 2.1 approved and applied. Explicit contrast: cause-specific Cox treats competing events as censored at occurrence and removes them; Fine-Gray retains prior competing events with censoring-adjusted weights. Cox treatment is valid for cause-specific hazard estimation; cumulative incidence requires all cause-specific hazards.
+  - Section 2.2 Past Deep Neural Network Models approved and applied: precise DeepSurv/Kvamme descriptions, Kvamme sampling connection, ranking loss encourages rather than guarantees concordance, and feature-decomposition distinction for DeepHit.
+  - Section 2.3 Cause Specific Hazard approved and applied: both equations retained unchanged; hazard described as a rate; overall event-free survival depends on all causes; cause-specific censoring distinguished from loss to follow-up and valid CIF construction explained.
+  - Section 2.4 Fine-Gray Subdistribution Hazard approved and applied, including continuous-time hazard-to-CIF equation, distinction between censoring weights and relative-hazard factors, and eligibility explanation. User specifically requested keeping the plain explanation that baseline describes time dependence and exp(beta X) scales it by covariates, plus the transition explaining that both approaches estimate the same CIF. Preserve explanatory value rather than replacing it with terse terminology.
+  - Section 2.5 CRISPNAM approved and applied: additive log-relative subdistribution hazard rather than additive hazard; global bias b included in both equations; scalar FeatureNet outputs and separate target-cause fitting distinguished from published architecture; feature associations are not causal effects. 
+  - Section 2.6 Risk Set Sampling Strategies approved and applied: mini-batch Fine-Gray eligibility includes prior competing events; NCC uses up to m controls with capped inclusion probability; SCC uses a Bernoulli subcohort fixed per training fold, with alpha an expected fraction and the current case always included. The Borgan2000 bibliography entry remains pending verification; Section 2.6 uses kvamme2019 for the neural-Cox sampling motivation.
+  - User approved and applied bibliography correction: `andersen2012competing` changed from `@book` to `@article`; other fields unchanged.
+  - Section 2.7 approved and applied after full deletion/citation review: retain plain IPW; distinguish log-sum-exp numerical stability from statistical weight stabilisation; remove unused stabilised-IPW formula and unsupported guarantees; separate Fine-Gray censoring weights from sampling weights. Bibliography entries unchanged. Background review now closed for this revision.
+
+Current scope: user explicitly narrowed remaining work to corrected loss, SCC, new results, discussion/conclusion and necessary consistency updates. Avoid general background rewrites or optional editorial improvements. Next: Model Evaluation and Diagnostics.
+
+- [x] Sampling methodology: FULL, NCC, fixed SCC and entropy.
+  - Full Risk subsection approved and applied: FULL uses all eligible mini-batch observations, includes prior competing events, retains Fine-Gray censoring weights and uses inclusion probability 1. Removed Cox1972, Wang2020 and Breslow1974 citations from this paragraph only; bibliography unchanged. 
+  - Case Cohort subsection approved and applied: Bernoulli subcohort selected once per training fold, stable IDs preserve membership across batches/epochs, only current case forced in, controls have inclusion probability alpha, current case probability 1, and prior competing events remain eligible. Retained Prentice1986; removed FineGray1999 citation from implementation-specific final sentence only. 
+  - Nested Case Control subsection approved and applied: up to m controls uniformly without replacement from eligible mini-batch Fine-Gray controls, prior competing events included, control probability min(m,N_i)/N_i for N_i>0, current case always retained, and only the case when no controls are available. Removed unsupported unbiasedness claim and both Borgan2000 citations from this paragraph; retained HorvitzThompson1952. Bibliography unchanged. 
+  - Dynamic Sampling Strategy: three targeted changes approved and applied (log-relative subdistribution hazard score terminology, acknowledgement of numerical epsilon safeguards, and corrected NCC comparison without constant mini-batch-size assumption). Equations and citations unchanged. IPW and Stability reviewed and retained unchanged.
+- [x] Loss function: corrected formulation retained; user confirmed the obsolete duplicate is commented out and handled. Preserve the fallback.
+  - First Loss Function section: three targeted changes approved and applied (log-relative subdistribution hazard terminology, explicit log-sum-exp and logarithm lower bounds, and fixed-contribution/design-expectation qualification for reused SCC membership). All equations and citations retained unchanged. User reports commenting out the duplicate to retain it as a fallback and has confirmed this item is handled. Preserve it; do not delete or repeatedly request confirmation. Earlier saved-file read differed from the reported editor state; check compilation consistency only at the final check.
+- [x] Training Details: approved cross-validation and mini-batch training corrections applied; user confirmed this item is complete.
+  - Training Details opening paragraph approved and applied: event-stratified five-fold splits for synthetic/Framingham, patient-grouped event-stratified five-fold splits for PBC, and approximate rather than guaranteed identical event proportions. Three subsequent training paragraphs approved and applied: all configurations use mini-batch training; FULL includes all eligible batch risk-set observations; ordinary PyTorch DataLoaders shuffle training but not validation data; sampling is evaluated for additional time reduction and predictive/stability trade-offs. User requested retaining training mechanics and motivation, not compressing these to a short replacement. No full-batch versus mini-batch experiment was performed.
+- [ ] Model Evaluation and Diagnostics (NEXT): verify metric definitions and pooled versus fold-level differences. Check validation and baseline-hazard details only where needed to interpret evaluation; do not reopen the completed Training Details rewrite.
+  - Entire Model Evaluation and Diagnostics section reviewed against all three notebooks; no thesis/code edits approved or applied. Findings: EvalSurv uses target-cause binary indicators and Antolini concordance without G^-2 IPCW; current thesis C-index equation mismatches. Upstream pycox Brier routine excludes observations with binary event 0 after their recorded time, including prior competing events under current encoding; supplied censoring KM counts code 0 only. Thus saved Brier/IBS should not yet be certified as competing-risk CIF prediction errors; verify installed experiment version and metric implementation before final wording/results interpretation. Pycox normalises by sum of weights, unlike thesis 1/N expression. Fold censoring KM uses training fold; pooled KM uses full evaluation cohort. Pooled Brier is nearest median observed time; mean fold Brier is a grid average; IBS description is currently commented out. Correlations compare total predicted scores with true linear predictors, not individual feature effects; synthetic helper also exports event-2 truth comparisons. AJ diagnostic keeps original competing-event codes and compares risk-stratum mean CIFs; qualify proof/guarantee language. Profiler measures Python process CPU/RSS and elapsed training-call time, not isolated model-only resources or background-noise-free efficiency. Next: resolve metric interpretation before approving full evaluation-section revisions.
+  - User evaluation scope: do NOT report or restore IBS; reporting focuses on C-index, Brier, training duration, Pearson/Spearman and CIF diagnostics. Leave CPU/Memory Profiling untouched at explicit user request. Keep AJ method, soften claims only. Clarify correlations measure overall predictors; FeatureNet plots separately show individual fitted feature contributions. Make minimal C-index changes matching Antolini implementation. User agrees to these categories of changes; exact wording review follows. Brier calculation discrepancy remains unresolved and is not authorised for a code change.
+- [ ] Synthetic results, figures and interpretation.
+- [ ] PBC results, figures and interpretation.
+- [ ] Framingham results, figures and interpretation.
+- [ ] Overall discussion: speed-accuracy trade-offs, competitive alternatives and temperature sensitivity.
+- [ ] Conclusion and limitations.
+- [ ] Abstract: update last to reflect approved findings.
+- [ ] Final consistency and compilation check, including citations, equations, figures and cross-references.
+
+Update both checkboxes and explanatory notes after approved work. Remove stale next-step pointers when advancing; keep one current next item. Do not count a proposed section as applied.
+
+### Latest approved introduction passage
+
+The user approved replacing the three computational-matrix sentences with these two sentences, and they were applied:
+
+> As the dataset grows, more individuals contribute to the risk sets, increasing the computation required to evaluate the loss function. Risk-set sampling aims to reduce this computational burden by using a subset of eligible individuals at each event time.
+
+Keep this wording unless the user approves another change. With fixed mini-batches, larger datasets increase batch count rather than necessarily enlarging every batch risk set; explain that distinction where technically needed without reintroducing unwanted detail into this passage.
+
+## Implementation facts already inspected
+
+These describe inspected active code, not an independent certification of correctness. Recheck relevant cells before changing mathematical text. Notebooks contain commented-out old code; do not mistake it for the active loss.
+
+- Target-cause events define loss rows. Eligible observations are those with `T_j >= T_i`, plus prior competing events with `T_j < T_i` and event code neither 0 nor the target cause.
+- Active observations have Fine-Gray weight 1. Prior competing-event observations have weight `G_hat(T_i-) / G_hat(T_j-)`. Previously censored and previous target events are excluded.
+- Censoring Kaplan-Meier estimation uses the training fold, with censoring code 0; weights use left limits.
+- Sampling contribution weights are `w_FG / pi_ij`; the current event case has inclusion probability 1.
+- Active loss uses log-sum-exp and mean target-event contributions, with no extra outer event weight. Upper weight clipping is disabled; gradient clipping is separate.
+- User clarified the ORIGINAL stabilisation motivation: avoid excessive variability in sampling-weighted loss contributions rather than relying on L2 parameter regularisation to address it. Preserve this motivation, but distinguish it from the CURRENT implementation, which uses plain inverse sampling probabilities, not marginal-probability-stabilised IPW. Do not describe the two weighting components as mathematically conflicting or claim log-sum-exp removes sampling variance.
+- SCC draws a Bernoulli subcohort once per training fold and reuses membership across batches/epochs via stable observation IDs. Each risk-set row forces in its current event case, not all future cases. Other eligible subcohort observations have inclusion probability alpha.
+- NCC samples up to m controls without replacement, excluding the current case, using inclusion probability `min(m, available) / available`.
+- Entropy computes normalized binary entropy of sigmoid-transformed risk scores, temperature-scaled exponential scores, and independent Bernoulli selection with probabilities scaled relative to the eligible-control mean. Sigmoid scores are sampling heuristics, not calibrated CIF probabilities.
+- FULL training means all eligible observations WITHIN each mini-batch, not necessarily the full training cohort.
+- Baseline subdistribution hazard estimation uses full training-fold risk sets with Fine-Gray weights. Baseline cumulative hazard is evaluated as a step function.
+- SCC validation uses unsampled mini-batch risk sets; inspected NCC/entropy validation still samples. Describe actual code, not an assumed common protocol.
+- The corrected first `Loss Function` section is retained. The user confirmed commenting out the obsolete second section as a fallback. Preserve that fallback; do not present its deletion as outstanding work.
+- PBC current notebook reads `RealWorldData/grouped_pbc.csv`. Verify preprocessing and fold units before asserting equivalence with old longitudinal/grouped analyses.
+- Metrics code uses `EvalSurv` with target-cause binary event indicators. Do not certify its competing-risk metric interpretation without reviewing definitions.
+
+## Old/new results matching and known limitations
+
+- Primary synthetic old comparison uses `FULL_1test_old`, `NCC_1test_old`, `SCC_1test_old`, `ENTROPY_1test_old`. FULL C-index 0.850110 and 58.1627 s/fold match thesis values.
+- Primary PBC comparison uses archived non-IND `*_PBC` folders; FULL C-index 0.755646 matches the thesis. `*_PBC_IND` is a separate alternative archive, not automatically interchangeable.
+- FH comparison uses archived `*_FH` folders.
+- `FULL_1test` and current `Results/FullRisk` are alternative baselines; do not silently substitute them for primary FULL.
+- Compared 48 configurations; 47 have old/new pooled CSV pairs. Entropy retention is 0.1 in these comparisons.
+- PBC entropy tau=0.1 lacks both old/new pooled CSVs. Old fold IBS/Brier has only 1/5 populated folds, new only 2/5. Do not fill missing values with zero or report a complete five-fold mean.
+- All 240 matched primary raw Brier fold CSV pairs have matching saved time grids. Five new FH NCC m=30 raw files lack old counterparts and corresponding main comparison rows.
+- Archived entropy raw folders include numeric-name aliases (e.g. 1 and 1.0). Do not average separate historical outputs or silently treat them as duplicates.
+- Pooled Brier is distinct from mean fold Brier and IBS. Current pooled Brier uses the evaluation-grid point nearest median observed time.
+- Major unresolved issue: pooled error reductions greatly exceed fold-level reductions. For FULL, old -> new pooled IBS versus mean fold IBS:
+  - Synthetic: 0.225387 -> 0.162780 versus 0.165930 -> 0.162772.
+  - PBC: 0.167145 -> 0.109546 versus 0.117625 -> 0.112406.
+  - FH: 0.094141 -> 0.074009 versus 0.074804 -> 0.074004.
+- FH FULL pooled Brier changes 0.670391 -> 0.136724, but mean fold Brier only 0.072641 -> 0.071879. Investigate pooling/evaluation changes before attributing all improvement to the corrected loss.
+- Fold labels alone do not prove identical patient membership across old/new experiments. Stored runs are descriptive comparisons, not isolated causal effects or repeated-seed significance tests.
+- Fold SD in the comparison report uses sample SD (ddof=1).
+
+## Empirical interpretation to preserve
+
+Entropy remains competitive for the user's speed-accuracy objective. Avoid both dismissing it because it does not win every metric and overstating it as universally best.
+
+New-run examples (FULL versus entropy):
+
+| Dataset / entropy setting | C-index FULL / entropy | IBS FULL / entropy | Mean seconds FULL / entropy |
+| --- | --- | --- | --- |
+| Synthetic tau=0.5 | 0.850960 / 0.849914 | 0.162780 / 0.165642 | 68.8598 / 31.7194 |
+| Synthetic tau=1 | 0.850960 / 0.850542 | 0.162780 / 0.163980 | 68.8598 / 43.2051 |
+| PBC tau=5 | 0.761371 / 0.764138 | 0.109546 / 0.108019 | 32.1217 / 26.4886 |
+| PBC tau=10 | 0.761371 / 0.775179 | 0.109546 / 0.105808 | 32.1217 / 30.4681 |
+| FH tau=0.5 | 0.662868 / 0.667744 | 0.074009 / 0.073892 | 27.6084 / 19.5887 |
+
+- Synthetic tau=0.5 is the fastest tested synthetic configuration, with ~54% less mean training time and ~0.00105 lower C-index than FULL.
+- Synthetic tau=0.1 deteriorates sharply (pooled C-index 0.850437 -> 0.562899); fold C-index also deteriorates.
+- SCC is a credible alternative: synthetic 5% is close to FULL at ~49% less time. PBC SCC 5% improves greatly but still trails FULL. FH SCC 5% approaches FULL metrics.
+- Synthetic entropy tau=0.5 no longer has best truth correlation; new SCC 20% has highest recorded event-1 Pearson/Spearman among tested configurations.
+- PBC entropy tau=10 has strongest recorded pooled predictive metrics but only ~5% less time than FULL; tau=5 saves ~18%.
+- FH NCC m=50 has strongest pooled metrics but takes ~3.2 times FULL duration. Entropy tau=0.5 and SCC 20% offer competitive speed-accuracy balances.
+- Timing includes convergence and run conditions, not isolated per-epoch costs. New FH FULL fold_2 takes 66.52 s; other folds take 16.76-19.29 s, so the mean-based speed advantage is sensitive to that fold.
+- A uniform Bernoulli comparison at matched retention and repeated seeds would help isolate entropy guidance's value. This is a possible limitation/future experiment, NOT authorization to launch new experiments.
+
+## Build troubleshooting status
+
+- RESOLVED by the user on 2026-10-17: cleaning auxiliary files fixed the original build. The user removed `build_verified` files as unnecessary. Do not recreate them or repeat build troubleshooting unless a new issue occurs. Keep checks proportionate and avoid unnecessary builds/artifacts.
+- User reported `I can't write on file Paper.pdf` at `Paper.out:1`. Exclusive read/write access subsequently succeeded and the PDF was not read-only; temporary locking was suspected, not proven.
+- A direct rebuild encountered an incomplete auxiliary file and later NUL corruption in `Paper.aux`. Do not treat `Paper.out:1` as evidence of a wording error or edit source blindly.
+- Sandboxed MiKTeX reported a fresh/unconfigured installation; external execution required sandbox escalation. Do not reinstall MiKTeX merely on that sandbox message.
+- An isolated build was run from `Documents/thesis/Paper`:
+  `latexmk -pdf -outdir=build_verified -interaction=nonstopmode -halt-on-error Paper.tex`
+- Historical verification: the isolated build completed with a 78-page PDF. Those temporary outputs were subsequently removed by the user; the current resolution is auxiliary-file cleanup as noted above.
+- Existing layout/bibliography warnings remain outside this targeted build fix. Do not claim a completely warning-free thesis.
+- Avoid simultaneous builds targeting the same auxiliary files. Do not kill applications, delete source files or overwrite user changes to resolve locks.
+
+## Efficient working habits
+
+- Use this guide and targeted reads instead of repeatedly scanning all notebooks, PDFs and results.
+- Use `summary.json` for already-computed numeric comparisons. Inspect relevant CSVs when verifying a claim or when files change.
+- Parse notebook JSON and read relevant active code cells; do not dump embedded outputs/images.
+- Batch independent reads and keep output bounded. Avoid lengthy speculative reviews or unnecessary new artifacts.
+- Do not spawn subagents unless the user explicitly requests delegation.
+- Do not rerun training or change model code during thesis editing unless requested.
+- Preserve pre-existing modified/deleted/untracked files. There are user changes to plots, results and `visulization.ipynb`; no blanket cleanup, checkout or reset.
+- Keep this file concise enough to remain useful. Update status, decisions and unresolved questions after meaningful approved work; do not append whole chat transcripts.

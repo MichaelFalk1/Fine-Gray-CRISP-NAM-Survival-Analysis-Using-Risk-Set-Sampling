@@ -5,48 +5,46 @@ Reallocating 'name_of_file' (item size: 1) to 17 items.
 The style file: utils/named-wits.bst
 Reallocating 'name_of_file' (item size: 1) to 11 items.
 Database file #1: references.bib
-Warning--can't use both volume and number fields in andersen2012competing
-Warning--empty publisher in andersen2012competing
 Warning--there's a url but no retrieval date in kingma2014adam
-You've used 36 entries,
+You've used 29 entries,
             2541 wiz_defined-function locations,
-            813 strings with 10999 characters,
-and the built_in function-call counts, 14556 in all, are:
-= -- 1447
-> -- 660
-< -- 2
-+ -- 231
-- -- 224
-* -- 1239
-:= -- 2353
-add.period$ -- 108
-call.type$ -- 36
-change.case$ -- 248
-chr.to.int$ -- 36
-cite$ -- 39
-duplicate$ -- 518
-empty$ -- 1118
-format.name$ -- 269
-if$ -- 2941
+            768 strings with 9913 characters,
+and the built_in function-call counts, 11745 in all, are:
+= -- 1167
+> -- 535
+< -- 1
++ -- 188
+- -- 182
+* -- 993
+:= -- 1902
+add.period$ -- 87
+call.type$ -- 29
+change.case$ -- 201
+chr.to.int$ -- 29
+cite$ -- 30
+duplicate$ -- 418
+empty$ -- 901
+format.name$ -- 218
+if$ -- 2375
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 43
-newline$ -- 219
-num.names$ -- 108
-pop$ -- 210
+missing$ -- 34
+newline$ -- 177
+num.names$ -- 87
+pop$ -- 171
 preamble$ -- 1
-purify$ -- 292
+purify$ -- 236
 quote$ -- 0
-skip$ -- 411
+skip$ -- 333
 stack$ -- 0
-substring$ -- 766
-swap$ -- 85
-text.length$ -- 2
+substring$ -- 614
+swap$ -- 69
+text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 256
-warning$ -- 3
-while$ -- 120
-width$ -- 38
-write$ -- 532
-(There were 3 warnings)
+type$ -- 208
+warning$ -- 1
+while$ -- 96
+width$ -- 31
+write$ -- 429
+(There was 1 warning)
