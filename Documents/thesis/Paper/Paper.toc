@@ -50,35 +50,34 @@
 \contentsline {subsection}{\numberline {4.3.1}Synthetic Dataset}{34}{subsection.4.3.1}%
 \contentsline {subsection}{\numberline {4.3.2}Real World Clinical Benchmark Primary Biliary Cholangitis (PBC) Dataset}{38}{subsection.4.3.2}%
 \contentsline {subsection}{\numberline {4.3.3}Real World Framingham Dataset}{41}{subsection.4.3.3}%
-\contentsline {section}{\numberline {4.4}Model Calibration and Discrimination}{44}{section.4.4}%
-\contentsline {subsection}{\numberline {4.4.1}Ground Truth Risk Recovery}{44}{subsection.4.4.1}%
-\contentsline {subsection}{\numberline {4.4.2}Cumulative Incidence Calibration}{44}{subsection.4.4.2}%
-\contentsline {subsection}{\numberline {4.4.3}Entropy Sampler Calibration and Risk Recovery}{45}{subsection.4.4.3}%
-\contentsline {subsection}{\numberline {4.4.4}Nested Case-Control (NCC) Calibration and Risk Recovery}{46}{subsection.4.4.4}%
-\contentsline {subsection}{\numberline {4.4.5}Static Case-Cohort (SCC) Calibration and Risk Recovery}{48}{subsection.4.4.5}%
-\contentsline {section}{\numberline {4.5}Real World Model Calibration and Discrimination}{50}{section.4.5}%
-\contentsline {subsection}{\numberline {4.5.1}Real World Clinical Benchmark Primary Biliary Cholangitis Dataset}{50}{subsection.4.5.1}%
-\contentsline {subsubsection}{Full Cohort Baseline}{50}{section*.31}%
-\contentsline {subsubsection}{Nested Case-Control (NCC)}{51}{section*.33}%
-\contentsline {subsubsection}{Static Case-Cohort (SCC)}{52}{section*.36}%
+\contentsline {section}{\numberline {4.4}Model Calibration and Discrimination}{45}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Ground Truth Risk Recovery}{45}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Cumulative Incidence Calibration}{45}{subsection.4.4.2}%
+\contentsline {subsection}{\numberline {4.4.3}Entropy Sampler Calibration and Risk Recovery}{46}{subsection.4.4.3}%
+\contentsline {subsection}{\numberline {4.4.4}Nested Case-Control (NCC) Calibration and Risk Recovery}{48}{subsection.4.4.4}%
+\contentsline {subsection}{\numberline {4.4.5}Static Case-Cohort (SCC) Calibration and Risk Recovery}{49}{subsection.4.4.5}%
+\contentsline {section}{\numberline {4.5}Real World Model Calibration and Discrimination}{51}{section.4.5}%
+\contentsline {subsubsection}{Full Cohort Baseline}{51}{section*.31}%
+\contentsline {subsubsection}{Nested Case-Control (NCC)}{52}{section*.33}%
+\contentsline {subsubsection}{Static Case-Cohort (SCC)}{54}{section*.36}%
 \contentsline {subsubsection}{Entropy Sampler}{54}{section*.39}%
-\contentsline {subsection}{\numberline {4.5.2}Real World Framingham Dataset}{56}{subsection.4.5.2}%
-\contentsline {subsubsection}{Full Cohort Baseline}{56}{section*.42}%
-\contentsline {subsubsection}{Nested Case-Control (NCC)}{57}{section*.44}%
-\contentsline {subsubsection}{Static Case-Cohort (SCC)}{58}{section*.46}%
-\contentsline {subsubsection}{Entropy Sampler}{59}{section*.48}%
-\contentsline {section}{\numberline {4.6}Feature Contribution and Interpretability}{60}{section.4.6}%
-\contentsline {subsection}{\numberline {4.6.1}Signal Recovery and Noise Isolation}{61}{subsection.4.6.1}%
-\contentsline {subsection}{\numberline {4.6.2}Impact of Risk-Set Sampling on Feature Recovery}{62}{subsection.4.6.2}%
-\contentsline {subsubsection}{Dynamic Entropy Sampler}{62}{section*.52}%
-\contentsline {subsubsection}{Nested Case-Control (NCC)}{63}{section*.54}%
-\contentsline {subsubsection}{Static Case-Cohort (SCC)}{63}{section*.56}%
-\contentsline {section}{\numberline {4.7}Discussion}{64}{section.4.7}%
-\contentsline {subsection}{\numberline {4.7.1}Interpretation of Findings}{64}{subsection.4.7.1}%
-\contentsline {subsection}{\numberline {4.7.2}Comparative Validation Against Existing Literature}{65}{subsection.4.7.2}%
-\contentsline {subsection}{\numberline {4.7.3}Computational Efficiency and Vectorization}{66}{subsection.4.7.3}%
-\contentsline {subsection}{\numberline {4.7.4}Theoretical and Practical Implications}{67}{subsection.4.7.4}%
-\contentsline {chapter}{\numberline {5}Conclusion and Future Work}{68}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Summary of Findings}{68}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Limitations and Future Directions}{69}{section.5.2}%
-\contentsline {chapter}{References}{72}{chapter*.58}%
+\contentsline {subsection}{\numberline {4.5.1}Real World Framingham Dataset}{57}{subsection.4.5.1}%
+\contentsline {subsubsection}{Full Cohort Baseline}{57}{section*.42}%
+\contentsline {subsubsection}{Nested Case-Control (NCC)}{58}{section*.44}%
+\contentsline {subsubsection}{Static Case-Cohort (SCC)}{59}{section*.46}%
+\contentsline {subsubsection}{Entropy Sampler}{60}{section*.48}%
+\contentsline {section}{\numberline {4.6}Feature Contribution and Interpretability}{61}{section.4.6}%
+\contentsline {subsection}{\numberline {4.6.1}Signal Recovery and Feature Contributions}{62}{subsection.4.6.1}%
+\contentsline {subsection}{\numberline {4.6.2}Impact of Risk-Set Sampling on Feature Recovery}{63}{subsection.4.6.2}%
+\contentsline {subsubsection}{Dynamic Entropy Sampler}{63}{section*.52}%
+\contentsline {subsubsection}{Nested Case-Control (NCC)}{64}{section*.54}%
+\contentsline {subsubsection}{Static Case-Cohort (SCC)}{64}{section*.56}%
+\contentsline {section}{\numberline {4.7}Discussion}{65}{section.4.7}%
+\contentsline {subsection}{\numberline {4.7.1}Interpretation of Findings}{66}{subsection.4.7.1}%
+\contentsline {subsection}{\numberline {4.7.2}Comparative Validation Against Existing Literature}{67}{subsection.4.7.2}%
+\contentsline {subsection}{\numberline {4.7.3}Computational Efficiency and Vectorization}{68}{subsection.4.7.3}%
+\contentsline {subsection}{\numberline {4.7.4}Theoretical and Practical Implications}{68}{subsection.4.7.4}%
+\contentsline {chapter}{\numberline {5}Conclusion and Future Work}{70}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Summary of Findings}{70}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Limitations and Future Directions}{71}{section.5.2}%
+\contentsline {chapter}{References}{75}{chapter*.58}%

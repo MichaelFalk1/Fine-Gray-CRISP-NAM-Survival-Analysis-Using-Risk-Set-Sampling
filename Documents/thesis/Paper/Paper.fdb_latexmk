@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex Paper"] 1792306295.81761 "Paper.aux" "Paper.bbl" "Paper" 1792306341.70771 0
+["bibtex Paper"] 1792432812.89434 "Paper.aux" "Paper.bbl" "Paper" 1792432859.14107 0
   "./references.bib" 1792252738 11504 e226479267ad207c37e5c3c3b3b5a0c7 ""
   "./utils/named-wits.bst" 1788868590 24478 56eea4624f667e2501a72a17f2eb9d42 ""
-  "Paper.aux" 1792306340 35721 8621f1c29c11c64bca3318467ceb993d "pdflatex"
+  "Paper.aux" 1792432858 36541 e901cf3c813a3f28857c82544b11e611 "pdflatex"
   (generated)
   "Paper.bbl"
   "Paper.blg"
   (rewritten before read)
-["pdflatex"] 1792306296.11979 "c:/Users/micha/OneDrive/Documents/#Msc Data Science/Research_2026/Code/Fine-Gray-CRISP-NAM-Survival-Analysis-Using-Risk-Set-Sampling/Documents/thesis/Paper/Paper.tex" "Paper.pdf" "Paper" 1792306341.70851 0
+["pdflatex"] 1792432813.2168 "c:/Users/micha/OneDrive/Documents/#Msc Data Science/Research_2026/Code/Fine-Gray-CRISP-NAM-Survival-Analysis-Using-Risk-Set-Sampling/Documents/thesis/Paper/Paper.tex" "Paper.pdf" "Paper" 1792432859.14189 0
   "C:/Users/micha/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1788869397 82507 a9eef8696c92627b87e9975edea03b2a ""
   "C:/Users/micha/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1788868708 13333527 86789163dcc0d8359a124f93dd44836a ""
   "C:/Users/micha/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc" 1458473887 4993 80dc9bab7f31fb78a000ccfed0e27cab ""
@@ -204,12 +204,12 @@
   "C:/Users/micha/AppData/Local/Programs/MiKTeX/tex/latex/tools/varioref.sty" 1761901070 44048 2d79759f1937d55dd01f16b2b545c1c7 ""
   "C:/Users/micha/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/micha/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
-  "Paper.aux" 1792306340 35721 8621f1c29c11c64bca3318467ceb993d "pdflatex"
-  "Paper.bbl" 1792306296 8350 a92dfeee813ae7df2d933fbc536b99d8 "bibtex Paper"
-  "Paper.out" 1792306340 14593 87e23d9905e43d7d361ad681aaf24a59 "pdflatex"
-  "Paper.tex" 1792304883 176179 bfe7f9017834cb8fb61db1d4fc46836e ""
-  "Paper.toc" 1792306340 7566 15e1696bc020281c481d32eb5f0d5ee4 "pdflatex"
-  "c:/Users/micha/OneDrive/Documents/#Msc Data Science/Research_2026/Code/Fine-Gray-CRISP-NAM-Survival-Analysis-Using-Risk-Set-Sampling/Documents/thesis/Paper/Paper.tex" 1792304883 176179 bfe7f9017834cb8fb61db1d4fc46836e ""
+  "Paper.aux" 1792432858 36541 e901cf3c813a3f28857c82544b11e611 "pdflatex"
+  "Paper.bbl" 1792432813 8598 f719ef782b2e7369ba42484d4a0f363d "bibtex Paper"
+  "Paper.out" 1792432858 14216 a1282c37bf0cdda47a4e5a066b3df09e "pdflatex"
+  "Paper.tex" 1792432676 184835 eb2f52fabbe9f60fc698e389f0430d61 ""
+  "Paper.toc" 1792432858 7436 fafffd987772db9fa3187f07fa185984 "pdflatex"
+  "c:/Users/micha/OneDrive/Documents/#Msc Data Science/Research_2026/Code/Fine-Gray-CRISP-NAM-Survival-Analysis-Using-Risk-Set-Sampling/Documents/thesis/Paper/Paper.tex" 1792432676 184835 eb2f52fabbe9f60fc698e389f0430d61 ""
   "images/Data/fh2.png" 1791447460 101468 a3bf12bafd100896ec7283da34bd8010 ""
   "images/Data/pbc3.png" 1791554310 61711 35ef9a65f5d3b9e181d16cc19c8d804d ""
   "images/Data/synth.png" 1788868590 62149 dc7d829864d7bfd383fad93c72e0fe7d ""

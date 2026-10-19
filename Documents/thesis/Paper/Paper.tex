@@ -106,7 +106,13 @@ I declare that this research report is my own, unaided work. It is being submitt
 % ABSTRACT
 % -------------------------
 \begin{abstract}
-Deep survival models for competing risks face severe computational bottlenecks due to exhaustive risk-set evaluations. To resolve this, this study integrates a novel dynamic, entropy-guided risk-set sampling strategy into an interpretable Neural Additive Model (CRISPNAM). Evaluated across synthetic and clinical datasets (PBC, Framingham), traditional sampling methods like Nested Case-Control and Static Case-Cohort have novel performance gains along with some calibration failures under high compression. Conversely, the Entropy sampler intelligently targets high-variance subjects. By leveraging stabilized Inverse Probability Weighting, the optimal entropy configuration acts as a data-level regularizer. Regarding feature recovery, CRISPNAM successfully tracked the true linear trajectories of primary synthetic predictors (such as $x_7$ and $x_8$), though L2 regularization and SiLU activations prevented complete suppression of null-effect features (such as $x_3$ and $x_4$). In the clinical PBC cohort, the model appropriately isolated critical biomarkers like serum bilirubin (serBilir) and prothrombin time as major risk contributors, while correctly assigning negligible, flat-line impact to clinical observations like hepatomegaly and spiders. The entropy-sampled model matched the Full Cohort baseline predictive performance (achieving a C-index of 0.851 on synthetic data) while reducing computational training time by over 50\%. Ultimately, this variance driven dynamic sampling provides a computationally scalable, highly calibrated, and clinically transparent framework for large-scale competing risk analysis.
+Deep survival models for competing risks can incur substantial computational costs when evaluating risk sets. To reduce training time while limiting predictive deterioration, this study integrates a dynamic, entropy-guided risk-set sampling strategy into an interpretable Neural Additive Model (CRISPNAM) using the Fine-Gray subdistribution hazard formulation.
+
+The strategy was compared with Nested Case-Control, Static Case-Cohort and an unsampled mini-batch FULL baseline across synthetic, PBC and Framingham datasets. Entropy sampling uses prediction-derived entropy scores to determine control-selection probabilities, with inverse sampling probabilities incorporated alongside Fine-Gray censoring weights.
+
+On synthetic data, entropy sampling at $\tau=0.5$ reduced mean training time by approximately 54\%, achieving a pooled C-index of $0.850$ and Brier Score of $0.105$, compared with $0.851$ and $0.104$ for FULL. On Framingham, the same temperature reduced mean training time by approximately 29\% with slightly improved pooled predictive metrics. On PBC, $\tau=5$ offered approximately 18\% lower mean training time with slightly improved pooled predictive metrics. SCC provided competitive alternatives, while predictive and calibration deterioration at some aggressive sampling settings highlighted the importance of dataset-specific parameter selection. The NAM architecture retained inspectable feature contributions, although sampling affected some contribution shapes and magnitudes.
+
+Overall, entropy-guided sampling at a nominal 10\% control-retention rate offered a promising balance between training time and predictive performance, supporting further investigation of adaptive sampling while preserving the model's additive interpretability.
 \end{abstract}
 
 % -------------------------
@@ -185,7 +191,7 @@ To address the research questions outlined above, this study pursues the followi
 %     \item \textbf{Chapter 1 (Introduction):} Outlines the background, motivation, research questions, and primary objectives of the study.
 %     \item \textbf{Chapter 2 (Background Theory):} Explores the theoretical foundations of competing risks, the Fine-Gray subdistribution hazard, traditional risk-set sampling strategies, and modern deep survival architectures.
 %     \item \textbf{Chapter 3 (Methodology):} Details the preprocessing pipelines, the mathematical formulation of the novel dynamic entropy sampling strategy, the CRISPNAM-FG network architecture, and the quantitative evaluation metrics.
-%     \item \textbf{Chapter 4 (Results and Discussion):} Presents the empirical findings across both synthetic and real wolrd datasets, highlighting the trade-offs between predictive discrimination, probability calibration, and computational efficiency. 
+%     \item \textbf{Chapter 4 (Results and Discussion):} Presents the empirical findings across both synthetic and real-world datasets, highlighting the trade-offs between predictive discrimination, probability calibration, and computational efficiency. 
 %     \item \textbf{Chapter 5 (Conclusion and Future Work):} Summarizes the major contributions of the study, addresses limitations, and outlines potential avenues for future research in scalable survival analysis.
 % \end{itemize}
 % % --------------------------------------------------------------
@@ -309,14 +315,14 @@ The loss combines the Fine--Gray censoring weight with the inverse sampling prob
 \chapter{Methodology}
 \label{ch:methodology}
 
-This chapter details the experimental design, data processing pipelines, and computational frameworks used to evaluate the proposed CRISPNAM architecture along with the  incoperation of the smapling techniques, that also include our custome sampling strategy. It begins by outlining the acquisition and preprocessing of both real wolrd clinical datasets and synthetically generated cohorts designed to test specific mathematical assumptions. The chapter then details the implementation of the deep survival models, including the network architecture, loss function formulations, and the risk set sampling techniques. Finally, it establishes the evaluation metrics and cross-validation strategies used to rigorously benchmark predictive performance .
+This chapter details the experimental design, data processing pipelines, and computational frameworks used to evaluate the proposed CRISPNAM architecture along with the  incorporation of the sampling techniques, that also include our custom sampling strategy. It begins by outlining the acquisition and preprocessing of both real-world clinical datasets and synthetically generated cohorts designed to test specific mathematical assumptions. The chapter then details the implementation of the deep survival models, including the network architecture, loss function formulations, and the risk set sampling techniques. Finally, it establishes the evaluation metrics and cross-validation strategies used to rigorously benchmark predictive performance .
 
 \section{Data Preprocessing}
 
 To evaluate the robustness, accuracy, and interpretability of the competing risks models, experiments were conducted across three distinct data environments: a fully controlled synthetic dataset, the clinical Primary Biliary Cholangitis (PBC) dataset, and a modified version of the Framingham Heart Study dataset.
 
 \subsection{Synthetic Data Generation}
-A fully synthetic dataset was computationally generated to provide a controlled environment where the true underlying data generating distributions, baseline hazards, and covariate coefficients were known definitively. The simulation is grounded in the cause-specific Cox proportional hazards framework for competing risks \citep{Cox1972, prentice1978analysis}. As theoretically formalized earlier in Chapter 2, this approach models a separate proportional hazard for each event type utilizing constant cause-specific baseline hazards. This ground-truth knowledge allows for exact empirical validation of the model's ability to recover true risk estimators without the confounding variables inherent to real wolrd medical data.
+A fully synthetic dataset was computationally generated to provide a controlled environment where the true underlying data generating distributions, baseline hazards, and covariate coefficients were known definitively. The simulation is grounded in the cause-specific Cox proportional hazards framework for competing risks \citep{Cox1972, prentice1978analysis}. As theoretically formalized earlier in Chapter 2, this approach models a separate proportional hazard for each event type utilizing constant cause-specific baseline hazards. This ground-truth knowledge allows for exact empirical validation of the model's ability to recover true risk estimators without the confounding variables inherent to real-world medical data.
 
 A cohort of $N = 15,000$ independent samples was generated. To ensure full experimental reproducibility, a fixed global random state (seed = 42) was utilized throughout the generation process. The feature space was constructed using 12 covariates: six continuous variables drawn from a standard normal distribution $\mathcal{N}(0, 1)$, and six binary variables sampled from a binomial distribution $\text{Binomial}(1, 0.5)$. These were concatenated to form the complete covariate matrix $X$.
 
@@ -380,7 +386,7 @@ p_j =
 
 This transformation maps the unbounded neural risk score onto the interval $(0,1)$, allowing a bounded measure of information to be calculated. The transformed value is used as a sampling score rather than being interpreted as a calibrated probability of experiencing the event of interest.
 
-The informational value of each individual is subsequently evaluated using normalized binary Shannon entropy:
+The informational value of each individual is subsequently evaluated using normalized binary Shannon entropy \citep{Shannon1948}:
 
 \begin{equation}
 H_j =
@@ -504,18 +510,18 @@ The final representation $z_i^{(L)} \in \mathbb{R}^{d_L}$ is projected to a scal
 \begin{equation}
     \tilde{f}_i(x_i) = W_i^{(L+1)} z_i^{(L)},
 \end{equation}
-where $W_i^{(L+1)} \in \mathbb{R}^{1 \times d_L}$. To guarantee model identifiability a core requirement of generalized additive models each FeatureNet enforces a zero-mean batch constraint during training:
+where $W_i^{(L+1)} \in \mathbb{R}^{1 \times d_L}$. To centre feature contributions within training mini-batches, each FeatureNet applies the following zero-mean constraint when the batch contains more than one observation:
 \begin{equation}
     f_i(x_{b,i}) = \tilde{f}_i(x_{b,i}) - \frac{1}{B} \sum_{j=1}^B \tilde{f}_i(x_{j,i}),
 \end{equation}
-for sample $b$ within a mini-batch of size $B$. This centering operation ensures that individual shape functions $\mathbb{E}[f_i(x_i)] = 0$ capture purely relative variations, preventing arbitrary vertical translation between subnetworks.
+for sample $b$ within a mini-batch of size $B$. This operation centres contributions within each training mini-batch; it does not impose a zero population mean or centre outputs automatically during evaluation.
 
 \subsubsection{Global Additive Aggregation}
 The overall model aggregates the individual feature-specific transformations additively with a learnable global intercept $\beta_0 \in \mathbb{R}$:
 \begin{equation}
     \eta(\mathbf{x}) = \beta_0 + \sum_{i=1}^p f_i(x_i),
 \end{equation}
-where $\eta(\mathbf{x})$ denotes the predicted log-subdistribution hazard score (relative risk). Because the final projection layers of the FeatureNets omits additive biases, the global baseline risk is entirely parameterized by $\beta_0$.
+where $\eta(\mathbf{x})$ denotes the predicted log-subdistribution hazard score (relative risk). The final projection layers omit additive biases, while $\beta_0$ provides a global intercept in the log-relative subdistribution hazard score. The baseline subdistribution hazard is estimated separately.
 
 All linear layer weights are initialized using Xavier uniform initialization 
 \begin{equation}
@@ -743,9 +749,9 @@ To ensure full reproducibility of the experiments, the CRISPNAM-FG architecture,
 \chapter{Results and Discussion}
 \section{Dataset Characteristics}
 
-To robustly evaluate the proposed CRISPNAM architecture, including the Fine-Gray sub-distribution loss formulation and the integrated risk-set sampling strategies, this study utilized three distinct datasets: a large-scale synthetic dataset and two smaller real wolrd clinical benchmarks (PBC and Framingham).
+To robustly evaluate the proposed CRISPNAM architecture, including the Fine-Gray sub-distribution loss formulation and the integrated risk-set sampling strategies, this study utilized three distinct datasets: a large-scale synthetic dataset and two smaller real-world clinical benchmarks (PBC and Framingham).
 
-The synthetic dataset ($N = 15,000$) was explicitly simulated to provide a rigorous mathematical environment with a high incidence of competing events. As illustrated in Figure \ref{fig:cif_synthetic}, the pronounced divergence between the standard Kaplan-Meier estimate and the true Cumulative Incidence Function (CIF) confirms that this dataset serves as an ideal stress test. It effectively demonstrates the architecture's capacity to correct the upward bias inherent in traditional single-event survival models. Furthermore, the large sample size ensures that the nested case-control and case-cohort sampling efficiencies are validated across a wide data range.
+The synthetic dataset ($N = 15,000$) was explicitly simulated to provide a rigorous mathematical environment with a high incidence of competing events. As illustrated in Figure \ref{fig:cif_synthetic}, the pronounced divergence between the standard Kaplan-Meier estimate and the true Cumulative Incidence Function (CIF) confirms that this dataset serves as an ideal stress test. It illustrates how treating competing events as censored in a Kaplan--Meier calculation can overestimate the cumulative incidence of the target event. Furthermore, the large sample size ensures that the nested case-control and case-cohort sampling efficiencies are validated across a wide data range.
 
 \begin{figure}[htbp]
     \centering
@@ -759,11 +765,11 @@ Subsequent evaluations were conducted on established, real-world benchmarks to a
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.75\textwidth]{images/Data/pbc3.png} 
-    \caption{Cumulative Incidence Function (CIF) versus Kaplan-Meier (KM) estimate for the primary event in the real wolrd PBC dataset.}
+    \caption{Cumulative Incidence Function (CIF) versus Kaplan-Meier (KM) estimate for the primary event in the real-world PBC dataset.}
     \label{fig:cif_pbc}
 \end{figure}
 
-Finally, the Framingham dataset was included as a secondary real wolrd evaluation point. Though significantly smaller in scale than the synthetic cohort and heavily censored (Figure \ref{fig:cif_framingham}), it contains persistent competing risk dynamics. Utilizing this combination of datasets ensures that the model's sampling mechanisms and loss functions are comprehensively validated across both mathematically extreme theoretical conditions and standard clinical realities.
+Finally, the Framingham dataset was included as a secondary real-world evaluation point. Though significantly smaller in scale than the synthetic cohort and heavily censored (Figure \ref{fig:cif_framingham}), it contains persistent competing risk dynamics. Utilizing this combination of datasets ensures that the model's sampling mechanisms and loss functions are comprehensively validated across both mathematically extreme theoretical conditions and standard clinical realities.
 
 \begin{figure}[H]
     \centering
@@ -980,9 +986,9 @@ Across the tested synthetic configurations, entropy at $\tau=0.5$ best met this 
 
 \subsection{Real World Clinical Benchmark Primary Biliary Cholangitis (PBC) Dataset}
 
-While the synthetic dataset validated the mathematical limits of the architecture under severe competing risk conditions, the Primary Biliary Cirrhosis (PBC) dataset serves to evaluate the model's robustness against standard clinical noise, unscaled covariates, and a smaller overall sample size. 
+Following the controlled synthetic evaluation, the Primary Biliary Cholangitis (PBC) dataset serves to evaluate the model's predictive performance and computational efficiency in a smaller clinical dataset. 
 
-Because the dataset is significantly smaller, the baseline execution time is inherently lower. However, the performance metrics presented in Figures \ref{fig:pbc_c_index}, \ref{fig:pbc_brier_score}, and \ref{fig:pbc_training_duration} reveal that the sampling strategies react far more violently to hyperparameter tuning on noisy clinical data than they do on clean synthetic data.
+The observed baseline training time was lower than for the synthetic dataset. The performance metrics presented in Figures \ref{fig:pbc_c_index}, \ref{fig:pbc_brier_score}, and \ref{fig:pbc_training_duration} show how the sampling settings affect predictive performance and training time in this clinical setting.
 
 \begin{figure}[H]
     \centering
@@ -991,7 +997,7 @@ Because the dataset is significantly smaller, the baseline execution time is inh
     \label{fig:pbc_c_index}
 \end{figure}
 
-The full cohort model maintained strong discriminative capabilities on the clinical data, achieving a pooled C-index of 0.756 and a Brier Score of 0.180. Due to the smaller dataset size, the computational burden was relatively light, averaging roughly 28 seconds per fold. Consequently, the primary objective of risk-set sampling on the PBC dataset shifts slightly: rather than strictly minimizing execution time, the goal is to prove that sampling does not catastrophically degrade the predictive integrity of a smaller cohort.
+The FULL model, used as the unsampled mini-batch baseline, achieved a pooled C-index of $0.761$ and a pooled Brier Score of $0.153$. Training required $32.12 \pm 15.09$ seconds per fold (mean $\pm$ sample standard deviation across five folds). As in the synthetic evaluation, the objective is to determine whether risk-set sampling can reduce training time while limiting deterioration in predictive performance.
 
 \begin{figure}[H]
     \centering
@@ -1000,7 +1006,7 @@ The full cohort model maintained strong discriminative capabilities on the clini
     \label{fig:pbc_brier_score}
 \end{figure}
 
-The NCC sampler exhibited somewhat volatile but competitive behavior on the clinical data. As the control parameter increased from $m=5$ to $m=10$, the predictive performance jumped from a C-index of 0.666 to a peak of 0.779, outperforming the full cohort, before stabilizing around 0.772 to 0.774 for larger control sets up to $m=100$. However, the execution time scaled linearly alongside the control size. At $m=100$, NCC required approximately 34 seconds, exceeding the duration of the full cohort model. This reinforces the finding that arbitrarily expanding control sets is computationally inefficient; an optimal balance for NCC on this dataset is found at lower control sizes like $m=10$, which maximizes discriminative performance (Brier score of 0.168) while minimizing training time.
+The NCC sampler showed a trade-off between predictive performance and training time on the PBC dataset. As the control parameter increased from $m=5$ to $m=10$, the pooled C-index increased from $0.653$ to $0.748$, while the pooled Brier Score decreased from $0.201$ to $0.167$. At $m=20$, the pooled C-index reached $0.768$, slightly exceeding FULL's $0.761$, although the pooled Brier Score remained higher at $0.158$, compared with $0.153$ for FULL. Mean training times were $26.01$, $31.15$, $31.36$, $41.72$ and $46.54$ seconds per fold for $m=5,10,20,50$ and $100$, respectively. Thus, $m=5$ reduced mean training time by approximately $19\%$ but showed substantial predictive deterioration, whereas $m=20$ offered only a $2\%$ time saving. At $m=50$, NCC achieved its lowest pooled Brier Score ($0.155$) and a pooled C-index of $0.761$, but took approximately $30\%$ longer than FULL. Increasing to $m=100$ required approximately $45\%$ more training time than FULL, with a pooled C-index of $0.763$ and a pooled Brier Score of $0.157$. This increase in training time at larger control counts is consistent with the computational consideration discussed by \cite{kvamme2019}, who developed a case-control sampling approach for neural-network Cox models and noted that computational complexity increases with the number of sampled controls. Their observation provides context for the present results, although the total training times reported here also depend on convergence and the Fine--Gray implementation. Among the tested NCC settings, $m=20$ therefore offered a competitive balance of discrimination and training time, but did not improve the Brier Score or substantially reduce training time relative to FULL.
 
 \begin{figure}[H]
     \centering
@@ -1009,17 +1015,17 @@ The NCC sampler exhibited somewhat volatile but competitive behavior on the clin
     \label{fig:pbc_training_duration}
 \end{figure}
 
-The limitations of the Static Case-Cohort (SCC) sampler were starkly exposed on the clinical data. At extreme subcohort compressions ($\alpha=0.05$), the model's discriminative ability collapsed entirely, plunging to a C-index of 0.338, performing worse than random chance. The calibration similarly degraded, yielding a Brier Score of 0.285. This catastrophic failure indicates that when the overall dataset is small and noisy, heavily compressing the static background cohort removes critical variance necessary for stable gradient descent. The SCC model only approaches viability at larger subcohort fractions like $\alpha=0.3$ and $\alpha=0.5$ (achieving C-indices of 0.730 and 0.733, respectively), but it consistently fails to match the baseline full cohort performance.
+The Static Case-Cohort (SCC) sampler showed greater predictive deterioration at small subcohort fractions on PBC than on the synthetic dataset. At a subcohort fraction of $\alpha=0.05$, the model's pooled C-index was $0.639$, compared with $0.761$ for FULL. The pooled Brier Score was also higher at $0.201$, compared with $0.153$ for FULL, while mean training time was $27.68$ seconds per fold, approximately $14\%$ lower than FULL. Increasing the subcohort fraction generally improved predictive performance, although the improvement was not monotonic. At $\alpha=0.2$, the pooled C-index was $0.724$ and the pooled Brier Score was $0.164$, with a mean training time of $24.70$ seconds per fold, approximately $23\%$ below FULL. At $\alpha=0.3$, training was slightly faster at $23.68$ seconds per fold, approximately $26\%$ below FULL, but predictive performance was weaker (pooled C-index: $0.710$; pooled Brier Score: $0.168$). At $\alpha=0.5$, SCC achieved its strongest pooled predictive metrics (C-index: $0.755$; Brier Score: $0.157$), approaching FULL, but required $34.71$ seconds per fold, approximately $8\%$ longer. Thus, none of the tested SCC settings matched FULL on both pooled predictive metrics while also reducing mean training time.
 
-The introduction of clinical noise forced a critical shift in the optimal temperature parameter ($\tau$) for the Entropy sampler. While greedy sampling might excel on clean data, applying a highly greedy temperature ($\tau=0.5$ or $\tau=1.0$) to the PBC data resulted in suboptimal discriminative performance (C-indices of 0.734 and 0.727) and poor calibration, such as a Brier Score of 0.209 for $\tau=0.5$. 
+The Entropy sampler showed a different temperature--performance trade-off on PBC than on the synthetic dataset. While $\tau=0.5$ offered a favourable speed--accuracy balance on synthetic data, the same setting on PBC achieved a pooled C-index of $0.725$ and a pooled Brier Score of $0.191$, compared with $0.761$ and $0.153$ for FULL. At $\tau=1$, the pooled C-index was $0.729$ and the pooled Brier Score was $0.169$. These settings reduced mean training time to $14.73$ and $16.23$ seconds per fold, respectively, approximately $54\%$ and $49\%$ below FULL, but with greater predictive deterioration.
 
-This occurs because a low $\tau$ forces the sampler to exclusively focus on the highest-variance observations. In a noisy clinical setting, these "high-variance" patients are often extreme outliers. By oversampling outliers, the model fails to learn the general underlying survival distribution. 
+Lower temperatures concentrate selection probabilities more strongly on observations with high entropy scores. This may limit the diversity of sampled controls and increase variability in sampling-weighted risk-set contributions. However, the present results do not establish that selected observations were outliers or that clinical noise caused the performance differences.
 
-The architecture recovers brilliantly when the temperature is relaxed to $\tau=5.0$ or $\tau=10.0$. By decreasing the greediness and introducing a flatter probability distribution over the risk-sets, the Entropy sampler recovers C-indices of 0.753 and 0.752 respectively, reaching statistical parity with the full cohort's 0.756. The calibration also strictly improves in this relaxed regime, achieving a Brier Score of 0.174 at $\tau=10.0$. Furthermore, at the optimal balance of $\tau=5.0$, the execution time remains highly efficient at approximately 16 seconds (nearly half the time of the full cohort model), confirming that Entropy sampling remains a superior optimization strategy provided the temperature is scaled appropriately to the dataset's intrinsic noise profile.
+Higher temperatures produced stronger predictive performance. At $\tau=5$, entropy achieved a pooled C-index of $0.764$ and a pooled Brier Score of $0.151$, with a mean training time of $26.49$ seconds per fold, approximately $18\%$ below FULL. At $\tau=10$, the pooled C-index increased to $0.775$ and the pooled Brier Score decreased to $0.147$, the strongest pooled predictive metrics among the tested PBC configurations with available pooled results. However, mean training time was $30.47$ seconds per fold, only approximately $5\%$ below FULL. Thus, $\tau=5$ offered a favourable balance for the study's speed--accuracy objective, while $\tau=10$ favoured predictive performance. Both settings achieved better pooled predictive metrics than FULL with shorter mean training times in these runs. Pooled predictive metrics were unavailable for $\tau=0.1$, so that setting is excluded from this comparison.
 
 \subsection{Real World Framingham Dataset}
 
-The Framingham dataset introduces a final, unique environmental challenge: it is heavily right-censored and features a lower overall event density. This scenario tests how the CRISPNAM architecture and its sampling mechanisms handle high uncertainty within the active risk pool. The performance and computational profiling for this dataset are presented in Figures \ref{fig:fh_c_index}, \ref{fig:fh_brier_score}, and \ref{fig:fh_training_duration}.
+The modified Framingham dataset provides a further evaluation setting in which most observations are right-censored. This scenario tests the CRISPNAM architecture and its sampling mechanisms when fewer observations contribute observed events. The predictive performance and training times for this dataset are presented in Figures \ref{fig:fh_c_index}, \ref{fig:fh_brier_score}, and \ref{fig:fh_training_duration}.
 
 \begin{figure}[H]
     \centering
@@ -1029,7 +1035,7 @@ The Framingham dataset introduces a final, unique environmental challenge: it is
 \end{figure}
 
 
-Due to the heavy censoring and inherent noise, the Full Cohort baseline achieves a modest pooled C-index of 0.645 and a high  Brier Score of 0.670. Because the dataset is small, the entire risk matrix easily fits into GPU memory, allowing highly optimized, vectorized tensor operations. Consequently, the Full Cohort training is executed rapidly, averaging roughly 21 seconds per fold. 
+The FULL model, used as the unsampled mini-batch baseline, achieved a pooled C-index of $0.663$ and a pooled Brier Score of $0.137$. Mean training time was $27.61 \pm 21.77$ seconds per fold (mean $\pm$ sample standard deviation across five folds). One fold required $66.52$ seconds, whereas the remaining four required between $16.76$ and $19.29$ seconds. Consequently, comparisons based on mean training time are sensitive to this longer-running fold. 
 
 \begin{figure}[H]
     \centering
@@ -1039,9 +1045,9 @@ Due to the heavy censoring and inherent noise, the Full Cohort baseline achieves
 \end{figure}
 
 
-The Framingham evaluation reveals a counter-intuitive but critical behavior of the NCC sampler: it improves predictive performance but severely degrades computational efficiency. Across all control sizes ($m \in [5, 100]$), NCC consistently outperforms the Full Cohort baseline, achieving a C-index of up to 0.677 ($m=50$) and lowering the Brier Score to 0.644 ($m=5$). In heavily censored datasets, utilizing the full cohort forces the model to optimize against a massive pool of noisy, uncertain observations. NCC mitigates this by randomly discarding background noise, effectively acting as a data-level regularizer that prevents overfitting.
+The Framingham evaluation shows that NCC improves pooled predictive metrics at the cost of longer training times. Across the reported control settings ($m=5,10,20,50,100$), NCC achieved higher pooled C-indices and lower pooled Brier Scores than FULL. At $m=5$, the pooled C-index was $0.682$ and the pooled Brier Score was $0.135$, compared with $0.663$ and $0.137$ for FULL. At $m=50$, NCC achieved its strongest pooled predictive metrics, with a C-index of $0.701$ and a Brier Score of $0.132$. These improvements do not establish that sampling removes noise or prevents overfitting; the present comparison measures the resulting predictive performance rather than isolating its cause.
 
-However, the computational cost is inverted. At $m=5$, NCC requires approximately 34 seconds to train a 60\% increase over the Full Cohort. This is believed to occur because the algorithmic overhead of dynamically sampling controls via CPU-bound loops outpaces the GPU compute time saved by the reduced matrix size. This confirms that on small datasets, the vectorization benefits of the Full Cohort outweigh the data-compression benefits of NCC.
+However, mean training times were $36.13$, $47.87$, $62.44$, $87.73$ and $48.41$ seconds per fold for $m=5,10,20,50$ and $100$, respectively, compared with $27.61$ seconds for FULL. Even the fastest NCC setting, $m=5$, took approximately $31\%$ longer than FULL, while $m=50$ required approximately $3.2$ times as long. Training time did not increase monotonically with the number of controls, and these runs do not isolate sampling overhead from differences in convergence. Thus, $m=50$ favoured predictive performance, but none of the reported NCC settings achieved the study's objective of reducing mean training time relative to FULL.
 
 \begin{figure}[H]
     \centering
@@ -1051,94 +1057,101 @@ However, the computational cost is inverted. At $m=5$, NCC requires approximatel
 \end{figure}
 
 
-Similar to the PBC dataset, SCC struggles with stability when the background cohort is too small. At $\alpha=0.05$, the C-index collapses to 0.588. While it stabilizes at $\alpha=0.5$ (C-index: 0.637), it fails to capture the regularization benefits seen in NCC and suffers from high calibration error (Brier Score: 0.681). Its execution time remains comparable to the baseline, offering no distinct advantage in this highly censored environment.
+The SCC sampler maintained predictive performance close to FULL at several subcohort fractions on the modified Framingham dataset. At $\alpha=0.05$, the pooled C-index was $0.662$ and the pooled Brier Score was $0.137$, close to FULL's $0.663$ and $0.137$, respectively. However, mean training time was $31.11$ seconds per fold, approximately $13\%$ longer than FULL. At $\alpha=0.2$, SCC achieved a pooled C-index of $0.669$ and a pooled Brier Score of $0.136$, with a mean training time of $20.02 \pm 1.90$ seconds per fold, approximately $27\%$ below FULL. This setting offered the strongest observed speed--accuracy balance among the tested SCC configurations. Although $\alpha=0.1$ achieved the highest SCC pooled C-index ($0.680$), its pooled Brier Score was $0.137$ and its mean training time was $30.82$ seconds per fold. Increasing the fraction to $\alpha=0.5$ did not improve performance: the pooled C-index was $0.654$ and the pooled Brier Score was $0.138$, with a mean training time of $27.02$ seconds per fold. Thus, a larger subcohort did not consistently improve predictive performance or training efficiency.
+
+Fold-level training times also varied substantially within some configurations. For FULL, one fold required $66.52$ seconds while the remaining four required $16.76$--$19.29$ seconds. Similarly, SCC at $\alpha=0.3$ included one fold lasting $88.51$ seconds, compared with $17.20$--$21.32$ seconds for the other folds. In contrast, SCC at $\alpha=0.2$ ranged from $17.28$ to $21.78$ seconds across all five folds. Training uses validation-based early stopping, so differences in fold composition and optimisation trajectories can affect the number of epochs completed, even within the same dataset and sampling configuration. However, the saved timing summaries alone do not establish why particular folds took longer. The approximately $27\%$ reduction for SCC at $\alpha=0.2$ therefore describes the observed five-fold mean, rather than a consistent reduction in every fold or an isolated reduction in computational cost per epoch.
+
+We retained all five folds and reported their variability. Some folds took substantially longer, influencing the mean. Validation-based early stopping can produce different training lengths, but we did not isolate the cause of each longer run. Our reported savings therefore describe observed mean training durations.
 
 
-The Entropy sampler reinforces the tuning dynamics observed in the PBC dataset. At an aggressively greedy temperature ($\tau=0.1$), the model overfits to the highest variance clinical outliers, resulting in a collapsed C-index of 0.575 and a severe Brier Score spike (0.863). 
+The Entropy sampler showed sensitivity to temperature on the modified Framingham dataset. At $\tau=0.1$, the pooled C-index was $0.615$ and the pooled Brier Score was $0.161$, both worse than FULL's $0.663$ and $0.137$, respectively. Mean training time was $30.18$ seconds per fold, also exceeding FULL's $27.61$ seconds. This deterioration is consistent with the potential limitations of overly concentrated sampling, but does not establish that the model overfitted to clinical outliers.
 
-However, when properly tuned to $\tau=5.0$, the entropy mechanism successfully filters the heavy censoring noise. It achieves a C-index of 0.663 and a Brier Score of 0.655, outperforming the Full Cohort baseline. Furthermore, unlike NCC, the algorithmic implementation of the Entropy sampler is highly efficient at optimal temperatures; at $\tau=0.5$, it executes in roughly 17 seconds, successfully improving upon both the predictive and computational benchmarks of the Full Cohort.
+At $\tau=0.5$, entropy achieved a pooled C-index of $0.668$ and a pooled Brier Score of $0.136$, slightly improving both metrics relative to FULL. Mean training time was $19.59 \pm 7.37$ seconds per fold, approximately $29\%$ below FULL. This setting provided the strongest observed speed--accuracy balance among the tested entropy configurations. At $\tau=1$, the pooled C-index increased to $0.675$ and the pooled Brier Score was $0.136$, but mean training time increased to $40.43$ seconds. Temperatures of $\tau=5$ and $\tau=10$ both achieved a pooled C-index of approximately $0.685$ and a pooled Brier Score of $0.135$, with mean training times of $50.53$ and $49.80$ seconds, respectively. Thus, higher temperatures improved discrimination but did not provide training-time savings relative to FULL.
 
+Across the reported Framingham configurations, entropy at $\tau=0.5$ best met the study's speed--accuracy objective, combining the shortest mean training time with slightly better pooled predictive metrics than FULL. SCC at $\alpha=0.2$ was a close alternative, requiring $20.02$ seconds per fold and achieving a slightly higher pooled C-index than entropy at $\tau=0.5$, although its pooled Brier Score was slightly higher. NCC at $m=50$ achieved the strongest pooled predictive metrics, but required approximately $3.2$ times FULL's mean training duration. These comparisons retain all five folds and should be interpreted alongside the timing variability described above.
 
 \section{Model Calibration and Discrimination}
 
-While the previous section established the predictive performance using the pooled Concordance Index and Brier Score, these metrics primarily evaluate general rank-ordering and time-averaged error. To fully validate the CRISPNAM architecture, it is necessary to examine its calibration its ability to predict absolute event probabilities accurately over time and its capacity to recover true underlying biostatistical relationships.
+While the previous section established the predictive performance using the pooled Concordance Index and Brier Score, these metrics summarise discrimination and prediction error, respectively. To further evaluate the CRISPNAM architecture, it is necessary to examine its calibration---its ability to predict absolute event probabilities accurately over time---and its agreement with the known synthetic risk structure.
 
 \subsection{Ground Truth Risk Recovery}
 
-A fundamental limitation of real wolrd clinical datasets is that the true feature effects and baseline hazards are strictly unknown. The synthetic dataset ($N=15,000$) bypasses this limitation, allowing for a direct comparison between the model's predicted relative risk score ($\hat{\eta}$) and the mathematically defined True Linear Predictor.
+A fundamental limitation of real-world clinical datasets is that the true feature effects and baseline hazards are unknown. The synthetic dataset ($N=15,000$) bypasses this limitation, allowing for a direct comparison between the model's predicted log-risk score ($\hat{\eta}$) and the known linear predictor used to generate the event of interest.
 
-Figure \ref{fig:synth_truth_recovery} illustrates this relationship for the Full Cohort baseline. The architecture successfully isolates the true hazard contributions, achieving a Spearman rank correlation of 0.833 and a Pearson linear correlation of 0.843 for the primary event of interest. This strong linear and monotonic agreement proves that the deep neural additive framework accurately recovers the true biostatistical feature effects without entanglement, even under severe competing risk conditions.
+Figure \ref{fig:synth_truth_recovery} illustrates this relationship for the FULL baseline. The predicted log-risk scores achieved a Spearman rank correlation of $0.849$ and a Pearson linear correlation of $0.857$ for the primary event of interest. This strong linear and monotonic agreement indicates that the model captures much of the overall synthetic risk structure. However, these correlations do not establish that each individual feature effect has been recovered correctly; feature-level recovery is examined separately through the FeatureNet plots.
 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.85\textwidth]{images/Synth_results/FULL/Metrics/model_diagnostics_cause_1.png}
-    \caption{Model diagnostics for the Full Cohort on the synthetic dataset, detailing rank correlation and subdistribution trajectory bounds.}
+    \caption{Model diagnostics for the FULL baseline on the synthetic dataset, showing predicted log-risk scores against the known linear predictor (left) and predicted versus empirical Aalen--Johansen cumulative incidence curves across three risk strata (right).}
     \label{fig:synth_truth_recovery}
 \end{figure}
 
 \subsection{Cumulative Incidence Calibration}
 
-Beyond rank-ordering patients correctly, a survival model must be highly calibrated; if the network predicts a 40\% cumulative incidence for a specific subgroup at a specific time horizon, empirical reality must reflect that exact proportion. 
+Beyond rank-ordering patients correctly, a survival model should provide calibrated event probabilities; if the network predicts a 40\% cumulative incidence for a specific subgroup at a specific time horizon, the corresponding empirical cumulative incidence should be approximately 40\%, allowing for sampling variability.
 
-To validate this absolute accuracy, the synthetic cohort was partitioned into three distinct risk strata (Low, Medium, and High) based on the network's predicted scores. As shown in the right panel of Figure \ref{fig:synth_truth_recovery}, the predicted mean CIF curves for all three strata effectively overlay the non-parametric Empirical Aalen-Johansen estimators. There is no visible divergence, probability collapse, or inflation at the temporal bounds, confirming that the unmodified Fine-Gray objective function is deeply calibrated.
+To assess calibration, the synthetic cohort was partitioned into three distinct risk strata (Low, Medium, and High) based on the network's predicted scores. As shown in the right panel of Figure \ref{fig:synth_truth_recovery}, the predicted mean CIF curves follow the broad pattern of the non-parametric Aalen--Johansen estimates over the interval where both are plotted. However, the model somewhat overestimates cumulative incidence in the low- and medium-risk strata and underestimates it in the high-risk stratum towards the end of the prediction interval. The empirical curves extend beyond the model's plotted prediction interval, so this figure does not establish calibration over the full observed follow-up period.
+
+Figure \ref{fig:synth_individual_cif} illustrates variation in predicted cumulative incidence between individuals. The selected high-risk subjects have predictions approaching one, while the selected low-risk subjects have predictions near zero. These individual curves are shown alongside the population Aalen--Johansen estimate as a reference; they are not expected to coincide with a population average. Their separation illustrates the range of model predictions but does not, by itself, establish individual-level calibration.
 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.85\textwidth]{images/Synth_results/FULL/Metrics/subject_curves_cause_1_cif.png}
-    \caption{Individual patient Cumulative Incidence trajectories compared against the population Aalen-Johansen baseline (Synthetic Dataset).}
+    \caption{Predicted cumulative incidence curves for selected high- and low-risk subjects (left) and five randomly selected subjects (right), shown alongside the population Aalen--Johansen estimate for the synthetic dataset.}
     \label{fig:synth_individual_cif}
 \end{figure}
 
 \subsection{Entropy Sampler Calibration and Risk Recovery}
 
-A core hypothesis of this study is that intelligent risk-set sampling can drastically reduce computational overhead without corrupting the model's calibration or its ability to recover true biostatistical relationships. To evaluate this, the dynamic Entropy sampling strategy was benchmarked against the Full Cohort baseline.
+A core objective of this study is to reduce training time while limiting deterioration in predictive performance. To assess whether the entropy sampler also preserves agreement with the known synthetic risk structure, its predicted log-risk scores were compared with the data-generating linear predictor and benchmarked against the unsampled mini-batch FULL baseline.
 
-Remarkably, the diagnostic evaluations reveal that the Entropy sampler does not merely match the baseline; at optimal temperature scaling ($\tau=0.5$), it strictly outperforms it in ground truth recovery. As illustrated in Figure \ref{fig:entropy_truth_recovery}, the Entropy sampler achieves a Pearson linear correlation of 0.866 and a Spearman rank correlation of 0.857. This is a measurable improvement over the Full Cohort's respective scores of 0.843 and 0.833. By dynamically prioritizing high-variance, high-information subjects and aggressively down-sampling dense, redundant patient clusters, the entropy mechanism effectively acts as a data-level regularizer, allowing the neural additive framework to isolate a cleaner underlying hazard signal.
+As illustrated in Figure \ref{fig:entropy_truth_recovery}, the entropy sampler at $\tau=0.5$ achieves a Pearson correlation of 0.848 and a Spearman correlation of 0.838, compared with 0.857 and 0.849, respectively, for FULL. These slightly lower correlations indicate that much of the association with the known risk structure is retained. Together with the approximately 54\% reduction in mean training duration reported earlier, this supports $\tau=0.5$ as a favourable setting for the study's speed--accuracy objective, rather than the setting with the strongest ground-truth risk recovery.
 
-Furthermore, as the temperature parameter $\tau$ is increased forcing the probability distribution to become flatter and less greedy the model's recovery metrics gracefully degrade back toward the Full Cohort baseline. At $\tau=1.0$, the Pearson correlation drops to 0.853, and at $\tau=5.0$, it falls to 0.839. This confirms the expected theoretical behavior: as the dynamic sampler approaches a uniform random sample, its regularizing benefits diminish.
+Risk recovery does not vary monotonically with temperature. At $\tau=1$, the Pearson and Spearman correlations are 0.860 and 0.851; at $\tau=5$, they are 0.846 and 0.836; and at $\tau=10$, they reach 0.861 and 0.853, the highest values among the tested entropy settings. Although increasing temperature makes the entropy-based sampling probabilities less concentrated, these results do not establish a consistent improvement or deterioration in risk recovery, nor do they demonstrate a regularising effect.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.85\textwidth]{images/Synth_results/ENTROPY/Metrics/model_diagnostics_cause_1_Entropy_tau_0.5_compression_0.1.png}
-    \caption{Model diagnostics for the optimal Entropy Sampler ($\tau=0.5$) demonstrating ground-truth risk recovery and IPW-adjusted calibration.}
+    \caption{Synthetic model diagnostics for the entropy sampler ($\tau=0.5$): association between predicted log-risk scores and the data-generating linear predictor (left), and predicted versus empirical cumulative incidence across risk strata (right).}
     \label{fig:entropy_truth_recovery}
 \end{figure}
 
-Crucially, this aggressive sub-sampling does not destroy the absolute probability estimates. A known vulnerability of risk-set sampling is the introduction of severe selection bias. However, the right panel of Figure \ref{fig:entropy_truth_recovery} demonstrates that the Inverse Probability Weighting (IPW) integration perfectly neutralizes this bias. The predicted Stratified CIF curves cleanly track the empirical Aalen-Johansen estimates without probability inflation.
+The right panel of Figure \ref{fig:entropy_truth_recovery} shows broad agreement between the predicted stratified CIF curves and the empirical Aalen--Johansen estimates over the plotted prediction interval. Towards the end of this interval, the model slightly underpredicts cumulative incidence in the middle- and high-risk strata and slightly overpredicts it in the low-risk stratum. These observations support approximate calibration at $\tau=0.5$, although the figure does not establish that IPW eliminates sampling bias. The empirical curves extend beyond the plotted predictions, so agreement over the full follow-up period cannot be assessed from this comparison.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.85\textwidth]{images/Synth_results/ENTROPY/Metrics/subject_curves_cause_1_cif_Entropy_tau_0.5_compression_0.1.png}
-    \caption{Individual patient Cumulative Incidence trajectories generated via the Entropy sampler ($\tau=0.5$).}
+    \caption{Individual cumulative incidence trajectories for the entropy sampler ($\tau=0.5$), showing selected high- and low-risk subjects (left) and five randomly selected subjects (right), with the population Aalen--Johansen estimate as a reference.}
     \label{fig:entropy_individual_cif}
 \end{figure}
 
-This calibration is further maintained at the micro-level. Figure \ref{fig:entropy_individual_cif} displays the individual subject CIF trajectories generated by the $\tau=0.5$ Entropy model. Despite being trained on a heavily fractionated approximation of the cohort, the network continues to output stable, monotonic, and bounded incidence curves that appropriately scale to specific patient covariate profiles.
+Figure \ref{fig:entropy_individual_cif} displays the individual subject CIF trajectories generated by the $\tau=0.5$ Entropy model. Despite being trained using sampled risk sets, the network continues to output non-decreasing incidence curves bounded between zero and one, with trajectories that vary according to individual covariate profiles. These curves illustrate that the model retains the ability to produce differentiated individual risk predictions despite substantial risk-set sampling.
 
 
 \subsection{Nested Case-Control (NCC) Calibration and Risk Recovery}
 
-Following the evaluation of the dynamic Entropy sampler, the Nested Case-Control (NCC) architecture was assessed to determine how rigid, uniform control sampling impacts absolute calibration and feature recovery. As established in the macro-performance analysis, NCC is highly sensitive to the defined control quota ($m$).
+Following the evaluation of the dynamic Entropy sampler, the Nested Case-Control (NCC) architecture was assessed to determine how rigid, uniform control sampling impacts absolute calibration and risk-score recovery. As established in the macro-performance analysis, NCC is affected by the defined control quota ($m$).
 
-When provided with a large control pool ($m=100$), the NCC sampler successfully mimics the full cohort. As shown in Figure \ref{fig:ncc_truth_recovery_100}, this configuration achieves a Pearson correlation of 0.856 and a Spearman rank correlation of 0.847, marginally outperforming the Full Cohort baseline by filtering out a portion of background noise. The Inverse Probability Weighting (IPW) mechanism functions effectively at this scale, ensuring the predicted stratified CIF curves accurately align with the empirical Aalen-Johansen estimates without significant bias.
+When provided with a large control pool ($m=100$), the NCC sampler achieves risk-score recovery close to FULL. As shown in Figure \ref{fig:ncc_truth_recovery_100}, this configuration achieves a Pearson correlation of 0.859 and a Spearman rank correlation of 0.851, marginally outperforming the Full Cohort baseline on these correlations. The predicted stratified CIF curves broadly follow the empirical Aalen-Johansen estimates over the plotted prediction interval, although some overprediction in the lower-risk strata and underprediction in the highest-risk stratum remain.
 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.85\textwidth]{images/Synth_results/NCC/Metrics/model_diagnostics_cause_1_NCC_ncontrols_100.png}
-    \caption{Model diagnostics for NCC with an optimal control pool ($m=100$).}
+    \caption{Model diagnostics for NCC with a large control pool ($m=100$).}
     \label{fig:ncc_truth_recovery_100}
 \end{figure}
 
-However, evaluating the boundary conditions of the NCC sampler reveals a critical vulnerability when the active risk-set is overly compressed. Figure \ref{fig:ncc_truth_recovery_5} illustrates the catastrophic breakdown of the model when restricted to just $m=5$ controls per case. While the linear correlation degrades to 0.806, the most severe failure occurs in the absolute probability calibration. 
+However, evaluating $m=5$ reveals poorer calibration with fewer sampled controls. Figure \ref{fig:ncc_truth_recovery_5} illustrates this deterioration when restricted to just $m=5$ controls per case. While the linear correlation decreases to 0.850, the more pronounced deterioration concerns the absolute probability calibration.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.85\textwidth]{images/Synth_results/NCC/Metrics/model_diagnostics_cause_1_NCC_ncontrols_5.png}
-    \caption{Model diagnostics for a heavily constrained NCC sampler ($m=5$), demonstrating structural calibration failure in the higher risk strata.}
+    \caption{Model diagnostics for a heavily constrained NCC sampler ($m=5$), demonstrating underprediction of cumulative incidence across the risk strata.}
     \label{fig:ncc_truth_recovery_5}
 \end{figure}
 
-The Stratified CIF calibration plot for $m=5$ demonstrates a total structural collapse. The high-risk curve (Stratum 3) terminates prematurely near $t=100$, and all strata drastically underestimate the true Aalen-Johansen incidence. This occurs because starving the neural network of valid controls artificially inflates the perceived baseline hazard during mini-batch optimization, distorting the IPW scaling. This visual diagnostic directly explains why the Brier Score spiked to 0.139 in the previous section: without sufficient controls, standard NCC cannot maintain absolute probabilistic accuracy over time.
+The Stratified CIF calibration plot for $m=5$ demonstrates substantial underprediction. The high-risk curve (Stratum 3) reaches approximately 0.38 near the end of the plotted prediction interval ($t=50$), compared with approximately 0.60 for the empirical Aalen-Johansen estimate, and the lower-risk strata also underestimate cumulative incidence. This poorer calibration accompanies the higher pooled Brier Score of 0.129 reported earlier, compared with 0.104 for FULL. These results do not isolate the cause of the calibration deterioration.
 
 \begin{figure}[htbp]
     \centering
@@ -1147,31 +1160,31 @@ The Stratified CIF calibration plot for $m=5$ demonstrates a total structural co
     \label{fig:ncc_individual_cif}
 \end{figure}
 
-Conversely, when operating at the optimal $m=100$ configuration, the micro-level calibration remains intact. Figure \ref{fig:ncc_individual_cif} confirms that the individual patient trajectories are stable, monotonic, and effectively separate high-risk and low-risk subjects while respecting the mathematical boundaries of the subdistribution hazard framework.
+At $m=100$, the model retains differentiated individual risk predictions. Figure \ref{fig:ncc_individual_cif} shows that the individual patient trajectories are monotonic, and separate selected high-risk and low-risk subjects while keeping the predicted probability of experiencing the event of interest by a given time within the valid range of 0\% to 100\%.
 
 \subsection{Static Case-Cohort (SCC) Calibration and Risk Recovery}
 
-The Static Case-Cohort (SCC) architecture offers a fundamentally different sampling philosophy, relying on a fixed background subcohort rather than time-matched controls. While this approach provides stable optimization across iterations, its ability to maintain absolute calibration is highly dependent on the retention fraction ($\alpha$).
+The Static Case-Cohort (SCC) architecture offers a fundamentally different sampling philosophy, relying on a fixed background subcohort rather than time-matched controls. Subcohort membership remains fixed across training iterations, and calibration is evaluated here at different retention fractions ($\alpha$).
 
-When provided with a robust background cohort ($\alpha=0.5$), the SCC sampler demonstrates strong structural integrity. As shown in Figure \ref{fig:scc_truth_recovery_05}, this configuration recovers the ground truth linear predictor with a Pearson correlation of 0.849 and a Spearman correlation of 0.840, slightly exceeding the Full Cohort baseline. Importantly, the IPW integration successfully scales the fixed background cohort to match the population distribution, resulting in Stratified CIF curves that accurately align with the empirical Aalen-Johansen estimates across all three risk strata.
+When provided with a robust background cohort ($\alpha=0.5$), the SCC sampler demonstrates strong risk-score recovery, mimicking closer to full risk. As shown in Figure \ref{fig:scc_truth_recovery_05}, this configuration recovers the ground truth linear predictor with a Pearson correlation of 0.862 and a Spearman correlation of 0.854, slightly exceeding the Full Cohort baseline. The Stratified CIF curves broadly follow the empirical Aalen-Johansen estimates over the plotted prediction interval, with some overprediction in the low- and medium-risk strata and slight underprediction in the high-risk stratum.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.85\textwidth]{images/Synth_results/SCC/Metrics/model_diagnostics_cause_1_SCC_subcohort_0.5.png}
-    \caption{Model diagnostics for SCC with an optimal subcohort fraction ($\alpha=0.5$).}
+    \caption{Model diagnostics for SCC with a subcohort fraction of $\alpha=0.5$.}
     \label{fig:scc_truth_recovery_05}
 \end{figure}
 
-However, similar to the NCC architecture, aggressively compressing the risk-set exposes severe methodological limits. When the background subcohort is reduced to just 5\% of the total population ($\alpha=0.05$), the model's calibration begins to fracture, as illustrated in Figure \ref{fig:scc_truth_recovery_05_collapse}. 
+When the expected background subcohort fraction is reduced to just 5\% of the training fold ($\alpha=0.05$), the model retains broad agreement with the empirical cumulative incidence, as illustrated in Figure \ref{fig:scc_truth_recovery_05_collapse}.
 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.85\textwidth]{images/Synth_results/SCC/Metrics/model_diagnostics_cause_1_SCC_subcohort_0.05.png}
-    \caption{Model diagnostics for a heavily compressed SCC sampler ($\alpha=0.05$) highlighting the degradation of IPW scaling.}
+    \caption{Model diagnostics for a heavily compressed SCC sampler ($\alpha=0.05$) showing risk-score recovery and stratified CIF calibration.}
     \label{fig:scc_truth_recovery_05_collapse}
 \end{figure}
 
-Interestingly, the nature of the SCC collapse differs from the NCC collapse. While the severely constrained NCC model ($m=5$) completely lost structural integrity and terminated early, the heavily constrained SCC model ($\alpha=0.05$) maintains its basic shape and still achieves a reasonable Pearson correlation of 0.835. The failure occurs entirely in the absolute calibration: because the static subcohort is too sparse to accurately represent the population's covariate density, the IPW scaling becomes skewed. Consequently, the predicted Stratified CIF curves systematically pull away from the true empirical baseline, particularly for the low and medium risk groups.
+Unlike NCC at $m=5$, SCC at $\alpha=0.05$ does not show substantial underprediction across all three risk strata. It achieves a Pearson correlation of 0.853 and a Spearman correlation of 0.843, slightly below FULL's respective values of 0.857 and 0.849. The predicted Stratified CIF curves slightly overestimate cumulative incidence in the low-risk stratum and underestimate it in the medium- and high-risk strata towards the end of the plotted prediction interval.
 
 \begin{figure}[htbp]
     \centering
@@ -1180,22 +1193,21 @@ Interestingly, the nature of the SCC collapse differs from the NCC collapse. Whi
     \label{fig:scc_individual_cif}
 \end{figure}
 
-Provided the subcohort fraction remains sufficiently large (e.g., $\alpha=0.5$), the SCC architecture remains highly reliable at the individual patient level. Figure \ref{fig:scc_individual_cif} demonstrates that the optimal SCC configuration successfully generates individualized, monotonic CIF trajectories that respect the subdistribution boundaries and cleanly separate high and low-risk clinical profiles.
+Provided the subcohort fraction remains sufficiently large (e.g., $\alpha=0.3,0.5$), the SCC architecture remains highly reliable at the individual patient level.Figure \ref{fig:scc_individual_cif} demonstrates that the SCC configuration at $\alpha=0.5$ successfully generates individualized, monotonic CIF trajectories that keeping the predicted probability of experiencing the event of interest by a given time within the valid range of 0\% to 100\%, and separate selected high- and low-risk subjects.
 
 
 \section{Real World Model Calibration and Discrimination}
 
-While the synthetic dataset provided a mathematically pure environment to test absolute boundaries and feature recovery, standard clinical data introduces high variance, unscaled covariates, and inherent observational noise. To validate the CRISPNAM architecture's generalizability, the calibration of the risk-set sampling mechanisms was evaluated against the real wolrd Primary Biliary Cirrhosis (PBC) benchmark.
+While the synthetic dataset provided a mathematically pure environment to test absolute boundaries and feature recovery, standard clinical data introduces high variance, unscaled covariates, and inherent observational noise. To validate the CRISPNAM architecture's generalizability, the calibration of the risk-set sampling mechanisms was evaluated against the real-world Primary Biliary Cirrhosis (PBC) benchmark.
 
-Because the ground truth linear predictor is fundamentally unknown in real wolrd clinical data, the evaluation relies exclusively on empirical calibration diagnostics. Specifically, the model's predicted Cumulative Incidence Functions (CIF) are plotted against the non-parametric Aalen-Johansen estimators, evaluated both at a stratified group level and via marginal calibration gaps.
+Because the ground truth linear predictor is fundamentally unknown in real-world clinical data, the evaluation relies exclusively on empirical calibration diagnostics. Specifically, the model's predicted Cumulative Incidence Functions (CIF) are plotted against the non-parametric Aalen-Johansen estimators, evaluated both at a stratified group level and via marginal calibration gaps.
 
-\subsection{Real World Clinical Benchmark Primary Biliary Cholangitis Dataset}
 
 \subsubsection{Full Cohort Baseline}
 
-The Full Cohort configuration serves as the empirical baseline for the PBC dataset. By computing the partial likelihood over the entire available risk set at every event time, it establishes the maximum achievable calibration given the intrinsic noise of the data.
+The Full Cohort configuration serves as the empirical baseline for the PBC dataset. By computing the partial likelihood over all eligible observations within each mini-batch at every event time, it establishes the unsampled reference for comparing calibration.
 
-Figure \ref{fig:pbc_full_calibration} illustrates this baseline calibration. The left panel displays the Stratified CIF Calibration; the clinical cohort was partitioned into three distinct risk strata (Low, Medium, and High) based on the network's predicted relative risk scores. The model's predicted mean incidence (solid lines) tracks the empirical Aalen-Johansen estimates (dashed lines) closely across all three risk levels. While there is minor localized deviation a standard artifact of noisy, real wolrd medical data the overall probabilistic scale is accurate, and there is no severe divergence or probability collapse over the 5,000-day observational window.
+Figure \ref{fig:pbc_full_calibration} illustrates this baseline calibration. The left panel displays the Stratified CIF Calibration; the clinical cohort was partitioned into three distinct risk strata (Low, Medium, and High) based on the network's predicted relative risk scores. The model's predicted mean incidence (solid lines) broadly follows the empirical Aalen-Johansen estimates (dashed lines), although the high-risk stratum is generally underestimated and the lower-risk strata show periods of overprediction. The plotted predictions extend to approximately 3,900 days, whereas the empirical curves extend beyond 5,000 days.
 
 \begin{figure}[htbp]
     \centering
@@ -1212,13 +1224,13 @@ Figure \ref{fig:pbc_full_calibration} illustrates this baseline calibration. The
     \label{fig:pbc_full_calibration}
 \end{figure}
 
-The right panel of Figure \ref{fig:pbc_full_calibration} introduces the Marginal Calibration diagnostic. This metric compares the mean of all individual patient predictions (orange line) directly against the overall population Aalen-Johansen baseline (dashed black line). The shaded "Calibration Gap" remains exceptionally narrow throughout the entire timeline, confirming that the Full Cohort model yields unbiased absolute risk estimates without systematically over- or under-predicting the incidence of the primary event.
+The right panel of Figure \ref{fig:pbc_full_calibration} introduces the Marginal Calibration diagnostic. This metric compares the mean of all individual patient predictions (orange line) directly against the overall population Aalen-Johansen baseline (dashed black line). The shaded "Calibration Gap" remains small over the plotted prediction interval, although the mean prediction lies slightly below the population estimate, particularly towards the end of the interval.
 
 \subsubsection{Nested Case-Control (NCC)}
 
-The calibration of the Nested Case-Control (NCC) architecture on the PBC dataset heavily mirrors the failure states observed in the synthetic environment, proving that the algorithm's vulnerability to extreme risk-set compression is a structural limitation, not an artifact of data simulation.
+The calibration of the Nested Case-Control (NCC) architecture on the PBC dataset shows poorer agreement at $m=5$ than at $m=100$, consistent with the pattern observed in the synthetic results.
 
-When provided with a robust control pool ($m=100$), the NCC sampler successfully recovers the baseline calibration. As seen in Figure \ref{fig:pbc_ncc_100_calibration}, both the Stratified CIF and Marginal Calibration plots look nearly identical to the Full Cohort. The IPW mechanism functions as intended, neutralizing the sampling bias and preventing the Marginal Calibration Gap from expanding.
+When provided with a robust control pool ($m=100$), the NCC sampler achieves marginal calibration close to FULL. As seen in Figure \ref{fig:pbc_ncc_100_calibration}, the Marginal Calibration Gap remains small, although deviations remain within individual risk strata. The stratified curves are therefore not identical to those of FULL.
 
 \begin{figure}[H]
     \centering
@@ -1252,13 +1264,13 @@ However, when the NCC sampler is aggressively constrained to just $m=5$ controls
     \label{fig:pbc_ncc_5_calibration}
 \end{figure}
 
-The consequence of this failure is visually stark in the Marginal Calibration plot (right panel). The mean model prediction severely detaches from the population baseline, creating a massive, expanding Calibration Gap. By starving the neural network of valid controls at each event time, the IPW formulation loses its stabilizing context, causing the model to systematically underestimate the baseline hazard of the clinical population. This definitively proves that while ultra-low control NCC ($m=5$) provides maximum computational speed, it sacrifices the absolute probabilistic integrity required for reliable clinical deployment.
+The consequence of this deterioration is visually stark in the Marginal Calibration plot (right panel). The mean model prediction falls well below the population baseline, creating a large, generally expanding Calibration Gap. One possible explanation is that using very few controls at each event time impairs risk estimation, contributing to systematic underprediction of cumulative incidence in the clinical population. Although $m=5$ had the shortest mean training duration among the tested PBC NCC settings, its poorer calibration suggests that this computational saving may come at the expense of the absolute risk accuracy needed for reliable clinical deployment.
 
 \subsubsection{Static Case-Cohort (SCC)}
 
-The Static Case-Cohort (SCC) architecture relies on a fixed background subcohort, theoretically providing a more stable optimization target than the dynamically changing risk sets of the NCC approach. However, applying this method to the small, noisy Primary Biliary Cirrhosis (PBC) dataset reveals significant vulnerabilities to cohort sparsity.
+The Static Case-Cohort (SCC) architecture relies on a fixed background subcohort. However, applying this method to the PBC dataset shows poorer calibration at $\alpha=0.05$ than at $\alpha=0.5$.
 
-Even under an optimal, low-compression configuration ($\alpha=0.5$), where 50\% of the population is retained as the background cohort, the SCC sampler struggles to match the baseline calibration. As shown in Figure \ref{fig:pbc_scc_50_calibration}, while the general shape of the Stratified CIF curves is preserved, there is noticeable deviation across all risk strata compared to the empirical Aalen-Johansen estimates.
+Under a lower-compression configuration ($\alpha=0.5$), where an expected 50\% of the training fold is selected as the background cohort, the SCC sampler achieves marginal calibration close to the baseline. As shown in Figure \ref{fig:pbc_scc_50_calibration}, while the general shape of the Stratified CIF curves is preserved, there is noticeable deviation across all risk strata compared to the empirical Aalen-Johansen estimates.
 
 \begin{figure}[htbp]
     \centering
@@ -1271,13 +1283,13 @@ Even under an optimal, low-compression configuration ($\alpha=0.5$), where 50\% 
         \includegraphics[width=\textwidth]{images/pbc_results/SCC/Metrics/subject_curves_cause_1_cif_SCC_subcohort_0.5.png}
         \caption{Marginal Calibration ($\alpha=0.5$)}
     \end{subfigure}
-    \caption{Calibration diagnostics for SCC with an optimal subcohort fraction ($\alpha=0.5$) on the PBC dataset.}
+    \caption{Calibration diagnostics for SCC with a subcohort fraction of $\alpha=0.5$ on the PBC dataset.}
     \label{fig:pbc_scc_50_calibration}
 \end{figure}
 
-The consequence of these localized deviations is apparent in the Marginal Calibration plot (right panel of Figure \ref{fig:pbc_scc_50_calibration}). The mean model prediction systematically underestimates the population baseline, creating a persistent and expanding calibration gap. Unlike the synthetic dataset, which contained 15,000 observations, the PBC dataset is highly constrained. Therefore, discarding even 50\% of the background cohort removes critical covariate density required for accurate Inverse Probability Weighting (IPW), resulting in a dampened absolute risk profile.
+Despite these localized deviations, the Marginal Calibration plot (right panel of Figure \ref{fig:pbc_scc_50_calibration}) shows a small calibration gap, similar to FULL. The mean model prediction slightly underestimates the population estimate, particularly towards the end of the plotted interval.
 
-This vulnerability becomes catastrophic under heavy compression. Figure \ref{fig:pbc_scc_05_calibration} illustrates the model's behavior when the background subcohort is reduced to just 5\% ($\alpha=0.05$). 
+Calibration deteriorates under heavier compression. Figure \ref{fig:pbc_scc_05_calibration} illustrates the model's behavior when the expected background subcohort fraction is reduced to just 5\% ($\alpha=0.05$).
 
 \begin{figure}[htbp]
     \centering
@@ -1290,19 +1302,19 @@ This vulnerability becomes catastrophic under heavy compression. Figure \ref{fig
         \includegraphics[width=\textwidth]{images/pbc_results/SCC/Metrics/subject_curves_cause_1_cif_SCC_subcohort_0.05.png}
         \caption{Marginal Calibration ($\alpha=0.05$)}
     \end{subfigure}
-    \caption{Calibration diagnostics for a heavily compressed SCC sampler ($\alpha=0.05$) demonstrating total IPW scaling failure.}
+    \caption{Calibration diagnostics for a heavily compressed SCC sampler ($\alpha=0.05$) demonstrating underprediction of cumulative incidence.}
     \label{fig:pbc_scc_05_calibration}
 \end{figure}
 
-At $\alpha=0.05$, the IPW mechanism experiences a total structural collapse. The Stratified CIF curves (left panel) are effectively crushed to zero, failing entirely to track the empirical risk progression. Because the static subcohort is too sparse to represent the background hazard of the clinical population, the network optimizes against a distorted, near-zero baseline. This is confirmed by the Marginal Calibration plot (right panel), where the mean model prediction remains flat, creating a massive calibration gap that encompasses nearly the entire population incidence. 
+At $\alpha=0.05$, the Stratified CIF curves (left panel) underestimate cumulative incidence across all three strata towards the end of the plotted prediction interval. The Marginal Calibration plot (right panel) also shows substantial underprediction and a larger calibration gap than at $\alpha=0.5$. However, the predicted curves increase over time and do not collapse to zero.
 
-This finding demonstrates that while static subcohorts offer computational stability in large datasets, they are mathematically fragile when applied to smaller clinical trials, as they risk destroying the absolute probability calibration of the subdistribution framework.
+This finding shows that the smaller subcohort performed less well for calibration in this PBC experiment.
 
 \subsubsection{Entropy Sampler}
 
-The application of the dynamic Entropy sampler to the Primary Biliary Cirrhosis (PBC) dataset reveals a critical insight regarding hyperparameter tuning in the presence of real wolrd clinical noise. In the mathematically pure synthetic dataset, a highly greedy temperature scaling ($\tau=0.5$) acted as a powerful regularizer, filtering out redundant patients and improving risk recovery. However, applying this exact same greedy configuration to a small, noisy clinical dataset results in a severe calibration failure.
+The application of the dynamic Entropy sampler to the PBC dataset demonstrates sensitivity to the temperature setting. Although $\tau=0.5$ provided a favourable speed--accuracy balance in the synthetic dataset, this setting shows substantial underprediction on PBC.
 
-Figure \ref{fig:pbc_entropy_05_calibration} illustrates the collapse of the Entropy sampler at $\tau=0.5$. Because the PBC dataset is inherently noisy, forcing the sampler to hyper-fixate on the absolute highest-variance observations causes it to overfit to clinical outliers. This extreme sampling skew destroys the integrity of the Inverse Probability Weighting (IPW) mechanism. 
+Figure \ref{fig:pbc_entropy_05_calibration} illustrates the poorer calibration of the Entropy sampler at $\tau=0.5$. One possible explanation is that concentrating sampling on observations with high entropy scores increases sensitivity to clinical noise and encourages overfitting to clinical outliers that receive high sampling probabilities.
 
 \begin{figure}[H]
     \centering
@@ -1315,13 +1327,13 @@ Figure \ref{fig:pbc_entropy_05_calibration} illustrates the collapse of the Entr
         \includegraphics[width=\textwidth]{images/pbc_results/Entropy/Metrics/subject_curves_cause_1_cif_Entropy_tau_0.5_compression_0.1.png}
         \caption{Marginal Calibration ($\tau=0.5$)}
     \end{subfigure}
-    \caption{Calibration diagnostics for a highly greedy Entropy sampler ($\tau=0.5$) on the PBC dataset.}
+    \caption{Calibration diagnostics for the Entropy sampler ($\tau=0.5$) on the PBC dataset.}
     \label{fig:pbc_entropy_05_calibration}
 \end{figure}
 
-As seen in the left panel of Figure \ref{fig:pbc_entropy_05_calibration}, the predicted Stratified CIF curves systematically pull away and underestimate the true Aalen-Johansen incidence across all risk groups. Consequently, the Marginal Calibration plot (right panel) exhibits a massive, expanding calibration gap, as the mean model prediction entirely fails to capture the true baseline hazard of the population.
+As seen in the left panel of Figure \ref{fig:pbc_entropy_05_calibration}, the predicted Stratified CIF curves systematically pull away and underestimate the empirical Aalen-Johansen incidence across all risk groups. Consequently, the Marginal Calibration plot (right panel) exhibits a large, generally expanding calibration gap, as the mean model prediction underestimates the population cumulative incidence.
 
-To correct this failure, the entropy of the sampling distribution must be artificially increased. By raising the temperature parameter to $\tau=5.0$, the sampling distribution becomes flatter and less greedy, forcing the model to retain a wider, more representative spread of the clinical cohort while still prioritizing information-dense observations. 
+By raising the temperature parameter to $\tau=5.0$, the sampling distribution becomes flatter and less greedy, reducing the differences in sampling probabilities between eligible controls.
 
 \begin{figure}[htbp]
     \centering
@@ -1334,24 +1346,24 @@ To correct this failure, the entropy of the sampling distribution must be artifi
         \includegraphics[width=\textwidth]{images/pbc_results/Entropy/Metrics/subject_curves_cause_1_cif_Entropy_tau_5_compression_0.1.png}
         \caption{Marginal Calibration ($\tau=5.0$)}
     \end{subfigure}
-    \caption{Calibration diagnostics for the optimal Entropy sampler ($\tau=5.0$), demonstrating complete restoration of absolute risk scaling.}
+    \caption{Calibration diagnostics for the Entropy sampler ($\tau=5.0$), demonstrating improved calibration relative to $\tau=0.5$.}
     \label{fig:pbc_entropy_5_calibration}
 \end{figure}
 
-As demonstrated in Figure \ref{fig:pbc_entropy_5_calibration}, this hyperparameter shift completely restores the model's absolute calibration. The Stratified CIF curves (left panel) closely track the empirical non-parametric estimates, and the Marginal Calibration Gap (right panel) narrows significantly, matching the structural integrity of the Full Cohort baseline. 
+As demonstrated in Figure \ref{fig:pbc_entropy_5_calibration}, this hyperparameter shift substantially improves the model's absolute calibration. The Stratified CIF curves (left panel) broadly follow the empirical non-parametric estimates, and the Marginal Calibration Gap (right panel) narrows considerably, with close agreement between the mean prediction and the population estimate. Some deviations remain within the individual risk strata.
 
-This behavior highlights the adaptive strength of the Entropy formulation: the temperature parameter $\tau$ acts as a tunable dial between computational compression and regularization. For large, clean datasets, it can be tuned down to aggressively compress the risk-set; for small, noisy clinical cohorts, it can be tuned up to preserve absolute probabilistic calibration without resorting to the brute-force computational overhead of a Full Cohort partial likelihood.
+This behavior highlights the importance of temperature selection in the Entropy formulation. On PBC, $\tau=5.0$ combines close marginal calibration with the approximately 18\% reduction in mean training duration reported earlier. The different findings at $\tau=0.5$ across the synthetic and PBC datasets support dataset-specific assessment of the temperature setting, rather than a general rule based on dataset size or noise.
 
 \newpage
 \subsection{Real World Framingham Dataset}
 
-To conclude the calibration analysis, the sampling architectures were evaluated on the Framingham heart study dataset. Unlike the highly distinct risk profiles of the synthetic data or the dense event rate of the PBC cohort, the Framingham dataset introduces a different biostatistical challenge: severe right-censoring. With a primary event incidence of only 15.6\%, the majority of the cohort is censored, creating an inherently sparse risk landscape over the long-term observational horizon.
+To conclude the calibration analysis, the sampling architectures were evaluated on the modified Framingham heart study dataset. Unlike the highly distinct risk profiles of the synthetic data or the dense event rate of the PBC cohort, the Framingham dataset introduces a different biostatistical challenge: severe right-censoring. With a primary event proportion of only 15.2\%, 72.0\% of observations are censored and 12.9\% experience a competing event, leaving relatively few primary events over the long-term observational horizon.
 
 \subsubsection{Full Cohort Baseline}
 
-The Full Cohort configuration once again serves as the gold-standard baseline. By leveraging the entire available risk-set, it maximizes the amount of information extracted from the heavily censored data. 
+The Full Cohort configuration once again serves as the unsampled mini-batch baseline. By including all eligible observations within each mini-batch risk set, it provides the reference for assessing sampling-related differences.
 
-As illustrated in Figure \ref{fig:fh_full_calibration}, the Full Cohort model handles the high censoring rate exceptionally well. The Stratified CIF Calibration (left panel) demonstrates that the model's predicted incidence correctly scales with empirical reality, even for the highest risk stratum, without experiencing probability inflation at the tail end of the survival curve. Furthermore, the Marginal Calibration diagnostic (right panel) shows near-perfect alignment between the mean model prediction and the population Aalen-Johansen baseline, with no visible calibration gap over the 3,500-day timeline.
+As illustrated in Figure \ref{fig:fh_full_calibration}, the Full Cohort model shows close overall calibration despite the high censoring rate. The Stratified CIF Calibration (left panel) demonstrates that the model's predicted incidence broadly follows the empirical estimates, with some deviations within individual strata and slight underprediction in the highest-risk stratum towards the end of the plotted interval. Furthermore, the Marginal Calibration diagnostic (right panel) shows close alignment between the mean model prediction and the population Aalen-Johansen baseline, with a very small calibration gap over the approximately 3,500-day timeline.
 
 \begin{figure}[htbp]
     \centering
@@ -1372,7 +1384,7 @@ As illustrated in Figure \ref{fig:fh_full_calibration}, the Full Cohort model ha
 
 \subsubsection{Nested Case-Control (NCC)}
 
-The high censoring rate in the Framingham dataset exposes a unique interaction with the Nested Case-Control (NCC) sampler. In previous datasets, heavy risk-set compression ($m=5$) caused the IPW formulation to break down, resulting in a massive underestimation of absolute risk. However, as shown in Figure \ref{fig:fh_ncc_calibration}, the NCC architecture is remarkably resilient on this specific dataset, even at extreme sparsity.
+The Framingham results show a different calibration pattern for the Nested Case-Control (NCC) sampler. In previous datasets, heavy risk-set compression ($m=5$) was accompanied by substantial underprediction of cumulative incidence. However, as shown in Figure \ref{fig:fh_ncc_calibration}, the NCC architecture retains close marginal calibration on this dataset, even at $m=5$.
 
 \begin{figure}[H]
     \centering
@@ -1397,20 +1409,20 @@ The high censoring rate in the Framingham dataset exposes a unique interaction w
         \includegraphics[width=\textwidth]{images/fh_results/NCC/Metrics/subject_curves_cause_1_cif_NCC_ncontrols_5.png}
         \caption{Marginal Calibration ($m=5$)}
     \end{subfigure}
-    \caption{Calibration diagnostics for optimal and constrained NCC configurations on the Framingham dataset.}
+    \caption{Calibration diagnostics for large-control-pool and constrained NCC configurations on the Framingham dataset.}
     \label{fig:fh_ncc_calibration}
 \end{figure}
 
-Both the optimal configuration ($m=100$) and the heavily constrained configuration ($m=5$) successfully track the empirical Aalen-Johansen baseline without experiencing probability collapse. The Stratified CIF curves remain highly calibrated, and the Marginal Calibration Gap is negligible for both settings. 
+Both the configuration with a larger control pool ($m=100$) and the heavily constrained configuration ($m=5$) successfully track the empirical Aalen-Johansen baseline without experiencing probability collapse. The Stratified CIF curves broadly follow their empirical counterparts, although deviations remain within individual strata, and the Marginal Calibration Gap is small for both settings.
 
-This resilience is a direct artifact of the data structure. Because 84.4\% of the Framingham cohort is censored (meaning they do not experience an event), the background risk-set is highly uniform and dense with "survivors". When the NCC sampler draws $m=5$ random controls, those controls are almost certainly censored patients representing the true low-hazard baseline. Therefore, the uniform random sampling of NCC accurately approximates the population density without introducing the severe variance spikes that destroyed calibration in the denser PBC and Synthetic datasets.
+This resilience may partly reflect the data structure. Because 72.0\% of the modified Framingham cohort is censored, many observations remain available as controls until their censoring times. Uniform NCC sampling may therefore draw frequently from this large group, even with only $m=5$ controls per case, potentially helping to represent the background population. This offers a possible explanation for the close marginal calibration observed here, compared with the stronger underprediction at $m=5$ in PBC and the synthetic dataset. Censoring nevertheless indicates that an event was not observed before follow-up ended; it does not establish that these individuals would remain event-free or have uniformly low risk.
 
 
 \subsubsection{Static Case-Cohort (SCC)}
 
-The application of the Static Case-Cohort (SCC) sampler to the Framingham dataset highlights a fundamental difference between static and dynamic sampling strategies under conditions of severe right-censoring. 
+The application of the Static Case-Cohort (SCC) sampler to the Framingham dataset allows comparison of different fixed subcohort fractions under conditions of severe right-censoring.
 
-When a robust background cohort is maintained ($\alpha=0.5$), the SCC architecture performs optimally. As shown in the top row of Figure \ref{fig:fh_scc_calibration}, this configuration successfully replicates the Full Cohort baseline. The Stratified CIF curves track the empirical reality cleanly, and the Marginal Calibration plot shows near-perfect agreement between the model average and the population baseline.
+When a robust background cohort is maintained ($\alpha=0.5$), the SCC architecture retains close marginal calibration. As shown in the top row of Figure \ref{fig:fh_scc_calibration}, this configuration achieves marginal agreement similar to FULL. The Stratified CIF curves show underprediction in the highest-risk stratum and overprediction in the lower-risk strata, and the Marginal Calibration plot shows close agreement between the model average and the population baseline.
 
 \begin{figure}[htbp]
     \centering
@@ -1437,19 +1449,19 @@ When a robust background cohort is maintained ($\alpha=0.5$), the SCC architectu
         \includegraphics[width=\textwidth]{images/fh_results/SCC/Metrics/subject_curves_cause_1_cif_SCC_subcohort_0.05.png}
         \caption{Marginal Calibration ($\alpha=0.05$)}
     \end{subfigure}
-    \caption{Calibration diagnostics for SCC on the Framingham dataset, contrasting the optimal subcohort (top) with the failure of the highly compressed subcohort (bottom).}
+    \caption{Calibration diagnostics for SCC on the Framingham dataset, contrasting $\alpha=0.5$ (top) with $\alpha=0.05$ (bottom).}
     \label{fig:fh_scc_calibration}
 \end{figure}
 
-However, unlike the NCC sampler which proved highly resilient to extreme compression on this specific dataset the SCC sampler demonstrates a clear calibration breakdown when constrained to $\alpha=0.05$. In the bottom row of Figure \ref{fig:fh_scc_calibration}, the Stratified CIF curves for the higher risk strata begin to systematically underestimate the empirical Aalen-Johansen estimates. Consequently, the Marginal Calibration plot reveals a distinct and expanding calibration gap, as the mean model prediction detaches from the population baseline over time.
+At $\alpha=0.05$, SCC also retains close marginal calibration, although differences remain within the risk strata. In the bottom row of Figure \ref{fig:fh_scc_calibration}, the Stratified CIF curve for the highest-risk stratum underestimates the empirical Aalen-Johansen estimate, while the lower-risk strata show periods of overprediction. The Marginal Calibration plot nevertheless shows only a small gap, with the mean prediction slightly below the population estimate.
 
-This divergence is mathematically illuminating. While the high censoring rate provided the NCC sampler with a dense pool of continuous "survivors" to sample from at each distinct event time, the SCC architecture is structurally rigid; it fixes its subcohort at $t=0$. In a long-horizon clinical study spanning nearly 10 years, drawing only a 5\% static sample at the baseline fails to provide sufficient covariate density to represent the evolving background hazard accurately. The IPW scaling becomes temporally skewed, proving that static sampling is more vulnerable to prolonged right-censoring than dynamic, time-matched sampling.
+These results show that close population-average calibration can coexist with overprediction and underprediction within individual risk strata. Both diagnostics are therefore relevant when assessing the SCC configurations.
 
 \subsubsection{Entropy Sampler}
 
-The evaluation of the Entropy sampler on the heavily right-censored Framingham dataset exposes the complex interplay between dynamic risk-weighting and baseline hazard estimation. Because only 15.6\% of the Framingham cohort experiences the primary event, the background risk-set is overwhelmingly dominated by censored "survivors." 
+The evaluation of the Entropy sampler on the heavily right-censored Framingham dataset examines whether temperature settings preserve calibration alongside the predictive-performance and training-time trade-offs reported earlier.
 
-When the temperature parameter is set to a highly greedy state ($\tau=0.5$), the Entropy algorithm aggressively prioritizes the rare, high-variance patients experiencing events, severely down-weighting the massive pool of censored observations. In a highly censored dataset, this over concentration proves detrimental to absolute calibration. 
+When the temperature parameter is set to $\tau=0.5$, the Entropy algorithm more strongly prioritises eligible controls with higher entropy scores than at $\tau=5.0$, where sampling probabilities are less concentrated. Such concentration may increase sensitivity to a smaller subset of observations, potentially affecting calibration. These probabilities depend on entropy scores derived from model predictions, rather than directly prioritising observed events or excluding censored observations. In the present Framingham results, however, $\tau=0.5$ retains close marginal calibration.
 
 \begin{figure}[htbp]
     \centering
@@ -1462,13 +1474,13 @@ When the temperature parameter is set to a highly greedy state ($\tau=0.5$), the
         \includegraphics[width=\textwidth]{images/fh_results/Entropy/Metrics/subject_curves_cause_1_cif_Entropy_tau_0.5_compression_0.1.png}
         \caption{Marginal Calibration ($\tau=0.5$)}
     \end{subfigure}
-    \caption{Calibration diagnostics for a greedy Entropy sampler ($\tau=0.5$) on the Framingham dataset, showing systemic over- and underestimation of risk.}
+    \caption{Calibration diagnostics for the Entropy sampler ($\tau=0.5$) on the Framingham dataset, showing stratified and marginal calibration.}
     \label{fig:fh_entropy_05_calibration}
 \end{figure}
 
-As illustrated in Figure \ref{fig:fh_entropy_05_calibration}, the $\tau=0.5$ configuration distorts the Inverse Probability Weighting (IPW) scaling. In the left panel, the model noticeably overestimates the true incidence for the high-risk stratum (solid green line exceeding the dashed empirical line). Concurrently, the Marginal Calibration diagnostic (right panel) reveals a distinct calibration gap, with the mean model prediction systematically underestimating the overall population baseline. By starving the neural network of the censored background population, the model fails to accurately anchor its absolute probability estimates.
+As illustrated in Figure \ref{fig:fh_entropy_05_calibration}, the $\tau=0.5$ configuration retains close marginal calibration. In the left panel, the model slightly underestimates cumulative incidence in the highest-risk stratum over much of the plotted interval, while the lower-risk strata show smaller deviations. Concurrently, the Marginal Calibration diagnostic (right panel) reveals close agreement between the mean model prediction and the population Aalen-Johansen estimate, with a very small calibration gap.
 
-To rectify this, the temperature parameter must be increased to soften the sampling distribution. Setting $\tau=5.0$ forces the Entropy sampler to behave less greedily, ensuring that while high-information events are still prioritized, a statistically viable volume of censored background patients is retained in every mini-batch. 
+Increasing the temperature to $\tau=5.0$ makes sampling probabilities more uniform across eligible controls. The corresponding calibration diagnostics are shown in Figure \ref{fig:fh_entropy_5_calibration}.
 
 \begin{figure}[htbp]
     \centering
@@ -1481,19 +1493,19 @@ To rectify this, the temperature parameter must be increased to soften the sampl
         \includegraphics[width=\textwidth]{images/fh_results/Entropy/Metrics/subject_curves_cause_1_cif_Entropy_tau_5_compression_0.1.png}
         \caption{Marginal Calibration ($\tau=5.0$)}
     \end{subfigure}
-    \caption{Calibration diagnostics for the optimally tuned Entropy sampler ($\tau=5.0$) demonstrating the closure of the Marginal Calibration Gap.}
+    \caption{Calibration diagnostics for the Entropy sampler ($\tau=5.0$) demonstrating a small Marginal Calibration Gap.}
     \label{fig:fh_entropy_5_calibration}
 \end{figure}
 
-Figure \ref{fig:fh_entropy_5_calibration} demonstrates the complete restoration of absolute calibration at $\tau=5.0$. The Stratified CIF curves now align perfectly with the empirical Aalen-Johansen estimates across all strata, eliminating the high-risk overestimation observed at $\tau=0.5$. Furthermore, the Marginal Calibration Gap is entirely closed, matching the structural integrity of the Full Cohort baseline.
+Figure \ref{fig:fh_entropy_5_calibration} demonstrates close marginal calibration at $\tau=5.0$. The Stratified CIF curves show underprediction in the highest-risk stratum and overprediction in the lowest-risk stratum, while the middle stratum follows its empirical estimate more closely. Furthermore, the Marginal Calibration Gap is small, as it is for $\tau=0.5$ and the Full Cohort baseline.
 
-This final evaluation solidifies the overarching operational framework for the CRISPNAM architecture. Across both small, noisy clinical trials (PBC) and heavily censored longitudinal studies (Framingham), highly greedy entropy sampling ($\tau=0.5$) corrupts IPW calibration. However, by treating the temperature parameter $\tau$ as an environmental hyperparameter tuning it upward ($\tau \in [1.0, 5.0]$) to flatten the sampling distribution in the presence of severe data sparsity or noise the Entropy sampler successfully matches Full Cohort predictive power and absolute calibration at a fraction of the computational cost.
+This final evaluation reinforces the dataset-specific nature of temperature selection. Unlike PBC, Framingham shows close marginal calibration at $\tau=0.5$, alongside slightly better pooled predictive metrics and approximately 29\% lower mean training time than FULL. Increasing the temperature to $\tau=5.0$ improves pooled discrimination but increases mean training time to 50.53 seconds, compared with 27.61 seconds for FULL. Thus, $\tau=0.5$ remains the strongest observed entropy setting for the study's speed--accuracy objective on Framingham, while $\tau=5.0$ favours discrimination at greater computational cost.
 
 \section{Feature Contribution and Interpretability}
 
-Beyond absolute predictive calibration, the synthetic dataset provides a controlled environment to evaluate the interpretability of the CRISPNAM architecture. Because the underlying data-generating parameters ($\beta$) are known, the isolated shape functions $f_i(x_i)$ learned by the Neural Additive Model (NAM) backend can be visually mapped directly against the true biostatistical feature effects.
+Beyond absolute predictive calibration, the synthetic dataset provides a controlled environment to evaluate the interpretability of the CRISPNAM architecture. Because the underlying data-generating parameters ($\beta$) are known, the isolated shape functions $f_i(x_i)$ learned by the Neural Additive Model (NAM) backend can be visually compared with the generating cause-specific log-hazard contributions. These provide a reference for interpretation, although the fitted Fine--Gray log-risk contributions need not reproduce the cause-specific coefficients exactly.
 
-Figure \ref{fig:feature_contributions_cause_1} illustrates this component-wise recovery for the primary event of interest (Cause 1) using the Full Cohort baseline. The solid blue lines represent the empirical shape functions learned entirely from the data, while the dashed red lines denote the true underlying linear hazard contributions.
+Figure \ref{fig:feature_contributions_cause_1} illustrates this component-wise comparison for the primary event of interest (Cause 1) using the Full Cohort baseline. The solid blue lines represent the centred learned shape functions, while the dashed red lines denote the centred generating cause-specific log-hazard contributions. The feature plots in this section use the model from the first cross-validation fold. For the binary features $x_7$--$x_{12}$, interpretation concerns the contributions at zero and one; the plotted curves between these values are interpolations.
 
 \begin{figure}[H]
     \centering
@@ -1502,155 +1514,164 @@ Figure \ref{fig:feature_contributions_cause_1} illustrates this component-wise r
     \label{fig:feature_contributions_cause_1}
 \end{figure}
 
-\subsection{Signal Recovery and Noise Isolation}
+\subsection{Signal Recovery and Feature Contributions}
 
-The diagnostic plots demonstrate exceptional feature disentanglement. For strong true-signal features (e.g., $x_1, x_2, x_{11}, x_{12}$), the learned nonlinear shape functions align closely with the true linear trajectories across the core feature domains, accurately capturing the magnitude and directionality of the hazard contributions. 
+The diagnostic plots demonstrate separately inspectable feature contributions. For strong true-signal features (e.g., $x_1, x_2, x_{11}, x_{12}$), the learned nonlinear shape functions capture the direction of the generating contributions, although their magnitudes differ. Agreement is particularly close for $x_{12}$, while $x_1$ and $x_2$ show smaller contribution magnitudes than the reference at the extremes.
 
-Furthermore, the plots visually validate the architectural use of the Sigmoid Linear Unit (SiLU) activation function. Unlike bounded activations (such as $\tanh$), which artificially saturate and flatten out at the extremes of a feature's distribution, the unconstrained nature of the SiLU activation allows the learned shape functions to maintain smooth, continuous trajectories at the outer bounds of the covariate space (most clearly visible at the extremes of $x_1$ and $x_2$).
+The FeatureNets use the Sigmoid Linear Unit (SiLU) activation function and produce smooth trajectories across the plotted covariate ranges. These plots describe the fitted model; no comparison with alternative activation functions was performed.
 
-Crucially, the additive framework successfully isolates observational noise. For features where the true generating parameter is zero (e.g., $x_3, x_4, x_9, x_{10}$), the network learns minor non-linear fluctuations rather than a perfectly flat line. This is an expected artifact of local overfitting within a finite synthetic sample. However, because each feature is processed independently, this spurious noise is strictly quarantined. The noise captured in $f_3(x_3)$ cannot entangle with or corrupt the pristine signal recovered in $f_1(x_1)$. This confirms that the CRISPNAM architecture functions as a transparent, white-box survival model, clearly revealing the exact drivers of patient-level risk.
+For features whose Cause 1 generating coefficient is zero ($x_3, x_4, x_9, x_{10}$), the network nevertheless learns non-flat contributions. These features have nonzero coefficients for the competing event and can therefore influence Cause 1 cumulative incidence through competition. Their learned contributions should not automatically be interpreted as observational noise or overfitting.
+
+The model also uses L2 regularisation, which penalises large parameter values without explicitly enforcing zero-valued feature contributions. In contrast, L1 regularisation can encourage exact zero coefficients and sparse solutions \citep{tibshirani1996}. L2 therefore does not require a feature function to become perfectly flat, but neither does it prevent this. The additive architecture makes each feature's contribution to the predicted log-risk directly inspectable, although the FeatureNets are trained jointly and estimation errors can still affect the summed prediction.
 
 
 \subsection{Impact of Risk-Set Sampling on Feature Recovery}
 
-The introduction of risk-set sampling alters the gradient landscape during backpropagation. While the previous sections established how these samplers affect absolute probabilistic calibration, it is equally critical to understand how fractional data exposure impacts the isolated FeatureNets' ability to learn the true underlying biostatistical shapes. 
+The introduction of risk-set sampling alters the gradient landscape during backpropagation. While the previous sections established how these samplers affect absolute probabilistic calibration, it is equally critical to understand how sampling affects the shapes and magnitudes of the learned feature contributions.
 
-By analyzing the component-wise feature recovery across the samplers, the previously observed macro-level metrics (C-index, Pearson, and Spearman correlations) can be visually explained at the network's foundational level.
+By analyzing the component-wise feature recovery across the samplers, the previously observed macro-level metrics (C-index, Pearson, and Spearman correlations) can be considered alongside the learned feature functions. These overall metrics do not directly measure the accuracy of each individual feature function.
 
 \subsubsection{Dynamic Entropy Sampler}
 
-The optimal Entropy sampler ($\tau=0.5$) provides the most mathematically profound finding of this architecture. Rather than degrading feature recovery due to data omission, the intelligent targeting of high-variance subjects acts as a powerful data-level regularizer. 
+The Entropy sampler at $\tau=0.5$, which provided the strongest observed synthetic speed--accuracy balance, retains the main directional patterns of the active features despite substantial risk-set sampling.
 
-As illustrated in Figure \ref{fig:feature_recovery_entropy}, the optimal Entropy configuration actually reconstructs the true generating parameters ($\beta$) with higher fidelity than the Full Cohort baseline. The learned shape functions for the active features (such as $x_1$, $x_2$, $x_7$, and $x_{12}$) exhibit smoother, more precise trajectories that tightly hug the dashed ground-truth lines. This visual precision directly correlates with the superior macro-metrics achieved by this configuration: a peak Pearson correlation of 0.866, a Spearman rank of 0.857, and an optimal C-index of 0.851. By aggressively down-weighting dense clusters of redundant, low-information patients, the Entropy sampler prevents the FeatureNets from overfitting to local population noise, allowing them to isolate a cleaner hazard signal.
+As illustrated in Figure \ref{fig:feature_recovery_entropy}, the $\tau=0.5$ configuration produces feature contributions broadly similar to FULL. The learned shape functions for the active features (such as $x_1$, $x_2$, $x_7$, and $x_{12}$) retain the generating directions, although agreement in magnitude varies between features. The corresponding overall Pearson correlation is 0.848, the Spearman correlation is 0.838, and the pooled C-index is 0.850. These results support retained predictive structure, rather than uniformly superior feature recovery or a demonstrated noise-filtering effect.
 
 \begin{figure}[htbp]
     \centering
     \begin{subfigure}[b]{0.48\textwidth}
         \includegraphics[width=\textwidth]{images/Synth_results/ENTROPY/feature_contributions_Event_1_cause_1_Entropy_tau_0.5_compression_0.1.png}
-        \caption{Optimal Entropy ($\tau=0.5$)}
+        \caption{Entropy ($\tau=0.5$)}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.48\textwidth}
         \includegraphics[width=\textwidth]{images/Synth_results/ENTROPY/feature_contributions_Event_1_cause_1_Entropy_tau_5_compression_0.1.png}
         \caption{Relaxed Entropy ($\tau=5.0$)}
     \end{subfigure}
-    \caption{Feature recovery for the Entropy sampler comparing optimal greedy behavior to relaxed uniform sampling.}
+    \caption{Feature recovery for the Entropy sampler comparing $\tau=0.5$ with the less concentrated sampling probabilities at $\tau=5.0$.}
     \label{fig:feature_recovery_entropy}
 \end{figure}
 
-Conversely, as the temperature parameter is artificially relaxed ($\tau=1.0$ moving to $\tau=5.0$), the sampling distribution becomes flatter and more uniform. Consequently, the feature recovery gracefully degrades back toward the Full Cohort baseline. At $\tau=5.0$ (right panel of Figure \ref{fig:feature_recovery_entropy}), minor non-linear distortions begin to reappear in the zero-signal features, and the Pearson correlation drops to 0.839 (with a C-index of 0.848), confirming that uniform random inclusion reintroduces the observational noise that the greedy configuration successfully filtered out.
+As the temperature increases to $\tau=5.0$, the sampling probabilities become flatter and more uniform. At $\tau=5.0$ (right panel of Figure \ref{fig:feature_recovery_entropy}), the main feature patterns remain similar, with differences in contribution magnitude. The overall Pearson correlation is 0.846 and the pooled C-index is 0.851. This comparison does not show a uniform deterioration in predictive performance as temperature increases.
 
 \subsubsection{Nested Case-Control (NCC)}
 
-The Nested Case-Control architecture's feature recovery is strictly bounded by the size of its control pool ($m$). When operating with a large quota ($m=100$), the NCC model behaves almost identically to the Full Cohort. It achieves a high Pearson correlation of 0.856 and a C-index of 0.849, and its corresponding feature plots successfully capture the correct directionality and magnitude of the covariates.
+The Nested Case-Control architecture's feature recovery varies with the size of its control pool ($m$). When operating with a large quota ($m=100$), the NCC model shows feature patterns broadly similar to the Full Cohort. It achieves a high Pearson correlation of 0.859 and a pooled C-index of 0.850, and its corresponding feature plots retain the generating directions of the active features, with differences in magnitude relative to the reference lines.
 
 \begin{figure}[htbp]
     \centering
     \begin{subfigure}[b]{0.48\textwidth}
         \includegraphics[width=\textwidth]{images/Synth_results/NCC/feature_contributions_Event_1_cause_1_NCC_ncontrols_100.png}
-        \caption{Optimal NCC ($m=100$)}
+        \caption{Large-control-pool NCC ($m=100$)}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.48\textwidth}
         \includegraphics[width=\textwidth]{images/Synth_results/NCC/feature_contributions_Event_1_cause_1_NCC_ncontrols_5.png}
         \caption{Constrained NCC ($m=5$)}
     \end{subfigure}
-    \caption{Feature recovery for the NCC sampler demonstrating signal dampening under extreme constraint.}
+    \caption{Feature recovery for the NCC sampler demonstrating changes in contribution magnitude with fewer sampled controls.}
     \label{fig:feature_recovery_ncc}
 \end{figure}
 
-However, extreme compression fundamentally starves the backpropagation gradients. As shown in the right panel of Figure \ref{fig:feature_recovery_ncc}, restricting the network to $m=5$ controls induces visible distortion. While the network correctly identifies the positive or negative trajectory of the active features (preserving a baseline C-index of 0.835), it fails to learn the true magnitude of the slopes. The curves for $x_1$ and $x_2$ pull away from the true $\beta$ trajectories, and the noise within the zero-signal features ($x_3$, $x_{10}$) becomes highly amplified. This geometric distortion explains the severe drop in the linear Pearson correlation (0.806) and the Spearman rank (0.795). 
+As shown in the right panel of Figure \ref{fig:feature_recovery_ncc}, restricting the network to $m=5$ controls is accompanied by larger contribution magnitudes for several features. While the network correctly identifies the positive or negative trajectory of the active features (with a pooled C-index of 0.847), several curves differ substantially in magnitude from the generating reference. The curves for $x_1$ and $x_2$ pull away from the reference lines, and the contributions of the competing-event features ($x_3$, $x_{10}$) become larger than at $m=100$. The overall Pearson and Spearman correlations are 0.850 and 0.841, respectively, indicating a modest reduction in overall risk-score agreement despite these visible changes in contribution magnitude.
 
 \subsubsection{Static Case-Cohort (SCC)}
 
-The Static Case-Cohort (SCC) sampler demonstrates a similar threshold-based degradation, though its fixed background cohort provides slightly more gradient stability than the highly stochastic constrained NCC sampler. 
+The Static Case-Cohort (SCC) sampler retains the main directional feature patterns at both displayed subcohort fractions, with differences in the magnitudes of individual contributions.
 
 \begin{figure}[htbp]
     \centering
     \begin{subfigure}[b]{0.48\textwidth}
         \includegraphics[width=\textwidth]{images/Synth_results/SCC/feature_contributions_Event_1_cause_1_SCC_subcohort_0.5.png}
-        \caption{Optimal SCC ($\alpha=0.5$)}
+        \caption{SCC ($\alpha=0.5$)}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.48\textwidth}
         \includegraphics[width=\textwidth]{images/Synth_results/SCC/feature_contributions_Event_1_cause_1_SCC_subcohort_0.05.png}
         \caption{Constrained SCC ($\alpha=0.05$)}
     \end{subfigure}
-    \caption{Feature recovery for the SCC sampler comparing optimal subcohort retention to extreme compression.}
+    \caption{Feature recovery for the SCC sampler comparing $\alpha=0.5$ with $\alpha=0.05$.}
     \label{fig:feature_recovery_scc}
 \end{figure}
 
-At an optimal subcohort fraction ($\alpha=0.5$), the feature plots (left panel of Figure \ref{fig:feature_recovery_scc}) show strong alignment with the ground truth, matching the Full Cohort baseline with a Pearson score of 0.849 and a C-index of 0.849. However, when the static subcohort is decimated to just 5\% of the population ($\alpha=0.05$), the FeatureNets lose the necessary density to map the extremes of the covariate space. Consequently, the learned shape functions flatten out and dampen, leading to a measurable drop in linear recovery (Pearson 0.835, Spearman 0.825, C-index 0.842). 
+At a subcohort fraction of $\alpha=0.5$, the feature plots (left panel of Figure \ref{fig:feature_recovery_scc}) show patterns broadly similar to FULL, with a Pearson score of 0.862 and a pooled C-index of 0.852. However, when the expected subcohort fraction is reduced to 5\% ($\alpha=0.05$), some contributions, including $x_5$, $x_6$ and $x_{11}$, have smaller magnitudes, while others remain similar or move closer to the generating reference. The overall Pearson correlation is 0.853, the Spearman correlation is 0.843, and the pooled C-index is 0.849.
 
-Ultimately, this component-level visual analysis confirms that only the dynamic Entropy sampler is capable of compressing the risk-set footprint without mathematically dampening or distorting the underlying biostatistical shape functions.
+Ultimately, the feature plots show that entropy, NCC and SCC can retain the main directional patterns of the active features, although individual contribution magnitudes vary. Entropy at $\tau=0.5$ preserves these patterns alongside the largest observed training-time reduction, while SCC at $\alpha=0.05$ remains a competitive alternative. The additive representation allows these differences to be inspected directly.
 
 
 \section{Discussion}
 
-The primary objective of this research was to resolve the computational bottleneck of deep survival architectures under competing risks without sacrificing absolute probability calibration or feature interpretability. By systematically evaluating the CRISPNAM architecture across pure mathematical simulations (Synthetic), standard clinical trials (PBC), and heavily right-censored longitudinal studies (Framingham), this study provides a comprehensive blueprint for optimizing deep survival networks. 
+The primary objective of this research was to reduce training time for CRISPNAM under competing risks while limiting deterioration in discrimination and prediction accuracy, with calibration and feature interpretability also evaluated. By systematically evaluating the CRISPNAM architecture across a synthetic dataset, the PBC clinical dataset, and the modified Framingham dataset, this study provides empirical evidence on the trade-offs between computational efficiency and predictive performance under different risk-set sampling strategies.
 
-The results generated validate the architecture's efficacy as both a highly interpretative survival model and a computationally robust framework for modeling competing risks.
+The results show that selected sampling configurations substantially reduced mean training time while retaining predictive performance close to the unsampled mini-batch baseline. The most favourable settings varied between datasets, highlighting the importance of evaluating sampling parameters alongside calibration and the model's interpretable feature contributions.
 
 \subsection{Interpretation of Findings}
 
-The overarching takeaway from the empirical evaluations is that dynamic, information-aware risk-set sampling strictly outperforms static or uniform sampling methods in deep survival analysis. The traditional algorithms Nested Case-Control (NCC) and Static Case-Cohort (SCC) exhibited severe structural vulnerabilities. When the active risk-sets were aggressively compressed to maximize computational speed, both NCC and SCC suffered from catastrophic calibration failures. Because deep neural networks optimize via mini-batch gradient descent, starving the network of the background population skewed the Inverse Probability Weighting (IPW) mechanisms, causing the models to systematically under- or overestimate the absolute Cumulative Incidence Functions (CIF).
+The overarching takeaway from the empirical evaluations is that risk-set sampling can substantially reduce training time while retaining predictive performance close to the unsampled baseline, although the balance depends on the dataset and sampling configuration. Entropy sampling at $\tau=0.5$ provided the strongest observed speed--accuracy balance on the synthetic and modified Framingham datasets, while $\tau=5$ offered a favourable balance on PBC. SCC remained competitive, particularly at $\alpha=0.05$ on the synthetic dataset and $\alpha=0.2$ on Framingham. NCC achieved the strongest pooled predictive metrics on Framingham at $m=50$, but required substantially longer training than FULL. Calibration deterioration was most evident for NCC at $m=5$ on the synthetic and PBC datasets, and for SCC at $\alpha=0.05$ on PBC. These findings favour selecting sampling settings according to the observed computational and predictive trade-offs rather than assuming that one method is universally superior.
 
-Conversely, the Entropy sampler demonstrated that the active risk-set can be heavily compressed without sacrificing probabilistic calibration or feature recovery, provided the sampling distribution targets high-variance, information-dense subjects. On the synthetic dataset, the optimal Entropy configuration ($\tau=0.5$) actually acted as a data-level regularizer, recovering the true biostatistical generating parameters ($\beta$) with a higher Pearson correlation (0.866) and C-index (0.851) than the Full Cohort baseline. 
+These findings also support further investigation of the proposed entropy-guided sampler and established sampling strategies. Across all tested temperatures, entropy sampling used a nominal control-retention setting of 10\%, whereas SCC was evaluated at several subcohort fractions, including 20\% and 30\%. Although these settings do not imply directly equivalent realised risk-set sizes, entropy's competitive predictive performance and substantial training-time savings at selected temperatures are promising under this restrictive sampling setting. Evaluating higher entropy retention rates, alongside comparisons at similar realised sampling fractions, could clarify whether retaining more controls improves calibration and predictive performance while preserving useful computational savings. The present results therefore establish the value of further research into entropy-guided sampling without requiring it to outperform every alternative on every metric.
 
-Furthermore, the evaluation revealed a critical hyperparameter dynamic: the temperature scaling ($\tau$) must be actively tuned to the environment's noise profile. In mathematically clean datasets, a greedy approach ($\tau=0.5$) isolates pristine signals. However, in noisy clinical datasets (PBC) or heavily censored cohorts (Framingham), relaxing the temperature ($\tau \in [1.0, 5.0]$) becomes necessary to prevent the network from overfitting to clinical outliers. 
+On the synthetic dataset, entropy sampling at $\tau=0.5$ reduced mean training time by approximately 54\%, while achieving a pooled C-index of 0.850 and a pooled Brier Score of 0.105, compared with 0.851 and 0.104 for FULL. Its Pearson correlation with the generating Cause 1 linear predictor was 0.848, slightly below FULL's 0.857. The calibration plots showed broad agreement with empirical cumulative incidence, and the feature plots retained the main directional patterns of the active features. Together, these findings demonstrate substantial computational savings with limited predictive deterioration at the nominal 10\% control-retention setting. They support entropy-guided sampling as a promising approach for this study's objective, rather than establishing superior recovery of the generating coefficients or a proven regularising effect.
 
-Crucially, the Neural Additive Model (NAM) backend upgraded with SiLU activations to prevent boundary saturation ensured that these computational gains did not come at the cost of interpretability. The architecture functioned as a transparent white-box model, allowing the direct visualization of isolated, patient-level hazard drivers without cross-feature entanglement.
+Furthermore, the evaluation highlighted the importance of dataset-specific temperature selection. Lower temperatures concentrate sampling probabilities more strongly around observations with higher entropy scores, potentially increasing sensitivity to a smaller subset of eligible controls. At $\tau=0.5$, entropy sampling provided a favourable speed--accuracy balance on both the synthetic and Framingham datasets, with broadly preserved calibration. On PBC, however, this setting showed substantial underprediction, whereas $\tau=5$ achieved closer marginal calibration and approximately 18\% lower mean training time than FULL. These differences suggest that temperature should be assessed against predictive performance, calibration and training time, rather than selected solely from assumptions about dataset size, censoring or clinical noise.
+
+Crucially, the Neural Additive Model (NAM) backend retained its additive structure under all sampling configurations, allowing computational gains to be assessed alongside interpretable feature contributions. The architecture allowed direct visualization of each feature's contribution to the predicted log-risk. Although sampling affected the shapes and magnitudes of some contributions, these differences remained inspectable. This transparency supports interpretation of the fitted predictions without implying exact recovery of the generating effects or independence between jointly trained FeatureNets.
 
 \subsection{Comparative Validation Against Existing Literature}
 
-To ensure the structural integrity of the underlying Fine-Gray loss formulation prior to sampling, the Full Cohort baselines were benchmarked against contemporary deep survival literature. Specifically, the model's performance was compared to the benchmark results established in the \textit{Interpretable Fine-Gray Deep Survival Model for Competing Risks} \citep{InterpretableFineGray2025}. 
+To contextualise predictive performance prior to sampling, the Full Cohort baselines were benchmarked against contemporary deep survival literature. Specifically, the model's performance was compared to the benchmark results established in the \textit{Interpretable Fine-Gray Deep Survival Model for Competing Risks} \citep{InterpretableFineGray2025}.
 
-To facilitate a direct, one-to-one comparison with the referenced study, the Time-Dependent Concordance Index (TD-CI) and Brier scores for the clinical cohorts were explicitly extracted at the 25th ($q_{0.25}$), 50th ($q_{0.50}$), and 75th ($q_{0.75}$) percentiles of the temporal distribution, alongside the overall pooled metrics.
+To present results at corresponding temporal quantiles, the Time-Dependent Concordance Index (TD-CI) and Brier scores for the clinical cohorts were explicitly extracted at the 25th ($q_{0.25}$), 50th ($q_{0.50}$), and 75th ($q_{0.75}$) percentiles of the temporal distribution, alongside the overall pooled metrics. These comparisons provide context rather than a direct replication, because cohort preparation, validation procedures and evaluation horizons are not necessarily identical across studies.
 
-For the primary event in the PBC dataset, the referenced literature reports a median TD-CI ($q_{0.50}$) of $0.813 \pm 0.016$ and a median Brier Score of $0.249 \pm 0.089$ for the CRISPNAM-FG architecture. The Full Cohort model in this study achieved a $q_{0.50}$ TD-CI of $0.663$ (peaking at $0.688$ for the $q_{0.75}$ horizon) and a $q_{0.50}$ Brier Score of $0.180$. While the discriminative rank-ordering is lower than the benchmark—a direct reflection of our rigorous patient-grouped cross-validation that intentionally eliminates optimistic within-subject data leakage the vastly superior (lower) Brier score achieved in this study confirms that the absolute probabilistic calibration of the architecture remains exceptionally sound.
+For the primary event in the PBC dataset, the referenced literature reports a TD-CI at the median evaluation horizon ($q_{0.50}$) of $0.813 \pm 0.016$ and a Brier Score at that horizon of $0.249 \pm 0.089$ for the CRISPNAM-FG architecture \citep{InterpretableFineGray2025}. The Full Cohort model in this study achieved TD-CI values of $0.746$, $0.716$ and $0.723$ at $q_{0.25}$, $q_{0.50}$ and $q_{0.75}$, respectively, with corresponding Brier scores of $0.115$, $0.153$ and $0.197$. At the median horizon, discrimination is lower than the published benchmark, while the reported Brier score is also lower. Patient-grouped cross-validation keeps observations from the same patient within a single fold in this study, but its contribution to the performance difference cannot be isolated from this comparison. The lower Brier score reflects lower reported prediction error under the present evaluation.
 
-On the Framingham Heart Study (FHS) dataset, the referenced literature reports a median TD-CI of $0.755 \pm 0.008$ and a median Brier Score of $0.202 \pm 0.141$. The Full Cohort model in this study recorded a $q_{0.50}$ TD-CI of $0.607$ and a $q_{0.50}$ Brier Score of $0.670$. This deviation from the reference benchmarks is a direct and expected result of methodological divergence in dataset preparation. The FHS dataset utilized in this study underwent a distinctly different feature engineering pipeline and was modified to forcefully induce a competing risk scenario. These structural alterations naturally shift the probabilistic baselines and covariate topographies. However, achieving a stable pooled C-index of $0.645$ using the full temporal evaluation confirms that the model successfully isolates the underlying clinical hazard despite the induced competing events and the extreme sparsity of actual events (84.4\% censored).
+On the Framingham Heart Study (FHS) dataset, the referenced literature reports a TD-CI at $q_{0.50}$ of $0.755 \pm 0.008$ and a Brier Score at that horizon of $0.202 \pm 0.141$ \citep{InterpretableFineGray2025}. The Full Cohort model in this study recorded TD-CI values of $0.568$, $0.574$ and $0.574$ at $q_{0.25}$, $q_{0.50}$ and $q_{0.75}$, respectively, with corresponding Brier scores of $0.094$, $0.137$ and $0.137$. The lower horizon-specific discrimination and lower reported Brier scores must be interpreted in light of differences in dataset preparation. The FHS dataset utilized in this study underwent a different feature engineering pipeline and was modified to introduce a competing risk scenario. These alterations change the prediction task and may contribute to differences from the published benchmark. The overall pooled C-index was $0.663$; this summarises concordance across the temporal evaluation and should be distinguished from the horizon-specific TD-CI values above.
 
-Finally, on the robust synthetic simulation, the Full Cohort achieved a pooled C-index of $0.850$ and an Brier Score of $0.106$. This proves that absent severe clinical noise, the mathematical foundations of the network and the Fine-Gray objective function operate at capacity, successfully establishing the stable theoretical baseline required to conduct the advanced riskset sampling experiments.
+Finally, on the synthetic simulation, the Full Cohort achieved a pooled C-index of $0.851$ and a Brier Score of $0.104$. Together with the synthetic risk-recovery and calibration results, these findings support the Full Cohort model as an empirical baseline for assessing the speed--accuracy trade-offs of risk-set sampling under the same experimental conditions.
+
 
 \subsection{Computational Efficiency and Vectorization}
 
-The profiling of the sampling models revealed a critical paradox in the application of traditional risk-set sampling (NCC and SCC) within modern deep learning frameworks. Historically, nested case-control and case-cohort sampling were developed to alleviate the computational burden of standard, single-event Cox models running sequentially on CPU architectures. 
+The evaluation of the sampling models showed that reducing the number of selected risk-set observations does not necessarily reduce total training time. Computational efficiency depends on the sampling implementation and the duration of training, as well as the sampling setting.
 
-However, modern deep neural networks rely fundamentally on highly parallelized matrix multiplications optimized for Graphical Processing Units (GPUs). As observed during the evaluation of the small Framingham cohort, the Full Cohort model actually trained faster than the highly constrained NCC ($m=5$) model. This occurs because calculating the partial likelihood for the full cohort requires continuous, unbroken tensor operations that easily fit into VRAM, maximizing GPU throughput. In contrast, standard NCC and SCC methods require dynamic subsampling loops to construct the risk-sets at each unique event time. This introduces severe CPU-to-GPU data transfer bottlenecks, breaking the inherent vectorization of the computational framework. The operational overhead of naive sampling outpaces the speed gained by processing smaller matrices.
+As observed during the evaluation of the small Framingham cohort, the Full Cohort model actually trained faster than the highly constrained NCC ($m=5$) model. In the present implementation, NCC selects controls within a loop over event rows, whereas SCC applies fixed subcohort membership through tensor operations. Entropy sampling also uses tensor operations to calculate selection probabilities and sample eligible controls. These implementation differences may affect computational overhead, but the observed timing differences cannot be attributed specifically to CPU-to-GPU transfers or GPU utilisation. Validation-based early stopping and variation between folds also affect total training duration.
 
-This hardware dynamic mathematically explains why the Entropy sampler proves vastly superior. By calculating the sampling probabilities upfront and intelligently reducing the data footprint based on information density rather than uniform algorithmic loops, the Entropy sampler maintains the structural integrity of the active tensors. On the large synthetic dataset where the full cohort tensor eventually outgrows efficient VRAM handling the Entropy sampler cut execution time by over 50\% without breaking GPU vectorization. This demonstrates that for deep survival architectures, intelligent, regularized data compression is computationally superior to traditional uniform control matching.
+On the synthetic dataset, entropy sampling at $\tau=0.5$ reduced mean training time by approximately 54\% while retaining predictive performance close to FULL. SCC at $\alpha=0.05$ provided a competitive reduction of approximately 49\%, although its pooled C-index decreased from $0.851$ for FULL to $0.849$ and its pooled Brier Score increased from $0.104$ to $0.105$. These findings demonstrate the practical value of risk-set sampling in the evaluated implementation, while showing that efficiency should be assessed through measured training times rather than inferred from the retained fraction alone.
 
 \subsection{Theoretical and Practical Implications}
 
-The findings of this study carry significant implications for the intersection of biostatistics and deep learning. Theoretically, it establishes that deep survival architectures should not default to traditional epidemiological sampling methods (like NCC or SCC) to solve computational bottlenecks. Because neural networks require robust feature variance to map non-linear functions effectively, uniform or static sampling actively harms the gradient landscape. Instead, sampling in deep survival analysis must be viewed as an information theory problem, where data compression is guided by variance and entropy.
+The findings support further investigation of entropy-guided risk-set sampling as an alternative to uniform and static sampling. Its competitive performance at a nominal 10\% control-retention rate suggests that prediction-derived entropy scores can provide a useful basis for selecting controls. However, the competitive SCC results and the sensitivity to entropy temperature show that the sampling strategy and retained fraction should be considered together. These empirical findings motivate further theoretical research into the trade-offs between sampling concentration, prediction quality and computational efficiency.
 
-Practically, the CRISPNAM architecture with Entropy sampling provides a highly scalable solution for modern healthcare analytics. As Electronic Health Records (EHR) generate massive, highly dimensional datasets, calculating the full partial likelihood becomes physically intractable on standard clinical hardware. The proposed architecture allows data science and biostatistics teams to train highly accurate competing risk models on massive patient populations using standard computational resources. Furthermore, the NAM backend ensures that these models can be deployed in clinical settings without violating the need for medical transparency, as physicians can visually verify the exact biomarkers driving a patient's risk score.
+Practically, the CRISPNAM architecture with Entropy sampling provides a promising approach to reducing training time in competing-risk prediction. The observed time savings motivate evaluation on larger Electronic Health Record (EHR) datasets, although scalability to massive patient populations was not established by the present experiments. Furthermore, the NAM backend preserves transparency by allowing individual feature contributions to the predicted log-risk to be visualised. This supports inspection of model predictions, while clinical deployment would require further validation in the intended patient population.
 
 
 \chapter{Conclusion and Future Work}
 
 \section{Summary of Findings}
 
-This dissertation addressed the critical computational bottlenecks inherent in training deep survival architectures for competing risks. By introducing and rigorously evaluating the CRISPNAM architecture alongside dynamic risk-set sampling mechanisms, this research demonstrated that computational efficiency does not have to come at the expense of absolute probabilistic calibration or clinical interpretability. 
+This dissertation evaluated risk-set sampling within a Fine-Gray CRISPNAM implementation, with the objective of substantially reducing training time while limiting deterioration in discrimination and predictive accuracy. Across synthetic, PBC and Framingham datasets, selected sampling configurations reduced mean training duration while retaining predictive performance close to the unsampled mini-batch FULL baseline. Calibration and interpretable feature contributions were also assessed to examine the effects of sampling beyond aggregate predictive metrics.
 
-The empirical evaluations across pure synthetic simulations and real wolrd clinical datasets (PBC, Framingham) conclusively showed that traditional sampling techniques Nested Case-Control (NCC) and Static Case-Cohort (SCC) exhibit severe structural vulnerabilities in deep learning contexts. While they successfully reduce the data footprint, they disrupt the continuous tensor operations required for GPU vectorization and routinely destroy Inverse Probability Weighting (IPW) calibration under conditions of extreme risk-set sparsity. 
+Entropy-guided sampling provided the strongest observed speed--accuracy balance on the synthetic and Framingham datasets at $\tau=0.5$. On synthetic data, it reduced mean training time by approximately 54\%, with a pooled C-index of $0.850$ and Brier Score of $0.105$, compared with $0.851$ and $0.104$ for FULL. On Framingham, it reduced mean training time by approximately 29\%, with slightly better pooled predictive metrics than FULL. On PBC, $\tau=5$ offered a favourable balance, reducing mean training time by approximately 18\% while slightly improving both pooled predictive metrics and achieving closer marginal calibration than lower-temperature settings. These savings describe observed mean durations across five folds, rather than guaranteed reductions in every fold or in computation per epoch.
 
-Conversely, the dynamic Entropy sampler proved vastly superior. By calculating sampling probabilities upfront and prioritizing information-dense, high-variance subjects, the Entropy mechanism effectively acts as a robust data-level regularizer. The evaluations revealed that when the temperature parameter ($\tau$) is actively tuned to the dataset's intrinsic noise profile using highly greedy sampling ($\tau \le 0.5$) for clean datasets and softer distributions ($\tau \ge 1.0$) for noisy or heavily censored clinical cohorts the model thrives. Under optimal configurations, the Entropy sampler matched or exceeded the Full Cohort baseline's predictive performance (C-index, Brier Score) and ground-truth feature recovery, while reducing computational training time by over 50\%. 
+The results also demonstrated the value of alternative sampling strategies and dataset-specific settings. Synthetic SCC at $\alpha=0.05$ reduced mean training time by approximately 49\%, with a pooled C-index of $0.849$ and Brier Score of $0.105$, indicating a small predictive deterioration relative to FULL. SCC at $\alpha=0.2$ was competitive on Framingham, while NCC at $m=50$ achieved the strongest NCC pooled predictive metrics on that dataset but required approximately 3.2 times the FULL training duration. Calibration deterioration at some aggressive sampling settings and the sensitivity of entropy sampling to temperature show that time savings must be assessed alongside prediction quality. Nevertheless, entropy's competitive performance at a nominal 10\% control-retention rate across all tested temperatures supports further investigation of entropy-guided sampling, including higher retention rates and comparisons with SCC at matched sampling fractions.
 
-Crucially, the integration of a Neural Additive Model (NAM) backend enhanced with SiLU activations to prevent boundary saturation ensured that the architecture remained fully transparent. The model successfully disentangled complex covariate effects, allowing for the direct visualization of individual, patient-level hazard drivers without the "black-box" entanglement characteristic of standard deep survival networks.
+Crucially, the Neural Additive Model (NAM) backend retained its additive structure under all sampling configurations, allowing individual feature contributions to the predicted log-risk to be visualised. Sampling affected the shapes and magnitudes of some contributions, but these differences remained inspectable. Together, the findings establish entropy-guided sampling as a promising approach for the study's speed--accuracy objective, while supporting continued research into both adaptive and established risk-set sampling strategies.
+
 
 \section{Limitations and Future Directions}
 
-Despite the robust findings, several limitations inherent to the study's scope and methodology present immediate, highly promising avenues for future research.
+Several limitations of the study provide directions for further development and evaluation of entropy-guided risk-set sampling.
 
-First, the reliance on standard IPW to correct sampling bias proved structurally fragile under extreme risk-set compression. As observed in the SCC and heavily constrained NCC evaluations, excessive subsampling caused the IPW denominators to approach zero, failing to represent the background hazard and resulting in immediate probability collapse. Future work should investigate the integration of stabilized IPW and Inverse Probability of Censoring Weighting (IPCW) mechanisms. Furthermore, coupling these stabilized weighting techniques with the Entropy sampling framework and applying them to other state-of-the-art deep survival architectures (e.g., DeepHit, DeepSurv) would verify whether these computational and predictive gains are universally transferable across different neural network topologies.
+First, predictive and calibration deterioration at some aggressive sampling settings indicates a need to investigate the variability introduced by selecting and weighting small subsets of eligible controls. These observations do not establish a general failure of inverse probability weighting or identify small inclusion probabilities as the sole cause. Future work could examine alternative sampling-probability constraints and weight-stabilisation strategies, assessing their effects on bias, variability, calibration and training time. These developments should distinguish sampling weights from the Fine-Gray censoring weights already included in the current implementation.
 
-Second, while this study explicitly focused on the Fine-Gray subdistribution hazard for competing risks, the core mechanism of variance-driven risk-set compression is theoretically agnostic to the event type. Future research should evaluate whether this intelligent Entropy sampling technique yields the same computational acceleration and regularization advantages in standard, single-event survival analysis (e.g., traditional Cox Proportional Hazards models).
+Second, this study evaluated entropy-guided sampling within a particular Fine-Gray CRISPNAM implementation. Future research could adapt the approach to other models with risk-set-based objectives, including neural Cox models such as DeepSurv, to assess whether similar speed--accuracy benefits occur in single-event survival analysis. Extension to architectures with different objectives, such as DeepHit, would require a separate formulation rather than direct substitution of the current sampler.
 
-Third, the temperature parameter ($\tau$) in the Entropy sampler currently functions as a static environmental hyperparameter. Finding the optimal $\tau$ requires a grid search prior to training, adding overhead to the model development lifecycle. A critical future direction involves developing an adaptive, learnable temperature scaling mechanism. Designing $\tau$ to decay dynamically across optimization epochs starting highly uniform ($\tau > 5.0$) to securely anchor the IPW baseline hazard, and cooling down to a greedy state ($\tau \le 0.5$) in later epochs to fine-tune signal recovery would fully automate the architecture's adaptation to dataset noise.
+Third, the entropy experiments varied temperature ($\tau$) while keeping the nominal control-retention rate fixed at 10\%. A systematic full factorial evaluation should test every selected temperature at every selected retention rate, including rates above and below 10\%. This would reveal how sampling concentration and the amount of retained data interact, and whether retaining more controls improves performance at temperatures that performed poorly under the current setting. Comparisons with SCC at matched nominal retention rates should also report realised control counts, because equal nominal fractions do not guarantee identical sampled risk sets. Predictive performance, calibration, training duration and memory use should be assessed across repeated runs, with parameter selection separated from final test evaluation.
 
-Finally, the upfront computational cost of calculating the entropy distribution across the risk-sets scales alongside dataset size. While this proved highly efficient overall in the evaluated cohorts, expanding the sampling methodology to Deep Multi-State Models presents a rigorous future challenge. Multi-state modeling provides a more comprehensive overview of disease progression than competing risks alone but suffers from even more severe computational scaling limits. Applying the dynamic Entropy sampler to large-scale multi-state transition matrices represents the next logical frontier for scaling complex longitudinal biostatistical modeling in modern healthcare analytics.
+A further direction concerns the temperature parameter ($\tau$), which remains fixed throughout training in the current implementation. Designing $\tau$ to decay dynamically across optimization epochs could allow training to begin with more nearly uniform sampling probabilities, for example at $\tau > 5.0$, before gradually concentrating selection towards higher-entropy observations at $\tau \le 0.5$. The motivation would be to maintain broader representation of eligible controls during early learning, then focus sampling more selectively as the model's predictions develop. Comparing this cooling schedule with fixed temperatures could establish whether it improves training stability and the speed--accuracy trade-off. An adaptive schedule informed by validation performance could further reduce reliance on a manually selected temperature, although its benefits would require empirical evaluation.
+
+Finally, the observed training-time savings were measured on the evaluated datasets and implementation. Larger-cohort experiments and targeted profiling should separate sampling overhead, time per epoch and the number of epochs required before early stopping. Repeated runs would also help assess the influence of fold composition and random initialisation on unusually long training durations. Beyond these computational evaluations, extending entropy-guided sampling to deep multi-state models offers a further research direction, requiring transition-specific risk-set definitions and evaluation of both predictive accuracy and computational cost.
+
 
 \bibliography{references}\addcontentsline{toc}{chapter}{References}
 \end{document}

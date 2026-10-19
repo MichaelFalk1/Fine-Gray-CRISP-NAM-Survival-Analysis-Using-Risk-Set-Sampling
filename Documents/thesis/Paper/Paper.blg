@@ -6,45 +6,45 @@ The style file: utils/named-wits.bst
 Reallocating 'name_of_file' (item size: 1) to 11 items.
 Database file #1: references.bib
 Warning--there's a url but no retrieval date in kingma2014adam
-You've used 29 entries,
+You've used 30 entries,
             2541 wiz_defined-function locations,
-            768 strings with 9913 characters,
-and the built_in function-call counts, 11745 in all, are:
-= -- 1167
-> -- 535
+            775 strings with 10057 characters,
+and the built_in function-call counts, 12105 in all, are:
+= -- 1206
+> -- 542
 < -- 1
-+ -- 188
-- -- 182
-* -- 993
-:= -- 1902
-add.period$ -- 87
-call.type$ -- 29
-change.case$ -- 201
-chr.to.int$ -- 29
-cite$ -- 30
-duplicate$ -- 418
-empty$ -- 901
-format.name$ -- 218
-if$ -- 2375
++ -- 190
+- -- 184
+* -- 1023
+:= -- 1958
+add.period$ -- 90
+call.type$ -- 30
+change.case$ -- 206
+chr.to.int$ -- 30
+cite$ -- 31
+duplicate$ -- 432
+empty$ -- 934
+format.name$ -- 221
+if$ -- 2449
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 34
-newline$ -- 177
-num.names$ -- 87
-pop$ -- 171
+missing$ -- 35
+newline$ -- 183
+num.names$ -- 90
+pop$ -- 173
 preamble$ -- 1
-purify$ -- 236
+purify$ -- 242
 quote$ -- 0
-skip$ -- 333
+skip$ -- 344
 stack$ -- 0
-substring$ -- 614
-swap$ -- 69
+substring$ -- 644
+swap$ -- 71
 text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 208
+type$ -- 216
 warning$ -- 1
-while$ -- 96
-width$ -- 31
-write$ -- 429
+while$ -- 100
+width$ -- 32
+write$ -- 444
 (There was 1 warning)

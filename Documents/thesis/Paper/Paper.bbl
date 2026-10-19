@@ -207,6 +207,13 @@ Bernard Rosner.
 \newblock Cengage learning, 2015.
 
 
+\bibitem[\protect\citeauthoryear{Tibshirani}{1996}]{tibshirani1996}
+Robert Tibshirani.
+\newblock Regression shrinkage and selection via the lasso.
+\newblock {\em Journal of the Royal Statistical Society, Series B},
+  58(1):267--288, 1996.
+
+
 \bibitem[\protect\citeauthoryear{Wilson \bgroup \em et al.\egroup
   }{1998}]{wilson1998prediction}
 Peter W.~F. Wilson, Ralph~B. D'Agostino, Daniel Levy, Albert~M. Belanger, Halit
